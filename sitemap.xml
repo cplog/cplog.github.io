@@ -3,109 +3,109 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/about/</loc>
+    <loc>http://cplog.github.io/about/</loc>
     <lastmod>2018-05-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/itemized/item1/</loc>
+    <loc>http://cplog.github.io/itemized/item1/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/itemized/item2/</loc>
+    <loc>http://cplog.github.io/itemized/item2/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/itemized/item3/</loc>
+    <loc>http://cplog.github.io/itemized/item3/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/itemized/item4/</loc>
+    <loc>http://cplog.github.io/itemized/item4/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/creating-a-new-theme/</loc>
+    <loc>http://cplog.github.io/blog/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/goisforlovers/</loc>
+    <loc>http://cplog.github.io/blog/goisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/hugoisforlovers/</loc>
+    <loc>http://cplog.github.io/blog/hugoisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/migrate-from-jekyll/</loc>
+    <loc>http://cplog.github.io/blog/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>http://cplog.github.io/categories/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/blog/</loc>
+    <loc>http://cplog.github.io/blog/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>http://cplog.github.io/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>http://cplog.github.io/categories/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/contact/</loc>
+    <loc>http://cplog.github.io/contact/</loc>
   </url>
   
   <url>
-    <loc>/categories/go/</loc>
+    <loc>http://cplog.github.io/categories/go/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/hugo/</loc>
+    <loc>http://cplog.github.io/categories/hugo/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/itemized/</loc>
+    <loc>http://cplog.github.io/itemized/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/jekyll/</loc>
+    <loc>http://cplog.github.io/categories/jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>http://cplog.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/tutorial/</loc>
+    <loc>http://cplog.github.io/tags/tutorial/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
