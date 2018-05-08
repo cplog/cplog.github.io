@@ -6,44 +6,25 @@
     <description>Recent content in Categories on CP LOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://cplog.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title></title>
-      <link>https://cplog.github.io/categories/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Github</title>
+      <link>https://cplog.github.io/categories/github/</link>
+      <pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/categories/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://cplog.github.io/categories/go/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://cplog.github.io/categories/go/</guid>
+      <guid>https://cplog.github.io/categories/github/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
       <link>https://cplog.github.io/categories/hugo/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://cplog.github.io/categories/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jekyll</title>
-      <link>https://cplog.github.io/categories/jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://cplog.github.io/categories/jekyll/</guid>
       <description></description>
     </item>
     
