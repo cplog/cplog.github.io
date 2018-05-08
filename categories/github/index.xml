@@ -17,7 +17,8 @@
       <pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://cplog.github.io/blog/github-hugo/</guid>
-      <description>Introduction What you need: &amp;hellip;* github account &amp;hellip;* hugo installed on your environment</description>
+      <description>Introduction Pre-requisite:  Have hugo installed in your environment github account  Step 1: use Hugo to create a default folder for the site
+&amp;gt;&amp;gt;hugo new site &amp;lt;blog name&amp;gt;  Step 2: Create a repo on github with the , e.g. my case will be cplog.</description>
     </item>
     
   </channel>
