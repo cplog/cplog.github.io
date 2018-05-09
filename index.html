@@ -450,7 +450,7 @@
         
 
         <a href="https://cplog.github.io/blog/github-hugo/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/052018/05/pic02.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/05/pic02.jpg" alt="">
         </a>
     
 
@@ -464,7 +464,8 @@
 
 <ol>
 <li>Have hugo installed in your environment</li>
-<li>github account</li>
+<li>Github account</li>
+<li>Basic linux commands</li>
 </ol>
 
 <p>Step 1: use Hugo to create a default folder for the site</p>
@@ -472,7 +473,35 @@
 <pre><code>&gt;&gt;hugo new site &lt;blog name&gt;
 </code></pre>
 
+<p>Then you should be able to see a structure like this in /<blog name> folder</p>
+
+<pre><code>.
+├── archetypes
+├── config.toml
+├── content
+├── data
+├── layouts
+├── static
+└── themes
+</code></pre>
+
 <p>Step 2: Create a repo on github with the <blog name>, e.g. my case will be <a href="https://github.com/cplog/cplog">cplog</a>.</p>
+
+<p>Step 3: Choose a theme that you like from <a href="https://themes.gohugo.io/">here</a>,
+then go to the theme&rsquo;s github repo and clone it at next step</p>
+
+<p>Step 4: Go to the <code>/theme</code> which is inside <code>/&lt;blog name&gt;</code> [created at step 2] and clone:</p>
+
+<pre><code>&gt;&gt;git clone &lt;the theme github url&gt;
+</code></pre>
+
+<p>Step 5: go to <code>/&lt;/blog name&gt;/theme/&lt;theme name&gt;</code>,
+you should be able to see the <code>/exampleSite</code> folder
+copy the <code>config.toml</code> to replace the one at <code>/&lt;blog name&gt;</code></p>
+
+<p>Step 6: back to <code>/&lt;blog name&gt;</code> and edit the config.toml</p>
+
+<h5 id="continue-asap">Continue ASAP&hellip;</h5>
 
   </div>
 

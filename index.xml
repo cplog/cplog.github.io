@@ -17,8 +17,9 @@
       <pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://cplog.github.io/blog/github-hugo/</guid>
-      <description>Introduction Pre-requisite:  Have hugo installed in your environment github account  Step 1: use Hugo to create a default folder for the site
-&amp;gt;&amp;gt;hugo new site &amp;lt;blog name&amp;gt;  Step 2: Create a repo on github with the , e.g. my case will be cplog.</description>
+      <description>Introduction Pre-requisite:  Have hugo installed in your environment Github account Basic linux commands  Step 1: use Hugo to create a default folder for the site
+&amp;gt;&amp;gt;hugo new site &amp;lt;blog name&amp;gt;  Then you should be able to see a structure like this in /folder
+. ├── archetypes ├── config.toml ├── content ├── data ├── layouts ├── static └── themes  Step 2: Create a repo on github with the , e.</description>
     </item>
     
   </channel>
