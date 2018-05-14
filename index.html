@@ -285,6 +285,9 @@
 
 
   
+  
+    
+  
 
 
         
@@ -292,7 +295,7 @@
         
 
         <a href="https://cplog.github.io/blog/github-hugo/" class="image featured">
-            <img src="https://cplog.github.io/img//pic02.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/05/pic02.jpg" alt="">
         </a>
     
 
@@ -329,7 +332,7 @@
             May 8, 2018</time>
         <span class="author">CP Tai</span>
         
-            <p>1 minute read</p>
+            <p>2 minute read</p>
         
         
     </div>
@@ -440,9 +443,6 @@
 
 
   
-  
-    
-  
 
 
         
@@ -450,7 +450,7 @@
         
 
         <a href="https://cplog.github.io/blog/github-hugo/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/05/pic02.jpg" alt="">
+            <img src="https://cplog.github.io/img//pic02.jpg" alt="">
         </a>
     
 
@@ -485,7 +485,9 @@
 └── themes
 </code></pre>
 
-<p>Step 2: Create a repo on github with the <blog name>, e.g. my case will be <a href="https://github.com/cplog/cplog">cplog</a>.</p>
+<p>Step 2: Create two repos on github
+* One with the <code>&lt;blog name&gt;</code>, e.g. my case will be <a href="https://github.com/cplog/cplog">cplog</a>.
+* And another one is <blog name>.github.io, with README.md e.g. mycase <a href="https://github.com/cplog/cplog.github.io">cptai.github.io</a>.</p>
 
 <p>Step 3: Choose a theme that you like from <a href="https://themes.gohugo.io/">here</a>,
 then go to the theme&rsquo;s github repo and clone it at next step</p>
@@ -499,7 +501,27 @@ then go to the theme&rsquo;s github repo and clone it at next step</p>
 you should be able to see the <code>/exampleSite</code> folder
 copy the <code>config.toml</code> to replace the one at <code>/&lt;blog name&gt;</code></p>
 
-<p>Step 6: back to <code>/&lt;blog name&gt;</code> and edit the config.toml</p>
+<p>Step 6: back to <code>/&lt;blog name&gt;</code> and edit the config.toml, change the info with respect to your blog name</p>
+
+<p>Step 7: At <code>/&lt;blog name&gt;</code> if you type <code>hugo server</code> you should be able to view your website at <code>localhost:1313</code></p>
+
+<p>Step 8: Before push to github, use <code>hugo</code> command will generate a new folder <code>/&lt;blog name&gt;/public</code></p>
+
+<p>Git init your website, and push the folder to your <code>&lt;blog name&gt;</code> git repo</p>
+
+<p>Step 9: Remove public from this git because we will put it as submodule and let it belongs to</p>
+
+<pre><code>&gt;&gt;git rm -rf public
+</code></pre>
+
+<p>Step 10: use <code>hugo</code> command to generate <code>/&lt;blog name&gt;/public</code> again then</p>
+
+<pre><code>&gt;&gt;git submodule add https://github.com/&lt;blog_name&gt;/&lt;blog_name&gt;.github.io.git public
+</code></pre>
+
+<p>Step 11: git push inside /<blog name>/public again to will publish you website at <blog_name>.github.io</p>
+
+<p>Finally, Open you browser and go to <blog_name>.github.io will see your website!</p>
 
 <h5 id="continue-asap">Continue ASAP&hellip;</h5>
 

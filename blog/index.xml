@@ -19,7 +19,7 @@
       <guid>https://cplog.github.io/blog/github-hugo/</guid>
       <description>Introduction Pre-requisite:  Have hugo installed in your environment Github account Basic linux commands  Step 1: use Hugo to create a default folder for the site
 &amp;gt;&amp;gt;hugo new site &amp;lt;blog name&amp;gt;  Then you should be able to see a structure like this in /folder
-. ├── archetypes ├── config.toml ├── content ├── data ├── layouts ├── static └── themes  Step 2: Create a repo on github with the , e.</description>
+. ├── archetypes ├── config.toml ├── content ├── data ├── layouts ├── static └── themes  Step 2: Create two repos on github * One with the &amp;lt;blog name&amp;gt;, e.</description>
     </item>
     
   </channel>
