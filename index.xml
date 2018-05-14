@@ -6,17 +6,26 @@
     <description>Recent content on CP LOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://cplog.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Regression Part 1</title>
+      <link>https://cplog.github.io/blog/ml/regression/</link>
+      <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/blog/ml/regression/</guid>
+      <description> To be Continued </description>
+    </item>
+    
+    <item>
       <title>Host your website as github.io</title>
-      <link>https://cplog.github.io/blog/github-hugo/</link>
+      <link>https://cplog.github.io/blog/hugo/github-hugo/</link>
       <pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/blog/github-hugo/</guid>
+      <guid>https://cplog.github.io/blog/hugo/github-hugo/</guid>
       <description>Introduction Pre-requisite:  Have hugo installed in your environment Github account Basic linux commands  Step 1: use Hugo to create a default folder for the site
 &amp;gt;&amp;gt;hugo new site &amp;lt;blog name&amp;gt;  Then you should be able to see a structure like this in /folder
 . ├── archetypes ├── config.toml ├── content ├── data ├── layouts ├── static └── themes  Step 2: Create two repos on github * One with the &amp;lt;blog name&amp;gt;, e.</description>
