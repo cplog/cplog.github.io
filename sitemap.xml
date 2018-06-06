@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://cplog.github.io/blog/regression/</loc>
+    <loc>https://cplog.github.io/blog/stock-statistics/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -51,19 +51,13 @@
   </url>
   
   <url>
-    <loc>https://cplog.github.io/categories/machine-learning/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cplog.github.io/categories/math/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://cplog.github.io/tags/note/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://cplog.github.io/categories/preprocessing/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -75,7 +69,13 @@
   </url>
   
   <url>
-    <loc>https://cplog.github.io/categories/regression/</loc>
+    <loc>https://cplog.github.io/categories/statistics/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://cplog.github.io/categories/stock/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

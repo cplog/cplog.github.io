@@ -29,20 +29,11 @@
     </item>
     
     <item>
-      <title>Machine learning</title>
-      <link>https://cplog.github.io/categories/machine-learning/</link>
+      <title>Preprocessing</title>
+      <link>https://cplog.github.io/categories/preprocessing/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/categories/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Math</title>
-      <link>https://cplog.github.io/categories/math/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://cplog.github.io/categories/math/</guid>
+      <guid>https://cplog.github.io/categories/preprocessing/</guid>
       <description></description>
     </item>
     
@@ -56,11 +47,20 @@
     </item>
     
     <item>
-      <title>Regression</title>
-      <link>https://cplog.github.io/categories/regression/</link>
+      <title>Statistics</title>
+      <link>https://cplog.github.io/categories/statistics/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/categories/regression/</guid>
+      <guid>https://cplog.github.io/categories/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stock</title>
+      <link>https://cplog.github.io/categories/stock/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/categories/stock/</guid>
       <description></description>
     </item>
     

@@ -13,11 +13,20 @@
     
     <item>
       <title>Regression Part 1</title>
-      <link>https://cplog.github.io/blog/regression/</link>
+      <link>https://cplog.github.io/blog/cleaning_stock/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/blog/regression/</guid>
+      <guid>https://cplog.github.io/blog/cleaning_stock/</guid>
       <description> To be Continued </description>
+    </item>
+    
+    <item>
+      <title>Stock with Data Science -- Part 1</title>
+      <link>https://cplog.github.io/blog/stock-statistics/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/blog/stock-statistics/</guid>
+      <description>import pandas as pd from requests_html import HTMLSession import re import time import os import numpy as np  curDir=os.getcwd()  session = HTMLSession() oil=&#39;ONG&#39; hotel=&#39;HNE&#39; #Parameter industry=oil r = session.get(&#39;https://www.etnet.com.hk/www/eng/stocks/industry_detail.php?nature={}&amp;amp;subtype=all&#39;.format(oil))  pattern = re.compile(r&amp;quot;^https://www.etnet.com.hk/realtime/quote.php\?code=(.*)&amp;quot;) industry_list={pattern.search(i).group(1) if pattern.match(i) != None else None for i in r.html.absolute_links} industry_list.remove(None)  series_list=[] for i in industry_list: new=pd.read_csv(curDir+&#39;/db_statistics/{}_{}.csv&#39;.format(industry,i),dtype=object, sep=&#39;,&#39;,index_col=[0]) new_df=pd.DataFrame(new[&#39;TTM&#39;]).rename(columns={&#39;TTM&#39;:&#39;TTM_{}&#39;.format(i)}) series_list.append(new_df) #df=pd.concat([df,pd.DataFrame(new[&#39;TTM&#39;]).rename(columns={&#39;TTM&#39;:i})],axis=1)  series_list[0]   .dataframe tbody tr th:only-of-type { vertical-align: middle; } .</description>
     </item>
     
   </channel>

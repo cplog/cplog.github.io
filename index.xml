@@ -12,12 +12,14 @@
     
     
     <item>
-      <title>Regression Part 1</title>
-      <link>https://cplog.github.io/blog/regression/</link>
+      <title>Stock with Data Science -- Part 1</title>
+      <link>https://cplog.github.io/blog/stock-statistics/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/blog/regression/</guid>
-      <description> To be Continued </description>
+      <guid>https://cplog.github.io/blog/stock-statistics/</guid>
+      <description>import pandas as pd from requests_html import HTMLSession import re import time import os import numpy as np  curDir=os.getcwd()  Fetch a list of industry stock ticker from etnet  use requests-html package to get the html contents &amp;gt; example of oil industry
+ The absolute links with this https://www.etnet.com.hk/realtime/quote.php\?code=(.*) can extract the tickers
+  session = HTMLSession() oil=&#39;ONG&#39; hotel=&#39;HNE&#39; #Parameter industry=oil r = session.get(&#39;https://www.etnet.com.hk/www/eng/stocks/industry_detail.php?nature={}&amp;amp;subtype=all&#39;.format(oil))  pattern = re.</description>
     </item>
     
     <item>

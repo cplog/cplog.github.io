@@ -278,7 +278,7 @@ ga('send', 'pageview');
                 
                         <article class="mini-post">
                             <header>
-                                <h3><a href="https://cplog.github.io/blog/regression/">Regression Part 1</a></h3>
+                                <h3><a href="https://cplog.github.io/blog/stock-statistics/">Stock with Data Science -- Part 1</a></h3>
                                 
                                 <time class="published" datetime=
                                     '2018-05-15'>
@@ -307,8 +307,8 @@ ga('send', 'pageview');
         
         
 
-        <a href="https://cplog.github.io/blog/regression/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/05/pic01.jpg" alt="">
+        <a href="https://cplog.github.io/blog/stock-statistics/" class="image featured">
+            <img src="https://cplog.github.io/img/2018/05/pic04.jpg" alt="">
         </a>
     
 
@@ -373,10 +373,10 @@ ga('send', 'pageview');
 
     <div class="title">
         
-            <h2><a href="https://cplog.github.io/blog/regression/">Regression Part 1</a></h2>
+            <h2><a href="https://cplog.github.io/blog/stock-statistics/">Stock with Data Science -- Part 1</a></h2>
         
         
-            <p>regression</p>
+            <p>load all statistics</p>
         
     </div>
     <div class="meta">
@@ -416,17 +416,32 @@ ga('send', 'pageview');
         
         
 
-        <a href="https://cplog.github.io/blog/regression/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/05/pic01.jpg" alt="">
+        <a href="https://cplog.github.io/blog/stock-statistics/" class="image featured">
+            <img src="https://cplog.github.io/img/2018/05/pic04.jpg" alt="">
         </a>
     
 
 
   
-  
+  <pre><code class="language-python">import pandas as pd
+from requests_html import HTMLSession
+import re
+import time
+import os
+import numpy as np
+</code></pre>
+
+<pre><code class="language-python">curDir=os.getcwd()
+</code></pre>
+
+<h3 id="fetch-a-list-of-industry-stock-ticker-from-etnet">Fetch a list of industry stock ticker from etnet</h3>
+
+<ol>
+<li><p>use requests-html package to get the html contents
+&gt; example of oil industry</p>
   <footer>
     <ul class="actions">
-      <li><a href="https://cplog.github.io/blog/regression/" class="button big">Continue Reading</a></li>
+      <li><a href="https://cplog.github.io/blog/stock-statistics/" class="button big">Continue Reading</a></li>
     </ul>
   <ul class="stats">
   <li class="categories">
@@ -437,16 +452,16 @@ ga('send', 'pageview');
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://cplog.github.io/categories/machine-learning">machine learning</a></li>
+                <li><a class="article-category-link" href="https://cplog.github.io/categories/stock">stock</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://cplog.github.io/categories/regression">regression</a></li>
+                <li><a class="article-category-link" href="https://cplog.github.io/categories/preprocessing">preprocessing</a></li>
                 
                 
                 <li><a class="article-category-link" href="https://cplog.github.io/categories/python">python</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://cplog.github.io/categories/math">math</a></li>
+                <li><a class="article-category-link" href="https://cplog.github.io/categories/statistics">statistics</a></li>
                 
             
         
@@ -611,7 +626,7 @@ ga('send', 'pageview');
           <article class="mini-post">
             <header>
               <h3>
-                <a href="https://cplog.github.io/blog/regression/">Regression Part 1</a>
+                <a href="https://cplog.github.io/blog/stock-statistics/">Stock with Data Science -- Part 1</a>
               </h3>
               
               <time class="published" datetime='2018-05-15'>
@@ -632,14 +647,17 @@ ga('send', 'pageview');
 
 
   
+  
+    
+  
 
 
         
         
         
 
-        <a href="https://cplog.github.io/blog/regression/" class="image featured">
-            <img src="https://cplog.github.io/date2018/05/pic01.jpg" alt="">
+        <a href="https://cplog.github.io/blog/stock-statistics/" class="image featured">
+            <img src="https://cplog.github.io/img/2018/05/pic04.jpg" alt="">
         </a>
     
 
@@ -670,6 +688,9 @@ ga('send', 'pageview');
 
 
   
+  
+    
+  
 
 
         
@@ -677,7 +698,7 @@ ga('send', 'pageview');
         
 
         <a href="https://cplog.github.io/blog/github-hugo/" class="image featured">
-            <img src="https://cplog.github.io/img//pic02.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/05/pic02.jpg" alt="">
         </a>
     
 
@@ -732,18 +753,7 @@ ga('send', 'pageview');
           <article>
             <header>
               
-                <a href="https://cplog.github.io/categories/machine-learning/">machine learning</a>
-                <span style="float:right;">1</span>
-              
-            </header>
-          </article>
-        </p>
-        
-        <p>
-          <article>
-            <header>
-              
-                <a href="https://cplog.github.io/categories/math/">math</a>
+                <a href="https://cplog.github.io/categories/preprocessing/">preprocessing</a>
                 <span style="float:right;">1</span>
               
             </header>
@@ -765,7 +775,18 @@ ga('send', 'pageview');
           <article>
             <header>
               
-                <a href="https://cplog.github.io/categories/regression/">regression</a>
+                <a href="https://cplog.github.io/categories/statistics/">statistics</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://cplog.github.io/categories/stock/">stock</a>
                 <span style="float:right;">1</span>
               
             </header>
