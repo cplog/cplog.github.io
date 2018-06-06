@@ -1,3 +1,2 @@
-*.csv
-db_statistics
+db_statistics/
 *.ipynb
