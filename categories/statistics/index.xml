@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on CP LOG</title>
+    <link>https://cplog.github.io/categories/statistics/</link>
+    <description>Recent content in Statistics on CP LOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://cplog.github.io/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Stock with Data Science -- Part 1</title>
+      <link>https://cplog.github.io/blog/stock-statistics/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/blog/stock-statistics/</guid>
+      <description>import pandas as pd from requests_html import HTMLSession import re import time import os import numpy as np  curDir=os.getcwd()  Fetch a list of industry stock ticker from etnet  use requests-html package to get the html contents &amp;gt; example of oil industry
+ The absolute links with this https://www.etnet.com.hk/realtime/quote.php\?code=(.*) can extract the tickers
+  session = HTMLSession() oil=&#39;ONG&#39; hotel=&#39;HNE&#39; #Parameter industry=oil r = session.get(&#39;https://www.etnet.com.hk/www/eng/stocks/industry_detail.php?nature={}&amp;amp;subtype=all&#39;.format(oil))  pattern = re.</description>
+    </item>
+    
+  </channel>
+</rss>
