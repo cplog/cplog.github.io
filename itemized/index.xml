@@ -6,45 +6,18 @@
     <description>Recent content in Itemized on CP LOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://cplog.github.io/itemized/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Fancy App 1</title>
-      <link>https://cplog.github.io/itemized/item1/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Project 1</title>
+      <link>https://cplog.github.io/itemized/item_1/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cplog.github.io/itemized/item1/</guid>
-      <description> App 1 </description>
-    </item>
-    
-    <item>
-      <title>Fancy App 2</title>
-      <link>https://cplog.github.io/itemized/item2/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://cplog.github.io/itemized/item2/</guid>
-      <description> App 2 </description>
-    </item>
-    
-    <item>
-      <title>Fancy App 3</title>
-      <link>https://cplog.github.io/itemized/item3/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://cplog.github.io/itemized/item3/</guid>
-      <description> App 3 </description>
-    </item>
-    
-    <item>
-      <title>Fancy App 4</title>
-      <link>https://cplog.github.io/itemized/item4/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://cplog.github.io/itemized/item4/</guid>
-      <description> App 4 </description>
+      <guid>https://cplog.github.io/itemized/item_1/</guid>
+      <description> Project 1 </description>
     </item>
     
   </channel>

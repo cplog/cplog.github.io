@@ -6,10 +6,19 @@
     <description>Recent content in Python on CP LOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://cplog.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Project 1</title>
+      <link>https://cplog.github.io/itemized/item_1/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/itemized/item_1/</guid>
+      <description> Project 1 </description>
+    </item>
     
     <item>
       <title>Stock with Data Science -- Part 2</title>
