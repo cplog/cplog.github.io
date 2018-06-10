@@ -6,9 +6,28 @@
     <description>Recent content in Categories on CP LOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://cplog.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Alphavantage</title>
+      <link>https://cplog.github.io/categories/alphavantage/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/categories/alphavantage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data</title>
+      <link>https://cplog.github.io/categories/data/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/categories/data/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Github</title>
@@ -31,7 +50,7 @@
     <item>
       <title>Preprocessing</title>
       <link>https://cplog.github.io/categories/preprocessing/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://cplog.github.io/categories/preprocessing/</guid>
       <description></description>
@@ -40,7 +59,7 @@
     <item>
       <title>Python</title>
       <link>https://cplog.github.io/categories/python/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://cplog.github.io/categories/python/</guid>
       <description></description>
@@ -58,7 +77,7 @@
     <item>
       <title>Stock</title>
       <link>https://cplog.github.io/categories/stock/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://cplog.github.io/categories/stock/</guid>
       <description></description>

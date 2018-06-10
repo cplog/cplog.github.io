@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://cplog.github.io/blog/alphavantage/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://cplog.github.io/blog/stock-statistics/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
   </url>
@@ -18,24 +23,37 @@
   </url>
   
   <url>
+    <loc>https://cplog.github.io/categories/alphavantage/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://cplog.github.io/blog/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://cplog.github.io/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://cplog.github.io/categories/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://cplog.github.io/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cplog.github.io/categories/data/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -52,19 +70,19 @@
   
   <url>
     <loc>https://cplog.github.io/tags/note/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://cplog.github.io/categories/preprocessing/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://cplog.github.io/categories/python/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -76,13 +94,13 @@
   
   <url>
     <loc>https://cplog.github.io/categories/stock/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://cplog.github.io/tags/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

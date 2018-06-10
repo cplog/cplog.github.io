@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alphavantage on CP LOG</title>
+    <link>https://cplog.github.io/categories/alphavantage/</link>
+    <description>Recent content in Alphavantage on CP LOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://cplog.github.io/categories/alphavantage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Stock with Data Science -- Part 2</title>
+      <link>https://cplog.github.io/blog/alphavantage/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://cplog.github.io/blog/alphavantage/</guid>
+      <description>Alphavantage (https://www.alphavantage.co/documentation/) Welcome to Part 2. This is part is about getting historical price of stocks. If you are intrested in reading data for whole industry of stock in Hong Kong, you can refer to part 1 (https://cplog.github.io/blog/stock-statistics/) .
+For open source project, geting free and easy data is always the challenge. I have tried serveral resources for free stock data, and alphavantage is definitely one of the easiest and full features that save tons of time in preprocessing.</description>
+    </item>
+    
+  </channel>
+</rss>
