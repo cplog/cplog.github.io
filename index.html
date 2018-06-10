@@ -305,7 +305,7 @@ ga('send', 'pageview');
         
 
         <a href="https://cplog.github.io/blog/alphavantage/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/06/pic04.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/06/01.jpg" alt="">
         </a>
     
 
@@ -383,7 +383,7 @@ ga('send', 'pageview');
         
 
         <a href="https://cplog.github.io/blog/github-hugo/" class="image featured">
-            <img src="https://cplog.github.io/img//pic02.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/05/pic02.jpg" alt="">
         </a>
     
 
@@ -427,7 +427,7 @@ ga('send', 'pageview');
             June 1, 2018</time>
         <span class="author">CP Tai</span>
         
-            <p>3 minute read</p>
+            <p>2 minute read</p>
         
         
     </div>
@@ -548,7 +548,7 @@ ga('send', 'pageview');
         
 
         <a href="https://cplog.github.io/blog/alphavantage/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/06/pic04.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/06/01.jpg" alt="">
         </a>
     
 
@@ -756,7 +756,8 @@ display(get_stock('0857.HK',alphavantage_api).tail())
 <h3 id="technical-indicator-e-g-rsi">Technical Indicator (e.g. RSI)</h3>
 
 <p>When it comes to technical indicator, seems it does not support csv output yet. <br>
-But we can still handle it by <code>requests</code> and treat it a json</p>
+But we can still handle it by <code>requests</code> and treat it a json <br>
+Below shows an example of monthly rsi period=9</p>
 
 <pre><code class="language-python">def get_rsi(stock,alphavantage_api):
     df = requests.get('https://www.alphavantage.co/query?function=RSI'
@@ -769,7 +770,7 @@ But we can still handle it by <code>requests</code> and treat it a json</p>
 </code></pre>
 
 <pre><code class="language-python">#Then we can also convert it to dataframe if needed
-display(json_normalize(get_rsi('0857.HK',alphavantage_api)['Technical Analysis: RSI']))
+display(json_normalize(get_rsi('0857.HK',alphavantage_api)['Technical Analysis: RSI']).T.tail())
 </code></pre>
 
 <div>
@@ -790,57 +791,32 @@ display(json_normalize(get_rsi('0857.HK',alphavantage_api)['Technical Analysis: 
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>2001-02-28.RSI</th>
-      <th>2001-03-30.RSI</th>
-      <th>2001-04-30.RSI</th>
-      <th>2001-05-31.RSI</th>
-      <th>2001-06-29.RSI</th>
-      <th>2001-07-31.RSI</th>
-      <th>2001-08-31.RSI</th>
-      <th>2001-09-28.RSI</th>
-      <th>2001-10-31.RSI</th>
-      <th>2001-11-30.RSI</th>
-      <th>...</th>
-      <th>2017-09-29.RSI</th>
-      <th>2017-10-31.RSI</th>
-      <th>2017-11-30.RSI</th>
-      <th>2017-12-29.RSI</th>
-      <th>2018-01-31.RSI</th>
-      <th>2018-02-28.RSI</th>
-      <th>2018-03-29.RSI</th>
-      <th>2018-04-30.RSI</th>
-      <th>2018-05-31.RSI</th>
-      <th>2018-06-08.RSI</th>
+      <th>0</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>43.5185</td>
-      <td>41.3641</td>
-      <td>16.2323</td>
-      <td>54.9769</td>
-      <td>52.9309</td>
-      <td>52.7610</td>
-      <td>52.3827</td>
-      <td>49.3940</td>
-      <td>50.0354</td>
-      <td>46.9137</td>
-      <td>...</td>
-      <td>37.9941</td>
-      <td>41.8976</td>
-      <td>46.2482</td>
-      <td>51.3690</td>
-      <td>65.3109</td>
+      <th>2018-02-28.RSI</th>
       <td>50.7025</td>
+    </tr>
+    <tr>
+      <th>2018-03-29.RSI</th>
       <td>48.1697</td>
+    </tr>
+    <tr>
+      <th>2018-04-30.RSI</th>
       <td>55.3405</td>
+    </tr>
+    <tr>
+      <th>2018-05-31.RSI</th>
       <td>64.9008</td>
+    </tr>
+    <tr>
+      <th>2018-06-08.RSI</th>
       <td>65.6107</td>
     </tr>
   </tbody>
 </table>
-<p>1 rows × 209 columns</p>
 </div>
 
   </div>
@@ -1180,7 +1156,7 @@ display(json_normalize(get_rsi('0857.HK',alphavantage_api)['Technical Analysis: 
         
 
         <a href="https://cplog.github.io/blog/alphavantage/" class="image featured">
-            <img src="https://cplog.github.io/img/2018/06/pic04.jpg" alt="">
+            <img src="https://cplog.github.io/img/2018/06/01.jpg" alt="">
         </a>
     
 
