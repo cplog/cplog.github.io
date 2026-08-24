@@ -1,0 +1,14 @@
+# superseded builds and local tooling — not part of the site
+lab/
+scrollcraft/
+ascii/
+pw/
+node_modules/
+out/
+*.log
+_*.mjs
+_*.py
+sc-*.png
+shot-*.png
+index.dark.html
+.scrollcraft.json

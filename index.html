@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eric Tai — Engineering lead, Hong Kong</title>
+<meta name="description" content="Engineering lead in Hong Kong. Agent platforms, knowledge systems, and the architecture decisions underneath them.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fff'/><rect x='6' y='15' width='20' height='2' fill='%23000'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --canvas:#FFFFFF;
+    --ink:#000000;
+    --ink-2:rgb(0 0 0 / 64%);
+    --ink-3:rgb(0 0 0 / 56%);          /* lifted: real reading sits here */
+    --ink-4:rgb(0 0 0 / 44%);          /* glyphs and genuinely optional text */
+    --border:rgb(0 0 0 / 10%);
+    --border-strong:rgb(0 0 0 / 18%);
+    --hover:rgb(0 0 0 / 5%);
+    --pressed:rgb(0 0 0 / 9%);
+    --tint:rgb(0 0 0 / 4%);
+    --font:"Inter",system-ui,-apple-system,sans-serif;
+    --pad:clamp(24px,5vw,64px);
+    --maxw:1200px;
+    --chapter:clamp(64px,10vw,128px);
+  }
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  a{color:inherit}
+  ::selection{background:var(--ink);color:var(--canvas)}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+  /* nav ------------------------------------------------------------------ */
+  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .nav__in{display:flex;align-items:center;gap:24px;height:64px;
+    width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+  .nav__links{margin-left:auto;display:flex;gap:8px}
+  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
+  @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
+  .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
+  @media(max-width:660px){.nav__links a{padding:6px 7px;font-size:13px}}
+  /* nowrap on the name means the row must give the links room back */
+  @media(max-width:440px){
+    .nav__in{gap:10px}
+    .nav__links{gap:0}
+    .nav__links a{padding:6px 5px;font-size:12.5px;letter-spacing:-.01em}
+  }
+
+  /* hero ----------------------------------------------------------------- */
+  .hero{padding-block:clamp(48px,7vw,88px) clamp(48px,7vw,88px)}
+  .hero__grid{display:grid;gap:clamp(32px,5vw,56px);align-items:end}
+  @media(min-width:920px){.hero__grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+  h1{font-size:clamp(34px,5.2vw,60px);font-weight:600;line-height:1.06;
+    letter-spacing:-.032em;max-width:15ch;text-wrap:balance}
+  h1 span{color:var(--ink-2)}
+  .hero__lede{margin-top:24px;font-size:18px;color:var(--ink-2);max-width:56ch;text-wrap:pretty}
+  .hero__meta{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;
+    text-decoration:none;padding:11px 18px;border-radius:8px;border:1px solid var(--border-strong);
+    color:var(--ink);background:var(--canvas);
+    transition:background .18s ease,border-color .18s ease}
+  @media (hover:hover) and (pointer:fine){.btn:hover{background:var(--hover)}}
+  .btn:active{background:var(--pressed)}
+  .btn--primary{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+  @media (hover:hover) and (pointer:fine){.btn--primary:hover{background:rgb(0 0 0 / 84%)}}
+
+  /* the one expressive interruption, in ink */
+  .ascii{position:relative;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+    background:var(--canvas);aspect-ratio:4/3;width:100%;min-width:0}
+  .ascii pre{position:absolute;inset:0;margin:0;overflow:hidden;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:clamp(5px,.6vw,8px);line-height:1.05;color:var(--ink);white-space:pre;opacity:.82}
+  .ascii__ctl{position:absolute;left:8px;bottom:8px;display:flex;gap:4px}
+  .ascii__ctl button{font-family:var(--font);font-size:12px;font-weight:500;color:var(--ink-3);
+    background:rgb(255 255 255 / 82%);border:1px solid var(--border);border-radius:6px;
+    padding:5px 9px;cursor:pointer;transition:color .18s ease,background .18s ease}
+  @media (hover:hover) and (pointer:fine){.ascii__ctl button:hover{color:var(--ink);background:var(--canvas)}}
+  .ascii__ctl button[aria-pressed="true"]{color:var(--ink);background:var(--canvas);border-color:var(--border-strong)}
+  .ascii__hint{position:absolute;right:10px;bottom:12px;font-size:12px;color:var(--ink-4)}
+  @media(max-width:660px){.ascii__hint{display:none}}
+
+  /* chapters -------------------------------------------------------------- */
+  section{padding-block:var(--chapter)}
+  section + section{border-top:1px solid var(--border)}
+  .chapter__head{max-width:60ch}
+  h2{font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.02em;line-height:1.15}
+  .chapter__sub{margin-top:12px;font-size:17px;color:var(--ink-2);text-wrap:pretty}
+
+  .exp{margin-top:48px;display:grid;gap:0}
+  @media(min-width:860px){.exp{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px,6vw,80px)}}
+  .exp__item{padding-block:28px;border-top:1px solid var(--border)}
+  .exp__item h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .exp__item p{margin-top:8px;color:var(--ink-2);max-width:48ch;font-size:16px}
+  .exp__tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;list-style:none}
+  .exp__tags li{font-size:13px;color:var(--ink-3);background:var(--tint);
+    border-radius:999px;padding:4px 11px}
+
+  .roles{margin-top:48px}
+  .role{display:grid;gap:6px;padding-block:32px;border-top:1px solid var(--border)}
+  @media(min-width:860px){.role{grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:0 clamp(32px,5vw,72px)}}
+  .role__when{font-size:14px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  /* A drawn mark, not a scraped logo: real marks exist for two of seven
+     employers, and a mixed set would be the loudest thing on the page. One
+     family, one weight, one optical size. */
+  .role__mark{display:flex;align-items:center;height:34px;margin-bottom:12px}
+  .role__mark img{max-height:26px;max-width:120px;width:auto;height:auto;display:block}
+  .role__stack{display:flex;align-items:center;height:34px;margin-bottom:12px}
+  .role__stack img,.role__stack .role__mono{
+    width:30px;height:30px;object-fit:contain;background:var(--canvas);
+    border:1px solid var(--border);border-radius:7px;padding:3px;
+    margin-right:-9px;position:relative;transition:margin-right .18s ease}
+  .role__stack > :last-child{margin-right:0}
+  .role__stack .role__mono{padding:0;font-size:10px;letter-spacing:0}
+  @media (hover:hover) and (pointer:fine){
+    .role:hover .role__stack img,.role:hover .role__stack .role__mono{margin-right:3px}
+  }
+  .role__mono{display:grid;place-items:center;width:38px;height:34px;
+    border:1px solid var(--border-strong);border-radius:8px;
+    font-size:12px;font-weight:600;color:var(--ink);font-variant-numeric:normal}
+  .role h3{font-size:19px;font-weight:600;letter-spacing:-.012em}
+  .role__org{font-size:16px;color:var(--ink-2);margin-top:2px}
+  .role p{margin-top:12px;color:var(--ink-2);max-width:66ch;font-size:16px;text-wrap:pretty}
+
+  .projects{margin-top:48px;display:grid;gap:clamp(32px,4vw,56px)}
+  .project{display:grid;gap:24px;align-items:center}
+  @media(min-width:900px){
+    .project{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,64px)}
+    .project:nth-child(even) .project__media{order:2}
+  }
+  .project__media{border-radius:10px;overflow:hidden;background:var(--tint)}
+  .project__media img{width:100%;height:100%;object-fit:cover;display:block;
+    filter:grayscale(1) contrast(1.04)}
+  .project__where{margin-top:4px;font-size:14px;color:var(--ink-3)}
+  .project h3{font-size:20px;font-weight:600;letter-spacing:-.014em}
+  .project p{margin-top:10px;color:var(--ink-2);max-width:52ch;font-size:16px;text-wrap:pretty}
+
+  /* project diagrams: the work explained, not illustrated. Same ink ladder as
+     the page, so they read as part of the document rather than as pictures. */
+  .dia{width:100%;height:auto;display:block;background:var(--tint);border-radius:10px}
+  .dia .box{fill:var(--canvas);stroke:rgb(0 0 0 / 22%);stroke-width:1}
+  .dia .box--key{stroke:var(--ink);stroke-width:1.5}
+  .dia .edge{fill:none;stroke:rgb(0 0 0 / 34%);stroke-width:1.25}
+  .dia .edge--stop{stroke-dasharray:4 4}
+  .dia .lbl{font-family:var(--font);font-size:12px;font-weight:500;fill:var(--ink)}
+  .dia .lbl--q{font-family:var(--font);font-size:11px;font-weight:400;fill:rgb(0 0 0 / 56%)}
+  .dia .gate{fill:none;stroke:var(--ink);stroke-width:1.5}
+  .project__constraint{margin-top:16px;font-size:14px;color:var(--ink-3);
+    padding-left:14px;border-left:1px solid var(--border-strong)}
+
+  .contact h2{font-size:clamp(26px,3.6vw,40px);max-width:24ch;letter-spacing:-.026em;line-height:1.12}
+  .contact__actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
+  .foot{margin-top:var(--chapter);padding-top:24px;border-top:1px solid var(--border);
+    display:grid;gap:8px;font-size:14px;color:var(--ink-3)}
+  @media(min-width:720px){.foot{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
+  .foot a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;
+    text-decoration-color:var(--border-strong)}
+  @media (hover:hover) and (pointer:fine){.foot a:hover{color:var(--ink)}}
+
+
+  /* Motion. Press feedback is driven by a spring in JS so it starts from the
+     current value and can be interrupted; CSS transitions here would fight it. */
+  .btn,.nav__links a,.ascii__ctl button{will-change:transform}
+  .btn:active{background:var(--pressed)}
+
+  /* Scroll edge, not a hard rule: the divider only exists once content is
+     actually underneath the floating chrome. */
+  .nav{border-bottom:1px solid transparent;
+    transition:border-color .3s ease,background .3s ease}
+  .nav[data-scrolled="true"]{border-bottom-color:var(--border)}
+
+  /* Diagram edges draw themselves once, in the direction the flow runs. This is
+     the diagram explaining itself, which is the one motion here that carries
+     information rather than feedback. */
+  .dia .edge{stroke-dasharray:var(--len,0);stroke-dashoffset:var(--len,0)}
+  .dia.is-drawn .edge{stroke-dashoffset:0;
+    transition:stroke-dashoffset .85s cubic-bezier(.22,1,.36,1)}
+  .dia .box,.dia .gate,.dia text{opacity:0}
+  .dia.is-drawn .box,.dia.is-drawn .gate,.dia.is-drawn text{opacity:1;
+    transition:opacity .5s ease-out}
+  .dia.is-drawn .box{transition-delay:.05s}
+  .dia.is-drawn text{transition-delay:.28s}
+
+  @media (prefers-reduced-motion:reduce){
+    .dia .edge{stroke-dasharray:none;stroke-dashoffset:0}
+    .dia .box,.dia .gate,.dia text{opacity:1;transition:none}
+    .nav{transition:none}
+  }
+  [data-in]{opacity:0;transform:translateY(8px)}
+  .is-in[data-in]{opacity:1;transform:none;transition:opacity .5s ease-out,transform .5s ease-out}
+  @media (prefers-reduced-motion:reduce){[data-in]{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 1 L7 4 L0 7" fill="none" stroke="rgb(0 0 0 / 34%)" stroke-width="1.2"/>
+    </marker>
+  </defs>
+</svg>
+<header class="nav">
+  <div class="nav__in">
+    <span class="nav__name">Eric Tai</span>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero__grid">
+      <div data-in>
+        <h1>I build the systems a business <span>runs on.</span></h1>
+        <p class="hero__lede">Engineering lead in Hong Kong. Agent platforms, knowledge systems, and
+          the architecture decisions underneath them: tenancy, ontology, provenance, and the parts
+          that are expensive to reverse.</p>
+        <div class="hero__meta">
+          <a class="btn btn--primary" href="#contact">Get in touch</a>
+          <a class="btn" href="https://www.linkedin.com/in/eric-cp-tai/" rel="me">LinkedIn</a>
+        </div>
+      </div>
+      <div class="ascii" data-in>
+        <pre id="ascii-out" role="img" aria-label="Interactive character field showing a connectivity graph"></pre>
+        <div class="ascii__ctl" id="ascii-ctl" role="group" aria-label="Field"></div>
+        <span class="ascii__hint" aria-hidden="true">Move to disturb</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="expertise"><div class="wrap">
+    <div class="chapter__head" data-in>
+      <h2>Expertise</h2>
+      <p class="chapter__sub">Four areas I am actually useful in, rather than everything I have touched.</p>
+    </div>
+    <div class="exp">
+      <div class="exp__item" data-in>
+        <h3>Data science and ML</h3>
+        <p>Ten years of it: recommendation engines, credit analytics, customer segmentation, spatial
+          and temporal analysis, OCR and NLP over real operational data.</p>
+        <ul class="exp__tags"><li>Python</li><li>PySpark</li><li>Hadoop and Hive</li><li>NLP</li><li>OCR</li></ul>
+      </div>
+      <div class="exp__item" data-in>
+        <h3>LLM and agent systems</h3>
+        <p>Orchestrating language models for performance and scale, and agents that act inside the
+          systems of record rather than reporting on them, under a recorded approval step.</p>
+        <ul class="exp__tags"><li>Orchestration</li><li>Inference</li><li>Tool use</li><li>Evaluation</li></ul>
+      </div>
+      <div class="exp__item" data-in>
+        <h3>Knowledge systems and platform</h3>
+        <p>Ontologies, entity resolution, hybrid retrieval and provenance. Shared engines against
+          per-customer deployments, and deciding what shares a database and what must not.</p>
+        <ul class="exp__tags"><li>pgvector</li><li>Hybrid recall</li><li>Multi-tenancy</li><li>Row-level security</li></ul>
+      </div>
+      <div class="exp__item" data-in>
+        <h3>Product and leadership</h3>
+        <p>Product owner and product manager on data products, leading cross-functional teams from
+          conception to deployment, reporting into chairman and group level.</p>
+        <ul class="exp__tags"><li>Product ownership</li><li>Team lead</li><li>Strategy</li><li>Delivery</li></ul>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="experience"><div class="wrap">
+    <div class="chapter__head" data-in>
+      <h2>Experience</h2>
+      <p class="chapter__sub">Ten years, Hong Kong. Banking operations to data science to engineering leadership.</p>
+    </div>
+    <div class="roles">
+      <article class="role" data-in>
+        <div class="role__when"><span class="role__mark"><img src="assets/marks/crewio-wordmark.png" alt="Crewio" loading="lazy" decoding="async"></span>Jul 2026 — now</div>
+        <div>
+          <h3>Lead Engineer</h3>
+          <div class="role__org">Crewio, Hong Kong</div>
+          <p>Leading engineering on an agent and knowledge platform for enterprise and SME customers:
+            shared engines in a monorepo, per-customer deployments across three tenancy tiers, and the
+            architecture underneath them. Where customisation is allowed to live, what a brain may
+            assume, and what activation actually costs per customer.</p>
+        </div>
+      </article>
+      <article class="role" data-in>
+        <div class="role__when"><span class="role__mark"><img src="assets/marks/lifung.svg" alt="Li and Fung" loading="lazy" decoding="async"></span>Mar 2022 — Jul 2026</div>
+        <div>
+          <h3>Principal Data Scientist, then Senior Data Scientist</h3>
+          <div class="role__org">Li &amp; Fung and LFX Digital, Strategic Data Unit</div>
+          <p>Led development of AI-driven products from conception to deployment, with a focus on
+            orchestrating large language models for performance and scale. Product owner of the
+            document intelligence service and lead for AI development at group level; product manager
+            across several data products. Rebuilt the business analytics pipeline with management in
+            each business unit.</p>
+        </div>
+      </article>
+      <article class="role" data-in>
+        <div class="role__when"><span class="role__mark"><img src="assets/marks/hkdc.png" alt="Hong Kong Data Club" loading="lazy" decoding="async"></span>Sep 2022 — now</div>
+        <div>
+          <h3>Founding Committee</h3>
+          <div class="role__org">Hong Kong Data Club</div>
+          <p>Founding committee member of Hong Kong's data practitioner community.</p>
+        </div>
+      </article>
+      <article class="role" data-in>
+        <div class="role__when"><span class="role__mark"><img src="assets/marks/shkp.png" alt="Sun Hung Kai Properties" loading="lazy" decoding="async"></span>Aug 2020 — Mar 2022</div>
+        <div>
+          <h3>Senior Data Scientist, then Data Scientist</h3>
+          <div class="role__org">Sun Hung Kai Properties, Chairman's Office</div>
+          <p>Reporting into the Chairman's Office, delivering strategy and analysis at group level
+            across mall management, SmarTone, YATA, KMB and The Point. Fused telco, customer profile,
+            transaction, image and text data into mall landscape analysis, campaign targeting,
+            segmentation into hundreds of segments, bus maintenance optimisation, and OCR and NLP over
+            cars and receipts.</p>
+        </div>
+      </article>
+      <article class="role" data-in>
+        <div class="role__when"><span class="role__mark"><img src="assets/marks/hkt.png" alt="HKT" loading="lazy" decoding="async"></span>Dec 2016 — Aug 2020</div>
+        <div>
+          <h3>Data Scientist, rising from Analyst</h3>
+          <div class="role__org">HKT, Group CTO Office</div>
+          <p>Team lead on data science projects. Delivered a recommendation engine end to end,
+            supported credit analytics and feature engineering, and built machine learning pipelines
+            over Hadoop, Hive, Spark and MongoDB. Text mining and NLP, spatial and temporal analysis
+            with geohash, and data fusion across internal and external sources.</p>
+        </div>
+      </article>
+      <article class="role" data-in>
+        <div class="role__when"><span class="role__stack"><img src="assets/marks/sap.svg" alt="SAP" loading="lazy" decoding="async"><img src="assets/marks/hangseng.png" alt="Hang Seng Bank" loading="lazy" decoding="async"><span class="role__mono" role="img" aria-label="Mecom Power">MP</span></span>2013 — 2016</div>
+        <div>
+          <h3>Earlier</h3>
+          <div class="role__org">SAP, Hang Seng Bank, Mecom Power</div>
+          <p>Big data platform internship at SAP on HANA, smart data streaming and predictive models.
+            Before that, commercial and retail banking at Hang Seng Bank in Macau, and administrative
+            work at a civil engineering firm.</p>
+        </div>
+      </article>
+    </div>
+  </div></section>
+
+  <section id="projects"><div class="wrap">
+    <div class="chapter__head" data-in>
+      <h2>Projects</h2>
+      <p class="chapter__sub">Four across ten years. Client and product names withheld where they are not mine to publish; the constraint is the part worth reading.</p>
+    </div>
+    <div class="projects">
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="pdt pdd">
+          <title id="pdt">A group-level document intelligence service</title>
+          <desc id="pdd">Unstructured documents from several business units pass through one extraction service and come out as structured records those units can query.</desc>
+          <rect class="box" x="24" y="46" width="120" height="36" rx="8"/><text class="lbl" x="84" y="69" text-anchor="middle">Contracts</text>
+          <rect class="box" x="24" y="128" width="120" height="36" rx="8"/><text class="lbl" x="84" y="151" text-anchor="middle">Invoices</text>
+          <rect class="box" x="24" y="210" width="120" height="36" rx="8"/><text class="lbl" x="84" y="233" text-anchor="middle">Specifications</text>
+          <path class="edge" d="M144 64 C 196 64 196 138 238 138" marker-end="url(#ar)"/>
+          <path class="edge" d="M144 146 H 238" marker-end="url(#ar)"/>
+          <path class="edge" d="M144 228 C 196 228 196 154 238 154" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="242" y="110" width="146" height="72" rx="9"/>
+          <text class="lbl" x="315" y="136" text-anchor="middle">Extraction service</text>
+          <text class="lbl--q" x="315" y="154" text-anchor="middle">one contract,</text>
+          <text class="lbl--q" x="315" y="169" text-anchor="middle">every business unit</text>
+          <path class="edge" d="M388 146 H 458" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="462" y="82" width="134" height="42" rx="9"/>
+          <text class="lbl" x="529" y="108" text-anchor="middle">Structured records</text>
+          <rect class="box" x="462" y="140" width="134" height="38" rx="9"/><text class="lbl" x="529" y="164" text-anchor="middle">Analytics</text>
+          <rect class="box" x="462" y="194" width="134" height="38" rx="9"/><text class="lbl" x="529" y="218" text-anchor="middle">Operations</text>
+          <path class="edge" d="M529 124 V 136" marker-end="url(#ar)"/>
+          <path class="edge" d="M529 178 V 190" marker-end="url(#ar)"/>
+        </svg></div>
+        <div>
+          <h3>Document intelligence, at group level</h3>
+          <p class="project__where">Li &amp; Fung, Strategic Data Unit</p>
+          <p>Product owner of the document intelligence service and lead for AI development across
+            the group. One extraction contract serving several business units, rather than a separate
+            parser per team.</p>
+          <p class="project__constraint">One service for the group, or every unit builds its own.</p>
+        </div>
+      </article>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="pst psd">
+          <title id="pst">Fusing five data sources into usable customer segments</title>
+          <desc id="psd">Telco, profile, transaction, image and text data are fused into one customer view, from which hundreds of segments are cut and handed to campaign teams as target lists.</desc>
+          <rect class="box" x="20" y="26" width="112" height="30" rx="7"/><text class="lbl" x="76" y="46" text-anchor="middle">Telco</text>
+          <rect class="box" x="20" y="72" width="112" height="30" rx="7"/><text class="lbl" x="76" y="92" text-anchor="middle">Profile</text>
+          <rect class="box" x="20" y="118" width="112" height="30" rx="7"/><text class="lbl" x="76" y="138" text-anchor="middle">Transactions</text>
+          <rect class="box" x="20" y="164" width="112" height="30" rx="7"/><text class="lbl" x="76" y="184" text-anchor="middle">Image</text>
+          <rect class="box" x="20" y="210" width="112" height="30" rx="7"/><text class="lbl" x="76" y="230" text-anchor="middle">Text</text>
+          <path class="edge" d="M132 41 C 178 41 178 126 216 126" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 87 C 178 87 178 130 216 130" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 133 H 216" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 179 C 178 179 178 136 216 136" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 225 C 178 225 178 140 216 140" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="220" y="106" width="128" height="56" rx="9"/>
+          <text class="lbl" x="284" y="130" text-anchor="middle">One customer</text>
+          <text class="lbl" x="284" y="148" text-anchor="middle">view</text>
+          <path class="edge" d="M348 134 H 402" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="406" y="98" width="122" height="72" rx="9"/>
+          <text class="lbl" x="467" y="124" text-anchor="middle">Segments</text>
+          <text class="lbl--q" x="467" y="142" text-anchor="middle">lifestage, interest,</text>
+          <text class="lbl--q" x="467" y="157" text-anchor="middle">behaviour</text>
+          <path class="edge" d="M467 170 V 206" marker-end="url(#ar)"/>
+          <rect class="box" x="396" y="210" width="142" height="40" rx="9"/>
+          <text class="lbl" x="467" y="235" text-anchor="middle">Campaign target list</text>
+        </svg></div>
+        <div>
+          <h3>Customer segmentation from five fused sources</h3>
+          <p class="project__where">Sun Hung Kai Properties, Chairman's Office</p>
+          <p>Telco, customer profile, transaction, image and text data fused into one view, cut into
+            hundreds of segments by lifestage, interest, behaviour and demographics, and handed to
+            campaign teams as target lists.</p>
+          <p class="project__constraint">A segment is only real if a campaign team can act on it.</p>
+        </div>
+      </article>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="prt prd">
+          <title id="prt">A recommendation engine delivered end to end</title>
+          <desc id="prd">Behavioural signals run through a distributed pipeline into a ranked recommendation, and the outcome feeds back into the next round of training.</desc>
+          <rect class="box" x="24" y="118" width="112" height="52" rx="9"/>
+          <text class="lbl" x="80" y="140" text-anchor="middle">Signals</text>
+          <text class="lbl--q" x="80" y="157" text-anchor="middle">behaviour, usage</text>
+          <path class="edge" d="M136 144 H 186" marker-end="url(#ar)"/>
+          <rect class="box" x="190" y="118" width="118" height="52" rx="9"/>
+          <text class="lbl" x="249" y="140" text-anchor="middle">Pipeline</text>
+          <text class="lbl--q" x="249" y="157" text-anchor="middle">Spark, Hive</text>
+          <path class="edge" d="M308 144 H 358" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="362" y="118" width="118" height="52" rx="9"/>
+          <text class="lbl" x="421" y="140" text-anchor="middle">Ranking</text>
+          <text class="lbl--q" x="421" y="157" text-anchor="middle">tuned, served</text>
+          <path class="edge" d="M480 144 H 528" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="532" y="118" width="66" height="52" rx="9"/>
+          <text class="lbl" x="565" y="148" text-anchor="middle">Customer</text>
+          <path class="edge" d="M565 170 C 565 232 300 236 249 214" marker-end="url(#ar)"/>
+          <text class="lbl--q" x="410" y="252" text-anchor="middle">what happened next trains the next round</text>
+          <path class="edge" d="M249 214 V 176" marker-end="url(#ar)"/>
+        </svg></div>
+        <div>
+          <h3>A recommendation engine, end to end</h3>
+          <p class="project__where">HKT, Group CTO Office</p>
+          <p>Delivered end to end as team lead: sourcing and cleansing, feature engineering, the
+            model, and the serving path over Hadoop, Hive, Spark and MongoDB. Alongside credit
+            analytics and spatial work with geohash.</p>
+          <p class="project__constraint">End to end meant owning the pipeline, not just the model.</p>
+        </div>
+      </article>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="d1t d1d">
+          <title id="d1t">Consolidating a messaging estate behind one agent platform</title>
+          <desc id="d1d">Four scattered channels converge into one agent platform, which reaches the systems of record only through a human approval gate.</desc>
+          <rect class="box" x="24" y="34" width="112" height="34" rx="8"/><text class="lbl" x="80" y="56" text-anchor="middle">Channel</text>
+          <rect class="box" x="24" y="90" width="112" height="34" rx="8"/><text class="lbl" x="80" y="112" text-anchor="middle">Channel</text>
+          <rect class="box" x="24" y="146" width="112" height="34" rx="8"/><text class="lbl" x="80" y="168" text-anchor="middle">Channel</text>
+          <rect class="box" x="24" y="202" width="112" height="34" rx="8"/><text class="lbl" x="80" y="224" text-anchor="middle">Channel</text>
+          <path class="edge" d="M136 51 C 190 51 190 128 232 128" marker-end="url(#ar)"/>
+          <path class="edge" d="M136 107 C 190 107 190 132 232 132" marker-end="url(#ar)"/>
+          <path class="edge" d="M136 163 C 190 163 190 138 232 138" marker-end="url(#ar)"/>
+          <path class="edge" d="M136 219 C 190 219 190 142 232 142" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="236" y="105" width="134" height="60" rx="9"/>
+          <text class="lbl" x="303" y="130" text-anchor="middle">Agent platform</text>
+          <text class="lbl--q" x="303" y="148" text-anchor="middle">one estate</text>
+          <path class="edge" d="M370 135 H 424" marker-end="url(#ar)"/>
+          <path class="gate" d="M436 104 V 166"/><path class="gate" d="M436 135 h 12"/>
+          <text class="lbl--q" x="436" y="94" text-anchor="middle">human approves</text>
+          <path class="edge" d="M450 135 H 486" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="490" y="105" width="106" height="60" rx="9"/>
+          <text class="lbl" x="543" y="130" text-anchor="middle">Systems</text>
+          <text class="lbl" x="543" y="148" text-anchor="middle">of record</text>
+        </svg></div>
+        <div>
+          <h3>An agent platform that acts under approval</h3>
+          <p class="project__where">Crewio, current</p>
+          <p>A scattered messaging estate consolidated behind one agent platform, with operational
+            agents that act inside the systems of record rather than reporting on them: procurement
+            chasing, usage analysis, and an approval step recorded before anything applies.</p>
+          <p class="project__constraint">An agent may propose. A human applies.</p>
+        </div>
+      </article>
+    </div>
+  </div></section>
+
+  <section id="contact"><div class="wrap contact">
+    <h2 data-in>If you are building something where being wrong is expensive, ask me something specific.</h2>
+    <div class="contact__actions" data-in>
+      <a class="btn btn--primary" href="mailto:eric@crewio.ai?subject=A%20specific%20question">eric@crewio.ai</a>
+      <a class="btn" href="https://www.linkedin.com/in/eric-cp-tai/" rel="me">linkedin.com/in/eric-cp-tai</a>
+    </div>
+    <div class="foot">
+      <p>Eric Tai. Engineering lead, Hong Kong.</p>
+      <p>Set in Inter. Photographs generated, then chosen.</p>
+      <p>The field above is rendered as text: no canvas, no dependencies.</p>
+    </div>
+  </div></section>
+</main>
+
+<script type="module">
+  import { Spring, pressable, reducedMotion } from "./motion.js";
+
+  // 1. Response: every control acknowledges on pointer-down.
+  document.querySelectorAll(".btn, .nav__links a, .ascii__ctl button")
+    .forEach((el) => pressable(el, { scale: el.classList.contains("btn") ? 0.975 : 0.94 }));
+
+  // 2. Scroll edge on the translucent chrome, rather than a permanent rule.
+  const nav = document.querySelector(".nav");
+  const onScroll = () => nav.setAttribute("data-scrolled", String(scrollY > 8));
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // 3. Diagrams draw their own flow, once, when first seen.
+  document.querySelectorAll(".dia").forEach((svg) => {
+    svg.querySelectorAll(".edge").forEach((e) => {
+      const len = e.getTotalLength();
+      e.style.setProperty("--len", len.toFixed(1));
+    });
+  });
+  const drawIo = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("is-drawn");
+    drawIo.unobserve(e.target);
+  }), { rootMargin: "0px 0px -15% 0px" });
+  document.querySelectorAll(".dia").forEach((d) => drawIo.observe(d));
+
+  import { AsciiStage } from "./engine.js";
+  import { SCENES } from "./scenes.js";
+
+  const out = document.getElementById("ascii-out");
+  const stage = new AsciiStage(out, { fps: 24 });
+  const ctl = document.getElementById("ascii-ctl");
+
+  SCENES.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = s.name; b.setAttribute("aria-pressed", String(i === 0));
+    b.addEventListener("click", () => {
+      stage.setScene(s);
+      [...ctl.children].forEach((x, k) => x.setAttribute("aria-pressed", String(k === i)));
+    });
+    ctl.appendChild(b);
+  });
+  stage.setScene(SCENES[0]);
+  stage.start();
+
+  // Pointer disturbs the field. This is the interaction, not decoration: it is
+  // the only continuously responsive thing on the page, and it is gated to real
+  // pointers so touch never fires a phantom hover.
+  if (matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMotion()) {
+    const box = out.parentElement;
+    // The disturbance springs toward the cursor rather than snapping to it, and
+    // keeps travelling for a moment after the pointer leaves. Snapping reads as
+    // a lookup table; a spring reads as something with weight.
+    let live = false;
+    const sx = new Spring(0.5, { bounce: 0, response: 0.32, onChange: sync });
+    const sy = new Spring(0.5, { bounce: 0, response: 0.32, onChange: sync });
+    function sync() { stage.pointer = live ? { x: sx.value, y: sy.value } : null; }
+    box.addEventListener("pointermove", (e) => {
+      const r = box.getBoundingClientRect();
+      live = true;
+      sx.to((e.clientX - r.left) / r.width);
+      sy.to((e.clientY - r.top) / r.height);
+    }, { passive: true });
+    box.addEventListener("pointerleave", () => {
+      // let the spring settle before the field forgets the pointer, so the
+      // disturbance decays instead of vanishing on one frame
+      setTimeout(() => { live = false; stage.pointer = null; }, 260);
+    });
+  }
+
+  document.addEventListener("visibilitychange", () => document.hidden ? stage.stop() : stage.start());
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -10% 0px" });
+  document.querySelectorAll("[data-in]").forEach((el) => io.observe(el));
+
+  // scroll-spy: the nav answers "where am I", which is wayfinding, not polish
+  const links = [...document.querySelectorAll(".nav__links a")];
+  const spy = new IntersectionObserver((es) => {
+    // above the first section nothing is current: marking Expertise while the
+    // reader is still in the hero is a wrong answer, not a default one
+    if (scrollY < innerHeight * 0.5) {
+      links.forEach((l) => l.removeAttribute("aria-current"));
+      return;
+    }
+    es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((l) => l.setAttribute("aria-current", String(l.getAttribute("href") === "#" + e.target.id)));
+    });
+  }, { rootMargin: "-64px 0px -60% 0px" });
+  addEventListener("scroll", () => {
+    if (scrollY < innerHeight * 0.5) links.forEach((l) => l.removeAttribute("aria-current"));
+  }, { passive: true });
+  document.querySelectorAll("main section[id]").forEach((s) => spy.observe(s));
+</script>
+</body>
+</html>
