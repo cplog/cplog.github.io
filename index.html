@@ -122,11 +122,22 @@
 
   .how{margin-top:40px;background:var(--tint);border-radius:10px;padding:clamp(16px,2.5vw,28px)}
   .how .dia{background:transparent}
-  .how__notes{margin-top:40px;display:grid;gap:0}
-  @media(min-width:900px){.how__notes{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(32px,5vw,64px)}}
-  .how__note{padding-block:24px;border-top:1px solid var(--border)}
-  .how__note h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
-  .how__note p{margin-top:8px;color:var(--ink-2);font-size:15.5px;max-width:44ch}
+  /* A step is a claim with the work that proves it directly underneath. The
+     rule sits above the claim, so the eye reads claim-then-evidence rather
+     than finding a project and hunting upward for what it demonstrates. */
+  .step{padding-top:clamp(40px,5vw,64px);margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--border)}
+  .step__claim{display:grid;grid-template-columns:minmax(0,32px) minmax(0,1fr);gap:0 16px;align-items:start}
+  .step__n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;
+    color:var(--ink-4);padding-top:5px;font-variant-numeric:tabular-nums}
+  .step__claim h3{font-size:clamp(21px,2.4vw,27px);font-weight:600;letter-spacing:-.018em}
+  .step__claim p{margin-top:10px;color:var(--ink-2);font-size:17px;max-width:56ch;text-wrap:pretty}
+  .step__proof{margin-top:28px;margin-left:48px}
+  @media(max-width:700px){.step__proof{margin-left:0}}
+  .step__lab{font-size:13px;color:var(--ink-4);text-transform:uppercase;letter-spacing:.07em;
+    margin-bottom:16px}
+  /* inside a step the project is evidence, not a headline act */
+  .step__proof .project h3{font-size:18px}
+  .step__proof .project p{font-size:15.5px}
   .roles{margin-top:48px}
   .role{display:grid;gap:6px;padding-block:32px;border-top:1px solid var(--border)}
   @media(min-width:860px){.role{grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:0 clamp(32px,5vw,72px)}}
@@ -163,7 +174,6 @@
   .project{display:grid;gap:24px;align-items:center}
   @media(min-width:900px){
     .project{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,64px)}
-    .project:nth-child(even) .project__media{order:2}
   }
   .project__media{border-radius:10px;overflow:hidden;background:var(--tint)}
   .project__media img{width:100%;height:100%;object-fit:cover;display:block;
@@ -241,10 +251,7 @@
   <div class="nav__in">
     <span class="nav__name">Eric Tai</span>
     <nav class="nav__links" aria-label="Sections">
-      <a href="#expertise">Expertise</a>
-      <a href="#how">How I work</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
+      <a href="#experience">Background</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -272,10 +279,218 @@
     </div>
   </div>
 
+  <section id="how"><div class="wrap">
+    <div class="chapter__head" data-in>
+      <h2>Most enterprise AI dies in the proof-of-concept graveyard</h2>
+      <p class="chapter__sub">A pilot proves the technology works, everyone agrees it is impressive,
+        and nothing reaches production. The way past it is the same shape every time, whether it is a
+        tender comparison, an ad compliance gate, or an agent platform.</p>
+    </div>
+    <div class="how" data-in><svg class="dia" viewBox="0 0 900 200" role="img" aria-labelledby="hwt hwd">
+        <title id="hwt">How the work goes from a business problem to production</title>
+        <desc id="hwd">A business problem becomes a demo that decides it, then budget and real data, then a narrow deployment shipped in weeks. One constraint identified at the start governs every stage.</desc>
+        <rect class="box" x="16" y="46" width="180" height="62" rx="9"/>
+        <text class="lbl" x="106" y="72" text-anchor="middle">A business problem</text>
+        <text class="lbl--q" x="106" y="90" text-anchor="middle">named by the people who have it</text>
+        <path class="edge" d="M196 77 H 252" marker-end="url(#ar)"/>
+        <rect class="box box--key" x="256" y="46" width="180" height="62" rx="9"/>
+        <text class="lbl" x="346" y="72" text-anchor="middle">A demo that decides it</text>
+        <text class="lbl--q" x="346" y="90" text-anchor="middle">clickable, real path, no backend</text>
+        <path class="edge" d="M436 77 H 492" marker-end="url(#ar)"/>
+        <rect class="box box--key" x="496" y="46" width="180" height="62" rx="9"/>
+        <text class="lbl" x="586" y="72" text-anchor="middle">A decision</text>
+        <text class="lbl--q" x="586" y="90" text-anchor="middle">budget, and real data</text>
+        <path class="edge" d="M676 77 H 732" marker-end="url(#ar)"/>
+        <rect class="box box--key" x="736" y="46" width="152" height="62" rx="9"/>
+        <text class="lbl" x="812" y="72" text-anchor="middle">Deployment</text>
+        <text class="lbl--q" x="812" y="90" text-anchor="middle">narrow, deep, in weeks</text>
+        <path class="edge edge--stop" d="M106 118 V 152 H 336"/>
+        <path class="edge edge--stop" d="M564 152 H 812 V 122" marker-end="url(#ar)"/>
+        <text class="lbl" x="450" y="157" text-anchor="middle">one constraint, held the whole way</text>
+      </svg></div>
+    <div class="step" data-in>
+      <div class="step__claim">
+        <span class="step__n">01</span>
+        <div>
+          <h3>A demo settles what a deck cannot</h3>
+          <p>A clickable path through the real decision, seeded and backendless, is cheaper than the meeting it replaces. The output is not a report. It is software an executive clicks.</p>
+        </div>
+      </div>
+      <div class="step__proof">
+        <p class="step__lab">Where I did this</p>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="pdt pdd">
+          <title id="pdt">A group-level document intelligence service</title>
+          <desc id="pdd">Unstructured documents from several business units pass through one extraction service and come out as structured records those units can query.</desc>
+          <rect class="box" x="24" y="46" width="120" height="36" rx="8"/><text class="lbl" x="84" y="69" text-anchor="middle">Contracts</text>
+          <rect class="box" x="24" y="128" width="120" height="36" rx="8"/><text class="lbl" x="84" y="151" text-anchor="middle">Invoices</text>
+          <rect class="box" x="24" y="210" width="120" height="36" rx="8"/><text class="lbl" x="84" y="233" text-anchor="middle">Specifications</text>
+          <path class="edge" d="M144 64 C 196 64 196 138 238 138" marker-end="url(#ar)"/>
+          <path class="edge" d="M144 146 H 238" marker-end="url(#ar)"/>
+          <path class="edge" d="M144 228 C 196 228 196 154 238 154" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="242" y="110" width="146" height="72" rx="9"/>
+          <text class="lbl" x="315" y="136" text-anchor="middle">Extraction service</text>
+          <text class="lbl--q" x="315" y="154" text-anchor="middle">one contract,</text>
+          <text class="lbl--q" x="315" y="169" text-anchor="middle">every business unit</text>
+          <path class="edge" d="M388 146 H 458" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="462" y="82" width="134" height="42" rx="9"/>
+          <text class="lbl" x="529" y="108" text-anchor="middle">Structured records</text>
+          <rect class="box" x="462" y="140" width="134" height="38" rx="9"/><text class="lbl" x="529" y="164" text-anchor="middle">Analytics</text>
+          <rect class="box" x="462" y="194" width="134" height="38" rx="9"/><text class="lbl" x="529" y="218" text-anchor="middle">Operations</text>
+          <path class="edge" d="M529 124 V 136" marker-end="url(#ar)"/>
+          <path class="edge" d="M529 178 V 190" marker-end="url(#ar)"/>
+        </svg></div>
+        <div>
+          <h3>Document intelligence, at group level</h3>
+          <p class="project__where">Li &amp; Fung, Strategic Data Unit</p>
+          <p>Product owner of the document intelligence service and lead for AI development across
+            the group. One extraction contract serving several business units, rather than a separate
+            parser per team.</p>
+          <p class="project__constraint">One service for the group, or every unit builds its own.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+    <div class="step" data-in>
+      <div class="step__claim">
+        <span class="step__n">02</span>
+        <div>
+          <h3>Then real data, no exceptions</h3>
+          <p>A demo wins the decision; only the customer's own data proves the value. Sample data hides the fields that do not match the documentation, the third of rows that are null, and the two contradictory answers that are each locally correct.</p>
+        </div>
+      </div>
+      <div class="step__proof">
+        <p class="step__lab">Where I did this</p>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="pst psd">
+          <title id="pst">Fusing five data sources into usable customer segments</title>
+          <desc id="psd">Telco, profile, transaction, image and text data are fused into one customer view, from which hundreds of segments are cut and handed to campaign teams as target lists.</desc>
+          <rect class="box" x="20" y="26" width="112" height="30" rx="7"/><text class="lbl" x="76" y="46" text-anchor="middle">Telco</text>
+          <rect class="box" x="20" y="72" width="112" height="30" rx="7"/><text class="lbl" x="76" y="92" text-anchor="middle">Profile</text>
+          <rect class="box" x="20" y="118" width="112" height="30" rx="7"/><text class="lbl" x="76" y="138" text-anchor="middle">Transactions</text>
+          <rect class="box" x="20" y="164" width="112" height="30" rx="7"/><text class="lbl" x="76" y="184" text-anchor="middle">Image</text>
+          <rect class="box" x="20" y="210" width="112" height="30" rx="7"/><text class="lbl" x="76" y="230" text-anchor="middle">Text</text>
+          <path class="edge" d="M132 41 C 178 41 178 126 216 126" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 87 C 178 87 178 130 216 130" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 133 H 216" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 179 C 178 179 178 136 216 136" marker-end="url(#ar)"/>
+          <path class="edge" d="M132 225 C 178 225 178 140 216 140" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="220" y="106" width="128" height="56" rx="9"/>
+          <text class="lbl" x="284" y="130" text-anchor="middle">One customer</text>
+          <text class="lbl" x="284" y="148" text-anchor="middle">view</text>
+          <path class="edge" d="M348 134 H 402" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="406" y="98" width="122" height="72" rx="9"/>
+          <text class="lbl" x="467" y="124" text-anchor="middle">Segments</text>
+          <text class="lbl--q" x="467" y="142" text-anchor="middle">lifestage, interest,</text>
+          <text class="lbl--q" x="467" y="157" text-anchor="middle">behaviour</text>
+          <path class="edge" d="M467 170 V 206" marker-end="url(#ar)"/>
+          <rect class="box" x="396" y="210" width="142" height="40" rx="9"/>
+          <text class="lbl" x="467" y="235" text-anchor="middle">Campaign target list</text>
+        </svg></div>
+        <div>
+          <h3>Customer segmentation from five fused sources</h3>
+          <p class="project__where">Sun Hung Kai Properties, Chairman's Office</p>
+          <p>Telco, customer profile, transaction, image and text data fused into one view, cut into
+            hundreds of segments by lifestage, interest, behaviour and demographics, and handed to
+            campaign teams as target lists.</p>
+          <p class="project__constraint">A segment is only real if a campaign team can act on it.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+    <div class="step" data-in>
+      <div class="step__claim">
+        <span class="step__n">03</span>
+        <div>
+          <h3>End to end, or it was not delivered</h3>
+          <p>Owning the pipeline and not just the model is the difference between a notebook and a system: sourcing, cleansing, features, the model, and the serving path that still runs on a Tuesday morning when nobody is watching it.</p>
+        </div>
+      </div>
+      <div class="step__proof">
+        <p class="step__lab">Where I did this</p>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="prt prd">
+          <title id="prt">A recommendation engine delivered end to end</title>
+          <desc id="prd">Behavioural signals run through a distributed pipeline into a ranked recommendation, and the outcome feeds back into the next round of training.</desc>
+          <rect class="box" x="24" y="118" width="112" height="52" rx="9"/>
+          <text class="lbl" x="80" y="140" text-anchor="middle">Signals</text>
+          <text class="lbl--q" x="80" y="157" text-anchor="middle">behaviour, usage</text>
+          <path class="edge" d="M136 144 H 186" marker-end="url(#ar)"/>
+          <rect class="box" x="190" y="118" width="118" height="52" rx="9"/>
+          <text class="lbl" x="249" y="140" text-anchor="middle">Pipeline</text>
+          <text class="lbl--q" x="249" y="157" text-anchor="middle">Spark, Hive</text>
+          <path class="edge" d="M308 144 H 358" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="362" y="118" width="118" height="52" rx="9"/>
+          <text class="lbl" x="421" y="140" text-anchor="middle">Ranking</text>
+          <text class="lbl--q" x="421" y="157" text-anchor="middle">tuned, served</text>
+          <path class="edge" d="M480 144 H 528" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="532" y="118" width="66" height="52" rx="9"/>
+          <text class="lbl" x="565" y="148" text-anchor="middle">Customer</text>
+          <path class="edge" d="M565 170 C 565 232 300 236 249 214" marker-end="url(#ar)"/>
+          <text class="lbl--q" x="410" y="252" text-anchor="middle">what happened next trains the next round</text>
+          <path class="edge" d="M249 214 V 176" marker-end="url(#ar)"/>
+        </svg></div>
+        <div>
+          <h3>A recommendation engine, end to end</h3>
+          <p class="project__where">HKT, Group CTO Office</p>
+          <p>Delivered end to end as team lead: sourcing and cleansing, feature engineering, the
+            model, and the serving path over Hadoop, Hive, Spark and MongoDB. Alongside credit
+            analytics and spatial work with geohash.</p>
+          <p class="project__constraint">End to end meant owning the pipeline, not just the model.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+    <div class="step" data-in>
+      <div class="step__claim">
+        <span class="step__n">04</span>
+        <div>
+          <h3>Narrow the scope, never the depth</h3>
+          <p>Not a smart assistant for the whole company, but one workflow end to end with nobody in the middle. A slice small enough to finish in weeks, deep enough that the business sees it. Whatever cannot show value in that window was not the core value.</p>
+        </div>
+      </div>
+      <div class="step__proof">
+        <p class="step__lab">Where I did this</p>
+      <article class="project" data-in>
+        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="d1t d1d">
+          <title id="d1t">Consolidating a messaging estate behind one agent platform</title>
+          <desc id="d1d">Four scattered channels converge into one agent platform, which reaches the systems of record only through a human approval gate.</desc>
+          <rect class="box" x="24" y="34" width="112" height="34" rx="8"/><text class="lbl" x="80" y="56" text-anchor="middle">Channel</text>
+          <rect class="box" x="24" y="90" width="112" height="34" rx="8"/><text class="lbl" x="80" y="112" text-anchor="middle">Channel</text>
+          <rect class="box" x="24" y="146" width="112" height="34" rx="8"/><text class="lbl" x="80" y="168" text-anchor="middle">Channel</text>
+          <rect class="box" x="24" y="202" width="112" height="34" rx="8"/><text class="lbl" x="80" y="224" text-anchor="middle">Channel</text>
+          <path class="edge" d="M136 51 C 190 51 190 128 232 128" marker-end="url(#ar)"/>
+          <path class="edge" d="M136 107 C 190 107 190 132 232 132" marker-end="url(#ar)"/>
+          <path class="edge" d="M136 163 C 190 163 190 138 232 138" marker-end="url(#ar)"/>
+          <path class="edge" d="M136 219 C 190 219 190 142 232 142" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="236" y="105" width="134" height="60" rx="9"/>
+          <text class="lbl" x="303" y="130" text-anchor="middle">Agent platform</text>
+          <text class="lbl--q" x="303" y="148" text-anchor="middle">one estate</text>
+          <path class="edge" d="M370 135 H 424" marker-end="url(#ar)"/>
+          <path class="gate" d="M436 104 V 166"/><path class="gate" d="M436 135 h 12"/>
+          <text class="lbl--q" x="436" y="94" text-anchor="middle">human approves</text>
+          <path class="edge" d="M450 135 H 486" marker-end="url(#ar)"/>
+          <rect class="box box--key" x="490" y="105" width="106" height="60" rx="9"/>
+          <text class="lbl" x="543" y="130" text-anchor="middle">Systems</text>
+          <text class="lbl" x="543" y="148" text-anchor="middle">of record</text>
+        </svg></div>
+        <div>
+          <h3>An agent platform that acts under approval</h3>
+          <p class="project__where">Crewio, current</p>
+          <p>A scattered messaging estate consolidated behind one agent platform, with operational
+            agents that act inside the systems of record rather than reporting on them: procurement
+            chasing, usage analysis, and an approval step recorded before anything applies.</p>
+          <p class="project__constraint">An agent may propose. A human applies.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+  </div></section>
+
   <section id="expertise"><div class="wrap">
     <div class="chapter__head" data-in>
-      <h2>Expertise</h2>
-      <p class="chapter__sub">Four areas I am actually useful in, rather than everything I have touched.</p>
+      <h2>Also useful in</h2>
+      <p class="chapter__sub">Four areas, rather than everything I have touched.</p>
     </div>
     <div class="exp">
       <div class="exp__item" data-in>
@@ -307,56 +522,6 @@
     </div>
   </div></section>
 
-
-  <section id="how"><div class="wrap">
-    <div class="chapter__head" data-in>
-      <h2>Most enterprise AI dies in the proof-of-concept graveyard</h2>
-      <p class="chapter__sub">A pilot proves the technology works, everyone agrees it is impressive,
-        and nothing reaches production. The way past it is the same shape every time, whether it is a
-        tender comparison, an ad compliance gate, or an agent platform.</p>
-    </div>
-    <div class="how" data-in><svg class="dia" viewBox="0 0 900 200" role="img" aria-labelledby="hwt hwd">
-        <title id="hwt">How the work goes from a business problem to production</title>
-        <desc id="hwd">A business problem becomes a demo that decides it, then budget and real data, then a narrow deployment shipped in weeks. One constraint identified at the start governs every stage.</desc>
-        <rect class="box" x="16" y="46" width="180" height="62" rx="9"/>
-        <text class="lbl" x="106" y="72" text-anchor="middle">A business problem</text>
-        <text class="lbl--q" x="106" y="90" text-anchor="middle">named by the people who have it</text>
-        <path class="edge" d="M196 77 H 252" marker-end="url(#ar)"/>
-        <rect class="box box--key" x="256" y="46" width="180" height="62" rx="9"/>
-        <text class="lbl" x="346" y="72" text-anchor="middle">A demo that decides it</text>
-        <text class="lbl--q" x="346" y="90" text-anchor="middle">clickable, real path, no backend</text>
-        <path class="edge" d="M436 77 H 492" marker-end="url(#ar)"/>
-        <rect class="box box--key" x="496" y="46" width="180" height="62" rx="9"/>
-        <text class="lbl" x="586" y="72" text-anchor="middle">A decision</text>
-        <text class="lbl--q" x="586" y="90" text-anchor="middle">budget, and real data</text>
-        <path class="edge" d="M676 77 H 732" marker-end="url(#ar)"/>
-        <rect class="box box--key" x="736" y="46" width="152" height="62" rx="9"/>
-        <text class="lbl" x="812" y="72" text-anchor="middle">Deployment</text>
-        <text class="lbl--q" x="812" y="90" text-anchor="middle">narrow, deep, in weeks</text>
-        <path class="edge edge--stop" d="M106 118 V 152 H 336"/>
-        <path class="edge edge--stop" d="M564 152 H 812 V 122" marker-end="url(#ar)"/>
-        <text class="lbl" x="450" y="157" text-anchor="middle">one constraint, held the whole way</text>
-      </svg></div>
-    <div class="how__notes">
-      <div class="how__note" data-in>
-        <h3>A demo settles what a deck cannot</h3>
-        <p>A clickable path through the real decision, seeded and backendless, is cheaper than the
-          meeting it replaces. The output is not a report. It is software an executive clicks.</p>
-      </div>
-      <div class="how__note" data-in>
-        <h3>Then real data, no exceptions</h3>
-        <p>A demo wins the decision; only the customer's own data proves the value. Sample data hides
-          the fields that do not match the documentation, the third of rows that are null, and the two
-          contradictory answers that are each locally correct.</p>
-      </div>
-      <div class="how__note" data-in>
-        <h3>Narrow the scope, never the depth</h3>
-        <p>Not a smart assistant for the whole company, but one workflow end to end with nobody in the
-          middle. A slice small enough to finish in weeks, deep enough that the business sees it.
-          Whatever cannot show value in that window was not the core value.</p>
-      </div>
-    </div>
-  </div></section>
 
   <section id="experience"><div class="wrap">
     <div class="chapter__head" data-in>
@@ -420,144 +585,6 @@
           <div class="role__org">SAP, Hang Seng Bank, Mecom Power</div>
           <p>Big data platform internship at SAP, and before that commercial and retail banking at
             Hang Seng Bank in Macau. The arc from banking operations to engineering took ten years.</p>
-        </div>
-      </article>
-    </div>
-  </div></section>
-
-  <section id="projects"><div class="wrap">
-    <div class="chapter__head" data-in>
-      <h2>Projects</h2>
-      <p class="chapter__sub">Four across ten years. Client and product names withheld where they are not mine to publish; the constraint is the part worth reading.</p>
-    </div>
-    <div class="projects">
-      <article class="project" data-in>
-        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="pdt pdd">
-          <title id="pdt">A group-level document intelligence service</title>
-          <desc id="pdd">Unstructured documents from several business units pass through one extraction service and come out as structured records those units can query.</desc>
-          <rect class="box" x="24" y="46" width="120" height="36" rx="8"/><text class="lbl" x="84" y="69" text-anchor="middle">Contracts</text>
-          <rect class="box" x="24" y="128" width="120" height="36" rx="8"/><text class="lbl" x="84" y="151" text-anchor="middle">Invoices</text>
-          <rect class="box" x="24" y="210" width="120" height="36" rx="8"/><text class="lbl" x="84" y="233" text-anchor="middle">Specifications</text>
-          <path class="edge" d="M144 64 C 196 64 196 138 238 138" marker-end="url(#ar)"/>
-          <path class="edge" d="M144 146 H 238" marker-end="url(#ar)"/>
-          <path class="edge" d="M144 228 C 196 228 196 154 238 154" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="242" y="110" width="146" height="72" rx="9"/>
-          <text class="lbl" x="315" y="136" text-anchor="middle">Extraction service</text>
-          <text class="lbl--q" x="315" y="154" text-anchor="middle">one contract,</text>
-          <text class="lbl--q" x="315" y="169" text-anchor="middle">every business unit</text>
-          <path class="edge" d="M388 146 H 458" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="462" y="82" width="134" height="42" rx="9"/>
-          <text class="lbl" x="529" y="108" text-anchor="middle">Structured records</text>
-          <rect class="box" x="462" y="140" width="134" height="38" rx="9"/><text class="lbl" x="529" y="164" text-anchor="middle">Analytics</text>
-          <rect class="box" x="462" y="194" width="134" height="38" rx="9"/><text class="lbl" x="529" y="218" text-anchor="middle">Operations</text>
-          <path class="edge" d="M529 124 V 136" marker-end="url(#ar)"/>
-          <path class="edge" d="M529 178 V 190" marker-end="url(#ar)"/>
-        </svg></div>
-        <div>
-          <h3>Document intelligence, at group level</h3>
-          <p class="project__where">Li &amp; Fung, Strategic Data Unit</p>
-          <p>Product owner of the document intelligence service and lead for AI development across
-            the group. One extraction contract serving several business units, rather than a separate
-            parser per team.</p>
-          <p class="project__constraint">One service for the group, or every unit builds its own.</p>
-        </div>
-      </article>
-      <article class="project" data-in>
-        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="pst psd">
-          <title id="pst">Fusing five data sources into usable customer segments</title>
-          <desc id="psd">Telco, profile, transaction, image and text data are fused into one customer view, from which hundreds of segments are cut and handed to campaign teams as target lists.</desc>
-          <rect class="box" x="20" y="26" width="112" height="30" rx="7"/><text class="lbl" x="76" y="46" text-anchor="middle">Telco</text>
-          <rect class="box" x="20" y="72" width="112" height="30" rx="7"/><text class="lbl" x="76" y="92" text-anchor="middle">Profile</text>
-          <rect class="box" x="20" y="118" width="112" height="30" rx="7"/><text class="lbl" x="76" y="138" text-anchor="middle">Transactions</text>
-          <rect class="box" x="20" y="164" width="112" height="30" rx="7"/><text class="lbl" x="76" y="184" text-anchor="middle">Image</text>
-          <rect class="box" x="20" y="210" width="112" height="30" rx="7"/><text class="lbl" x="76" y="230" text-anchor="middle">Text</text>
-          <path class="edge" d="M132 41 C 178 41 178 126 216 126" marker-end="url(#ar)"/>
-          <path class="edge" d="M132 87 C 178 87 178 130 216 130" marker-end="url(#ar)"/>
-          <path class="edge" d="M132 133 H 216" marker-end="url(#ar)"/>
-          <path class="edge" d="M132 179 C 178 179 178 136 216 136" marker-end="url(#ar)"/>
-          <path class="edge" d="M132 225 C 178 225 178 140 216 140" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="220" y="106" width="128" height="56" rx="9"/>
-          <text class="lbl" x="284" y="130" text-anchor="middle">One customer</text>
-          <text class="lbl" x="284" y="148" text-anchor="middle">view</text>
-          <path class="edge" d="M348 134 H 402" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="406" y="98" width="122" height="72" rx="9"/>
-          <text class="lbl" x="467" y="124" text-anchor="middle">Segments</text>
-          <text class="lbl--q" x="467" y="142" text-anchor="middle">lifestage, interest,</text>
-          <text class="lbl--q" x="467" y="157" text-anchor="middle">behaviour</text>
-          <path class="edge" d="M467 170 V 206" marker-end="url(#ar)"/>
-          <rect class="box" x="396" y="210" width="142" height="40" rx="9"/>
-          <text class="lbl" x="467" y="235" text-anchor="middle">Campaign target list</text>
-        </svg></div>
-        <div>
-          <h3>Customer segmentation from five fused sources</h3>
-          <p class="project__where">Sun Hung Kai Properties, Chairman's Office</p>
-          <p>Telco, customer profile, transaction, image and text data fused into one view, cut into
-            hundreds of segments by lifestage, interest, behaviour and demographics, and handed to
-            campaign teams as target lists.</p>
-          <p class="project__constraint">A segment is only real if a campaign team can act on it.</p>
-        </div>
-      </article>
-      <article class="project" data-in>
-        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="prt prd">
-          <title id="prt">A recommendation engine delivered end to end</title>
-          <desc id="prd">Behavioural signals run through a distributed pipeline into a ranked recommendation, and the outcome feeds back into the next round of training.</desc>
-          <rect class="box" x="24" y="118" width="112" height="52" rx="9"/>
-          <text class="lbl" x="80" y="140" text-anchor="middle">Signals</text>
-          <text class="lbl--q" x="80" y="157" text-anchor="middle">behaviour, usage</text>
-          <path class="edge" d="M136 144 H 186" marker-end="url(#ar)"/>
-          <rect class="box" x="190" y="118" width="118" height="52" rx="9"/>
-          <text class="lbl" x="249" y="140" text-anchor="middle">Pipeline</text>
-          <text class="lbl--q" x="249" y="157" text-anchor="middle">Spark, Hive</text>
-          <path class="edge" d="M308 144 H 358" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="362" y="118" width="118" height="52" rx="9"/>
-          <text class="lbl" x="421" y="140" text-anchor="middle">Ranking</text>
-          <text class="lbl--q" x="421" y="157" text-anchor="middle">tuned, served</text>
-          <path class="edge" d="M480 144 H 528" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="532" y="118" width="66" height="52" rx="9"/>
-          <text class="lbl" x="565" y="148" text-anchor="middle">Customer</text>
-          <path class="edge" d="M565 170 C 565 232 300 236 249 214" marker-end="url(#ar)"/>
-          <text class="lbl--q" x="410" y="252" text-anchor="middle">what happened next trains the next round</text>
-          <path class="edge" d="M249 214 V 176" marker-end="url(#ar)"/>
-        </svg></div>
-        <div>
-          <h3>A recommendation engine, end to end</h3>
-          <p class="project__where">HKT, Group CTO Office</p>
-          <p>Delivered end to end as team lead: sourcing and cleansing, feature engineering, the
-            model, and the serving path over Hadoop, Hive, Spark and MongoDB. Alongside credit
-            analytics and spatial work with geohash.</p>
-          <p class="project__constraint">End to end meant owning the pipeline, not just the model.</p>
-        </div>
-      </article>
-      <article class="project" data-in>
-        <div class="project__media"><svg class="dia" viewBox="0 0 620 290" role="img" aria-labelledby="d1t d1d">
-          <title id="d1t">Consolidating a messaging estate behind one agent platform</title>
-          <desc id="d1d">Four scattered channels converge into one agent platform, which reaches the systems of record only through a human approval gate.</desc>
-          <rect class="box" x="24" y="34" width="112" height="34" rx="8"/><text class="lbl" x="80" y="56" text-anchor="middle">Channel</text>
-          <rect class="box" x="24" y="90" width="112" height="34" rx="8"/><text class="lbl" x="80" y="112" text-anchor="middle">Channel</text>
-          <rect class="box" x="24" y="146" width="112" height="34" rx="8"/><text class="lbl" x="80" y="168" text-anchor="middle">Channel</text>
-          <rect class="box" x="24" y="202" width="112" height="34" rx="8"/><text class="lbl" x="80" y="224" text-anchor="middle">Channel</text>
-          <path class="edge" d="M136 51 C 190 51 190 128 232 128" marker-end="url(#ar)"/>
-          <path class="edge" d="M136 107 C 190 107 190 132 232 132" marker-end="url(#ar)"/>
-          <path class="edge" d="M136 163 C 190 163 190 138 232 138" marker-end="url(#ar)"/>
-          <path class="edge" d="M136 219 C 190 219 190 142 232 142" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="236" y="105" width="134" height="60" rx="9"/>
-          <text class="lbl" x="303" y="130" text-anchor="middle">Agent platform</text>
-          <text class="lbl--q" x="303" y="148" text-anchor="middle">one estate</text>
-          <path class="edge" d="M370 135 H 424" marker-end="url(#ar)"/>
-          <path class="gate" d="M436 104 V 166"/><path class="gate" d="M436 135 h 12"/>
-          <text class="lbl--q" x="436" y="94" text-anchor="middle">human approves</text>
-          <path class="edge" d="M450 135 H 486" marker-end="url(#ar)"/>
-          <rect class="box box--key" x="490" y="105" width="106" height="60" rx="9"/>
-          <text class="lbl" x="543" y="130" text-anchor="middle">Systems</text>
-          <text class="lbl" x="543" y="148" text-anchor="middle">of record</text>
-        </svg></div>
-        <div>
-          <h3>An agent platform that acts under approval</h3>
-          <p class="project__where">Crewio, current</p>
-          <p>A scattered messaging estate consolidated behind one agent platform, with operational
-            agents that act inside the systems of record rather than reporting on them: procurement
-            chasing, usage analysis, and an approval step recorded before anything applies.</p>
-          <p class="project__constraint">An agent may propose. A human applies.</p>
         </div>
       </article>
     </div>
