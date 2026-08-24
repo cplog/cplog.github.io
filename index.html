@@ -133,7 +133,15 @@
      employers, and a mixed set would be the loudest thing on the page. One
      family, one weight, one optical size. */
   .role__mark{display:flex;align-items:center;height:34px;margin-bottom:12px}
-  .role__mark img{width:26px;height:26px;object-fit:contain;display:block}
+  /* Optical sizing, not box sizing. Measured ink coverage inside a square box:
+     crewio 85%, hkt 90% (solid tiles) against lifung 51%, shkp 55% (open marks).
+     Each mark is scaled by sqrt(target/actual) so they carry equal weight. */
+  .role__mark img{height:26px;width:auto;max-width:34px;object-fit:contain;display:block}
+  .role__mark img[src$="crewio.svg"]{height:23px}
+  .role__mark img[src$="hkt.png"]{height:22px}
+  .role__mark img[src$="hkdc.png"]{height:25px}
+  .role__mark img[src$="lifung-mark.svg"]{height:29px}
+  .role__mark img[src$="shkp.png"]{height:28px}
   .role__stack{display:flex;align-items:center;height:34px;margin-bottom:12px}
   .role__stack .role__mono{margin-right:-8px;position:relative;transition:margin-right .18s ease}
   .role__stack > :last-child{margin-right:0}
