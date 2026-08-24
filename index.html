@@ -192,6 +192,11 @@
   .dia .lbl{font-family:var(--font);font-size:12px;font-weight:500;fill:var(--ink)}
   .dia .lbl--q{font-family:var(--font);font-size:11px;font-weight:400;fill:rgb(0 0 0 / 56%)}
   .dia .gate{fill:none;stroke:var(--ink);stroke-width:1.5}
+  /* Edge labels sit clear of the arrow band rather than on it, so none of them
+     needs a mask painted over the tinted ground -- a mask that then has to be
+     kept in sync with the ground colour is how these drawings break. */
+  .dia .edge-lbl{font-family:var(--font);font-size:11px;font-weight:400;
+    fill:rgb(0 0 0 / 52%);letter-spacing:.005em}
   .project__constraint{margin-top:16px;font-size:14px;color:var(--ink-3);
     padding-left:14px;border-left:1px solid var(--border-strong)}
 
@@ -293,14 +298,17 @@
         <text class="lbl" x="106" y="72" text-anchor="middle">A business problem</text>
         <text class="lbl--q" x="106" y="90" text-anchor="middle">named by the people who have it</text>
         <path class="edge" d="M196 77 H 252" marker-end="url(#ar)"/>
+        <text class="edge-lbl" x="224" y="36" text-anchor="middle">scoped in weeks</text>
         <rect class="box box--key" x="256" y="46" width="180" height="62" rx="9"/>
         <text class="lbl" x="346" y="72" text-anchor="middle">A demo that decides it</text>
         <text class="lbl--q" x="346" y="90" text-anchor="middle">clickable, real path, no backend</text>
         <path class="edge" d="M436 77 H 492" marker-end="url(#ar)"/>
+        <text class="edge-lbl" x="464" y="36" text-anchor="middle">shown, not pitched</text>
         <rect class="box box--key" x="496" y="46" width="180" height="62" rx="9"/>
         <text class="lbl" x="586" y="72" text-anchor="middle">A decision</text>
         <text class="lbl--q" x="586" y="90" text-anchor="middle">budget, and real data</text>
         <path class="edge" d="M676 77 H 732" marker-end="url(#ar)"/>
+        <text class="edge-lbl" x="704" y="36" text-anchor="middle">on their own data</text>
         <rect class="box box--key" x="736" y="46" width="152" height="62" rx="9"/>
         <text class="lbl" x="812" y="72" text-anchor="middle">Deployment</text>
         <text class="lbl--q" x="812" y="90" text-anchor="middle">narrow, deep, in weeks</text>
@@ -328,11 +336,13 @@
           <path class="edge" d="M144 64 C 196 64 196 138 238 138" marker-end="url(#ar)"/>
           <path class="edge" d="M144 146 H 238" marker-end="url(#ar)"/>
           <path class="edge" d="M144 228 C 196 228 196 154 238 154" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="191" y="28" text-anchor="middle">unstructured</text>
           <rect class="box box--key" x="242" y="110" width="146" height="72" rx="9"/>
           <text class="lbl" x="315" y="136" text-anchor="middle">Extraction service</text>
           <text class="lbl--q" x="315" y="154" text-anchor="middle">one contract,</text>
           <text class="lbl--q" x="315" y="169" text-anchor="middle">every business unit</text>
           <path class="edge" d="M388 146 H 458" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="425" y="136" text-anchor="middle">structured</text>
           <rect class="box box--key" x="462" y="82" width="134" height="42" rx="9"/>
           <text class="lbl" x="529" y="108" text-anchor="middle">Structured records</text>
           <rect class="box" x="462" y="140" width="134" height="38" rx="9"/><text class="lbl" x="529" y="164" text-anchor="middle">Analytics</text>
@@ -375,15 +385,18 @@
           <path class="edge" d="M132 133 H 216" marker-end="url(#ar)"/>
           <path class="edge" d="M132 179 C 178 179 178 136 216 136" marker-end="url(#ar)"/>
           <path class="edge" d="M132 225 C 178 225 178 140 216 140" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="178" y="24" text-anchor="middle">entity-resolved</text>
           <rect class="box box--key" x="220" y="106" width="128" height="56" rx="9"/>
           <text class="lbl" x="284" y="130" text-anchor="middle">One customer</text>
           <text class="lbl" x="284" y="148" text-anchor="middle">view</text>
           <path class="edge" d="M348 134 H 402" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="375" y="124" text-anchor="middle">cut into</text>
           <rect class="box box--key" x="406" y="98" width="122" height="72" rx="9"/>
           <text class="lbl" x="467" y="124" text-anchor="middle">Segments</text>
           <text class="lbl--q" x="467" y="142" text-anchor="middle">lifestage, interest,</text>
           <text class="lbl--q" x="467" y="157" text-anchor="middle">behaviour</text>
           <path class="edge" d="M467 170 V 206" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="452" y="192" text-anchor="end">handed to campaign teams</text>
           <rect class="box" x="396" y="210" width="142" height="40" rx="9"/>
           <text class="lbl" x="467" y="235" text-anchor="middle">Campaign target list</text>
         </svg></div>
@@ -416,18 +429,21 @@
           <text class="lbl" x="80" y="140" text-anchor="middle">Signals</text>
           <text class="lbl--q" x="80" y="157" text-anchor="middle">behaviour, usage</text>
           <path class="edge" d="M136 144 H 186" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="161" y="108" text-anchor="middle">nightly batch</text>
           <rect class="box" x="190" y="118" width="118" height="52" rx="9"/>
           <text class="lbl" x="249" y="140" text-anchor="middle">Pipeline</text>
           <text class="lbl--q" x="249" y="157" text-anchor="middle">Spark, Hive</text>
           <path class="edge" d="M308 144 H 358" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="333" y="108" text-anchor="middle">features</text>
           <rect class="box box--key" x="362" y="118" width="118" height="52" rx="9"/>
           <text class="lbl" x="421" y="140" text-anchor="middle">Ranking</text>
           <text class="lbl--q" x="421" y="157" text-anchor="middle">tuned, served</text>
           <path class="edge" d="M480 144 H 528" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="504" y="108" text-anchor="middle">served</text>
           <rect class="box box--key" x="532" y="118" width="66" height="52" rx="9"/>
           <text class="lbl" x="565" y="148" text-anchor="middle">Customer</text>
           <path class="edge" d="M565 170 C 565 232 300 236 249 214" marker-end="url(#ar)"/>
-          <text class="lbl--q" x="410" y="252" text-anchor="middle">what happened next trains the next round</text>
+          <text class="edge-lbl" x="410" y="252" text-anchor="middle">what happened next trains the next round</text>
           <path class="edge" d="M249 214 V 176" marker-end="url(#ar)"/>
         </svg></div>
         <div>
@@ -463,13 +479,16 @@
           <path class="edge" d="M136 107 C 190 107 190 132 232 132" marker-end="url(#ar)"/>
           <path class="edge" d="M136 163 C 190 163 190 138 232 138" marker-end="url(#ar)"/>
           <path class="edge" d="M136 219 C 190 219 190 142 232 142" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="184" y="24" text-anchor="middle">consolidated</text>
           <rect class="box box--key" x="236" y="105" width="134" height="60" rx="9"/>
           <text class="lbl" x="303" y="130" text-anchor="middle">Agent platform</text>
           <text class="lbl--q" x="303" y="148" text-anchor="middle">one estate</text>
           <path class="edge" d="M370 135 H 424" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="403" y="127" text-anchor="middle">proposes</text>
           <path class="gate" d="M436 104 V 166"/><path class="gate" d="M436 135 h 12"/>
-          <text class="lbl--q" x="436" y="94" text-anchor="middle">human approves</text>
+          <text class="edge-lbl" x="436" y="94" text-anchor="middle">human approves</text>
           <path class="edge" d="M450 135 H 486" marker-end="url(#ar)"/>
+          <text class="edge-lbl" x="468" y="182" text-anchor="middle">applies</text>
           <rect class="box box--key" x="490" y="105" width="106" height="60" rx="9"/>
           <text class="lbl" x="543" y="130" text-anchor="middle">Systems</text>
           <text class="lbl" x="543" y="148" text-anchor="middle">of record</text>
