@@ -12,6 +12,13 @@
 
 export const RAMP = " .'`^\",:;Il!i><~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
+// The 70-step ramp above is built for photographic dithering: dense, and its
+// middle is all letterforms. Put sparse line art through it and indices 20-45
+// come back as `{Z$Z{` -- the image reads as corrupted text rather than as a
+// drawing. Anything structural uses this instead: eight steps, no letters, and
+// weight that rises monotonically without any glyph calling attention to itself.
+export const RAMP_SOFT = " .·:-=+*";
+
 export class AsciiStage {
   constructor(el, { cols = 150, fps = 30 } = {}) {
     this.el = el;
@@ -74,6 +81,35 @@ export class AsciiStage {
         const i = y * cols + x;
         if (v > grid[i]) grid[i] = v;
       },
+      /**
+       * A line drawn as line characters. The glyph follows the segment's real
+       * visual slope (cells are ~0.55 as wide as tall, so raw dy lies), which
+       * is what makes a run of them read as one stroke instead of as a column
+       * of unrelated punctuation.
+       *
+       * Weakness is expressed as gaps rather than as a fainter glyph. Dotting
+       * is the honest ASCII idiom for "less certain", and it keeps every mark
+       * on the page at one ink weight.
+       */
+      stroke(x0, y0, x1, y1, strength) {
+        const dxv = x1 - x0, dyv = (y1 - y0) / cellRatio;
+        const a = Math.abs(Math.atan2(dyv, dxv));
+        const g = a < 0.3927 || a > 2.7489 ? "-"
+                : a < 1.1781 ? (dyv * dxv < 0 ? "/" : "\\")
+                : a < 1.9635 ? "|"
+                : (dyv * dxv < 0 ? "/" : "\\");
+        const steps = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0)) | 0;
+        // 1 = solid, 0 = nothing; between them the stroke thins to a dotted rule
+        const every = strength > 0.55 ? 1 : strength > 0.34 ? 2 : strength > 0.16 ? 3 : 4;
+        for (let s = 1; s < steps; s++) {
+          if (s % every) continue;
+          const k = s / steps;
+          const cx = Math.round(x0 + (x1 - x0) * k), cy = Math.round(y0 + (y1 - y0) * k);
+          if (cx < 0 || cy < 0 || cx >= cols || cy >= rows) continue;
+          const i = cy * cols + cx;
+          if (!chars[i]) chars[i] = { c: g };
+        }
+      },
       line(x0, y0, x1, y1, v) {
         const steps = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0)) | 0;
         for (let s = 0; s <= steps; s++) {
@@ -94,7 +130,8 @@ export class AsciiStage {
     }
     if (scene.draw) scene.draw(ctx);
 
-    const n = RAMP.length - 1;
+    const ramp = scene.ramp || RAMP;
+    const n = ramp.length - 1;
     let out = "";
     for (let y = 0; y < rows; y++) {
       let line = "";
@@ -102,7 +139,7 @@ export class AsciiStage {
         const lit = chars[y * cols + x];
         if (lit) { line += lit.c; continue; }
         const v = grid[y * cols + x];
-        line += RAMP[Math.max(0, Math.min(n, Math.round((v > 1 ? 1 : v < 0 ? 0 : v) * n)))];
+        line += ramp[Math.max(0, Math.min(n, Math.round((v > 1 ? 1 : v < 0 ? 0 : v) * n)))];
       }
       out += line + "\n";
     }

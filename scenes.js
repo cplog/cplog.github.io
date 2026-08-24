@@ -1,5 +1,7 @@
 // Three scenes. Each one has a reason to exist rather than being an effect.
 
+import { RAMP_SOFT } from "./engine.js";
+
 const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
 /* 1 - FIELD ---------------------------------------------------------------
@@ -9,6 +11,7 @@ const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 export const field = {
   id: "field",
   name: "Interference",
+  ramp: RAMP_SOFT,
   note: "Three sine layers over a warped domain. The warp is why it never quite repeats.",
   still: 3.1,
   field(nx, ny, t) {
@@ -25,7 +28,7 @@ export const field = {
     // that real black space survives between the bright bands.
     const rr = Math.sqrt(nx * nx + (ny * 2.4) * (ny * 2.4));
     const vig = clamp(1.18 - rr * 0.62);
-    return clamp((a * 0.30 + 0.20) * vig);
+    return clamp((a * 0.42 + 0.30) * vig);
   },
 };
 
@@ -34,7 +37,7 @@ export const field = {
    brightness falls with distance. It is the same claim the writing makes:
    the interesting part is which things are connected and how much you trust
    the edge. */
-const NODES = 17;
+const GX = 6, GY = 3, NODES = GX * GY;
 const seeded = (i) => {
   const s = Math.sin(i * 127.1) * 43758.5453;
   return s - Math.floor(s);
@@ -42,8 +45,9 @@ const seeded = (i) => {
 export const graph = {
   id: "graph",
   name: "Connectivity",
-  note: "Edges exist while two nodes are close, and fade with distance. Trust falls off the same way.",
+  note: "Edges exist while two nodes are close, and thin to dots as distance grows. Trust falls off the same way.",
   still: 6.0,
+  ramp: RAMP_SOFT,
   draw(ctx) {
     const { cols, rows, t } = ctx;
     const pts = [];
@@ -52,43 +56,41 @@ export const graph = {
       // Lissajous band and the field reads as one arc instead of a graph
       const fx = 0.13 + seeded(i) * 0.19, fy = 0.11 + seeded(i + 31) * 0.17;
       const px = seeded(i + 99) * 6.283, py = seeded(i + 57) * 6.283;
-      let x = (0.5 + 0.42 * Math.sin(t * fx + px)) * (cols - 1);
-      let y = (0.5 + 0.44 * Math.sin(t * fy + py)) * (rows - 1);
+      // Homes come from a jittered grid, not from the hash. Two draws of a
+      // sine hash are correlated enough that every node lands on one diagonal
+      // and the frame gets dead corners; a grid guarantees the coverage and
+      // the jitter removes the regularity.
+      const gx = i % GX, gy = (i / GX) | 0;
+      const hx = 0.07 + ((gx + 0.22 + seeded(i + 11) * 0.56) / GX) * 0.86;
+      const hy = 0.09 + ((gy + 0.22 + seeded(i + 71) * 0.56) / GY) * 0.82;
+      let x = (hx + 0.10 * Math.sin(t * fx + px)) * (cols - 1);
+      let y = (hy + 0.11 * Math.sin(t * fy + py)) * (rows - 1);
       // the pointer pushes nodes away, which is the page's one real interaction
       if (ctx.pointer) {
         const pxp = ctx.pointer.x * (cols - 1), pyp = ctx.pointer.y * (rows - 1);
-        const dx = x - pxp, dy = (y - pyp) / ctx.cellRatio / 1.75;
+        const dx = x - pxp, dy = (y - pyp) / ctx.cellRatio;
         const d = Math.hypot(dx, dy), R = cols * 0.16;
         if (d < R && d > 0.001) {
           const push = (1 - d / R) * cols * 0.075;
           x += (dx / d) * push;
-          y += (dy / d) * push * ctx.cellRatio * 1.75;
+          y += (dy / d) * push * ctx.cellRatio;
         }
       }
       pts.push([x, y]);
     }
-    const reach = cols * 0.17;
+    const reach = cols * 0.27;
     for (let i = 0; i < pts.length; i++) {
       for (let j = i + 1; j < pts.length; j++) {
         const dx = pts[i][0] - pts[j][0];
         // correct for cell aspect or "close" means something different vertically
-        const dy = (pts[i][1] - pts[j][1]) / ctx.cellRatio / 1.75;
+        const dy = (pts[i][1] - pts[j][1]) / ctx.cellRatio;
         const d = Math.hypot(dx, dy);
         if (d > reach) continue;
-        const strength = 1 - d / reach;
-        ctx.line(pts[i][0], pts[i][1], pts[j][0], pts[j][1], (k) => {
-          // brightest at the ends, so nodes read as anchors and edges as inference
-          const ends = Math.abs(k - 0.5) * 2;
-          return strength * (0.30 + ends * 0.34);
-        });
+        ctx.stroke(pts[i][0], pts[i][1], pts[j][0], pts[j][1], 1 - d / reach);
       }
     }
-    // nodes read as anchors: full weight, with a short shoulder either side
-    for (const [x, y] of pts) {
-      ctx.put(x, y, 1);
-      ctx.put(x + 1, y, 0.7); ctx.put(x - 1, y, 0.7);
-      ctx.put(x + 2, y, 0.34); ctx.put(x - 2, y, 0.34);
-    }
+    // nodes last, so an edge never overwrites the thing it connects
+    for (const [x, y] of pts) ctx.text(x, y, "o");
   },
 };
 
@@ -103,6 +105,7 @@ const PAIRS = [
 export const revision = {
   id: "revision",
   name: "Revision",
+  ramp: RAMP_SOFT,
   note: "A claim is set, struck, and reset. The superseded version stays legible.",
   still: 3.4,
   draw(ctx) {
