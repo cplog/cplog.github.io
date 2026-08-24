@@ -105,6 +105,13 @@
   .exp__tags li{font-size:13px;color:var(--ink-3);background:var(--tint);
     border-radius:999px;padding:4px 11px}
 
+  .how{margin-top:40px;background:var(--tint);border-radius:10px;padding:clamp(16px,2.5vw,28px)}
+  .how .dia{background:transparent}
+  .how__notes{margin-top:40px;display:grid;gap:0}
+  @media(min-width:900px){.how__notes{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(32px,5vw,64px)}}
+  .how__note{padding-block:24px;border-top:1px solid var(--border)}
+  .how__note h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .how__note p{margin-top:8px;color:var(--ink-2);font-size:15.5px;max-width:44ch}
   .roles{margin-top:48px}
   .role{display:grid;gap:6px;padding-block:32px;border-top:1px solid var(--border)}
   @media(min-width:860px){.role{grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:0 clamp(32px,5vw,72px)}}
@@ -214,6 +221,7 @@
     <span class="nav__name">Eric Tai</span>
     <nav class="nav__links" aria-label="Sections">
       <a href="#expertise">Expertise</a>
+      <a href="#how">How I work</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
@@ -271,6 +279,55 @@
         <p>Product owner and product manager on data products, leading cross-functional teams from
           conception to deployment, reporting into chairman and group level.</p>
         <ul class="exp__tags"><li>Product ownership</li><li>Team lead</li><li>Strategy</li><li>Delivery</li></ul>
+      </div>
+    </div>
+  </div></section>
+
+
+  <section id="how"><div class="wrap">
+    <div class="chapter__head" data-in>
+      <h2>How the work actually goes</h2>
+      <p class="chapter__sub">The same shape every time, whether it is a tender comparison, an ad
+        compliance gate, or an agent platform.</p>
+    </div>
+    <div class="how" data-in><svg class="dia" viewBox="0 0 900 200" role="img" aria-labelledby="hwt hwd">
+        <title id="hwt">How the work goes from a business problem to production</title>
+        <desc id="hwd">A business problem becomes a working demo used to win the decision, then a production system, and the constraint identified at the start governs every stage.</desc>
+        <rect class="box" x="16" y="46" width="180" height="62" rx="9"/>
+        <text class="lbl" x="106" y="72" text-anchor="middle">A business problem</text>
+        <text class="lbl--q" x="106" y="90" text-anchor="middle">named by the people who have it</text>
+        <path class="edge" d="M196 77 H 252" marker-end="url(#ar)"/>
+        <rect class="box box--key" x="256" y="46" width="180" height="62" rx="9"/>
+        <text class="lbl" x="346" y="72" text-anchor="middle">A demo that proves it</text>
+        <text class="lbl--q" x="346" y="90" text-anchor="middle">clickable, real path, no backend</text>
+        <path class="edge" d="M436 77 H 492" marker-end="url(#ar)"/>
+        <rect class="box box--key" x="496" y="46" width="180" height="62" rx="9"/>
+        <text class="lbl" x="586" y="72" text-anchor="middle">A decision</text>
+        <text class="lbl--q" x="586" y="90" text-anchor="middle">someone commits budget</text>
+        <path class="edge" d="M676 77 H 732" marker-end="url(#ar)"/>
+        <rect class="box box--key" x="736" y="46" width="152" height="62" rx="9"/>
+        <text class="lbl" x="812" y="72" text-anchor="middle">Production</text>
+        <text class="lbl--q" x="812" y="90" text-anchor="middle">the same thing, for real</text>
+        <path class="edge edge--stop" d="M106 118 V 152 H 336"/>
+        <path class="edge edge--stop" d="M564 152 H 812 V 122" marker-end="url(#ar)"/>
+        <text class="lbl" x="450" y="157" text-anchor="middle">one constraint, held the whole way</text>
+      </svg></div>
+    <div class="how__notes">
+      <div class="how__note" data-in>
+        <h3>The demo is the argument</h3>
+        <p>A clickable path through the real decision, with seeded data and no backend, settles a
+          question that a deck cannot. It is cheaper to build than the meeting it replaces.</p>
+      </div>
+      <div class="how__note" data-in>
+        <h3>The constraint comes first</h3>
+        <p>Frozen brand assets so a generator cannot invent a logo. An approval step recorded before
+          anything applies. Team-scoped access before a single document is indexed. The constraint is
+          what makes the system safe to hand over.</p>
+      </div>
+      <div class="how__note" data-in>
+        <h3>Written down before built</h3>
+        <p>Requirements, then the product, then the design, then the code. Every project carries its
+          own spec, so the next person can tell what was decided and when.</p>
       </div>
     </div>
   </div></section>
