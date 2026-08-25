@@ -13,3 +13,5 @@ shot-*.png
 index.dark.html
 .scrollcraft.json
 og.html
+hero/node_modules/
+hero/dist/

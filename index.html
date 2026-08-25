@@ -90,19 +90,10 @@
   @media (hover:hover) and (pointer:fine){.btn--primary:hover{background:rgb(0 0 0 / 84%)}}
 
   /* the one expressive interruption, in ink */
-  .ascii{position:relative;border:1px solid var(--border);border-radius:10px;overflow:hidden;
-    background:var(--canvas);aspect-ratio:4/3;width:100%;min-width:0}
-  .ascii pre{position:absolute;inset:10px 10px 38px;margin:0;overflow:hidden;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:clamp(5px,.6vw,8px);line-height:1.05;color:var(--ink);white-space:pre;opacity:.82}
-  .ascii__ctl{position:absolute;left:8px;bottom:8px;display:flex;gap:4px}
-  .ascii__ctl button{font-family:var(--font);font-size:12px;font-weight:500;color:var(--ink-3);
-    background:rgb(255 255 255 / 82%);border:1px solid var(--border);border-radius:6px;
-    padding:5px 9px;cursor:pointer;transition:color .18s ease,background .18s ease}
-  @media (hover:hover) and (pointer:fine){.ascii__ctl button:hover{color:var(--ink);background:var(--canvas)}}
-  .ascii__ctl button[aria-pressed="true"]{color:var(--ink);background:var(--canvas);border-color:var(--border-strong)}
-  .ascii__hint{position:absolute;right:10px;bottom:12px;font-size:12px;color:var(--ink-4)}
-  @media(max-width:660px){.ascii__hint{display:none}}
+  .field{position:relative;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+    background:var(--tint);aspect-ratio:4/3;width:100%;min-width:0}
+  .field #hero-3d{position:absolute;inset:0}
+  .field #hero-3d iframe{width:100%;height:100%;border:0;display:block}
 
   /* chapters -------------------------------------------------------------- */
   section{padding-block:var(--chapter)}
@@ -212,7 +203,7 @@
 
   /* Motion. Press feedback is driven by a spring in JS so it starts from the
      current value and can be interrupted; CSS transitions here would fight it. */
-  .btn,.nav__links a,.ascii__ctl button{will-change:transform}
+  .btn,.nav__links a{will-change:transform}
   .btn:active{background:var(--pressed)}
 
   /* Scroll edge, not a hard rule: the divider only exists once content is
@@ -276,10 +267,9 @@
           <a class="btn" href="https://www.linkedin.com/in/eric-cp-tai/" rel="me">LinkedIn</a>
         </div>
       </div>
-      <div class="ascii" data-in>
-        <pre id="ascii-out" role="img" aria-label="Interactive character field showing a connectivity graph"></pre>
-        <div class="ascii__ctl" id="ascii-ctl" role="group" aria-label="Field"></div>
-        <span class="ascii__hint" aria-hidden="true">Move to disturb</span>
+      <div class="field" data-in>
+        <div id="hero-3d" role="img"
+             aria-label="A slowly moving field of connected points"></div>
       </div>
     </div>
   </div>
@@ -618,8 +608,7 @@
     <div class="foot">
       <p>Eric Tai. Forward-deployed engineer, Hong Kong.</p>
       <p>Set in Inter. Photographs generated, then chosen.</p>
-      <p>The field above is rendered as text: no canvas, no dependencies.</p>
-    </div>
+      </div>
   </div></section>
 </main>
 
@@ -627,7 +616,7 @@
   import { Spring, pressable, reducedMotion } from "./motion.js";
 
   // 1. Response: every control acknowledges on pointer-down.
-  document.querySelectorAll(".btn, .nav__links a, .ascii__ctl button")
+  document.querySelectorAll(".btn, .nav__links a")
     .forEach((el) => pressable(el, { scale: el.classList.contains("btn") ? 0.975 : 0.94 }));
 
   // 2. Scroll edge on the translucent chrome, rather than a permanent rule.
@@ -650,51 +639,29 @@
   }), { rootMargin: "0px 0px -15% 0px" });
   document.querySelectorAll(".dia").forEach((d) => drawIo.observe(d));
 
-  import { AsciiStage } from "./engine.js";
-  import { SCENES } from "./scenes.js";
-
-  const out = document.getElementById("ascii-out");
-  const stage = new AsciiStage(out, { fps: 24 });
-  const ctl = document.getElementById("ascii-ctl");
-
-  SCENES.forEach((s, i) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.textContent = s.name; b.setAttribute("aria-pressed", String(i === 0));
-    b.addEventListener("click", () => {
-      stage.setScene(s);
-      [...ctl.children].forEach((x, k) => x.setAttribute("aria-pressed", String(k === i)));
-    });
-    ctl.appendChild(b);
-  });
-  stage.setScene(SCENES[0]);
-  stage.start();
-
-  // Pointer disturbs the field. This is the interaction, not decoration: it is
-  // the only continuously responsive thing on the page, and it is gated to real
-  // pointers so touch never fires a phantom hover.
-  if (matchMedia("(hover:hover) and (pointer:fine)").matches && !reducedMotion()) {
-    const box = out.parentElement;
-    // The disturbance springs toward the cursor rather than snapping to it, and
-    // keeps travelling for a moment after the pointer leaves. Snapping reads as
-    // a lookup table; a spring reads as something with weight.
-    let live = false;
-    const sx = new Spring(0.5, { bounce: 0, response: 0.32, onChange: sync });
-    const sy = new Spring(0.5, { bounce: 0, response: 0.32, onChange: sync });
-    function sync() { stage.pointer = live ? { x: sx.value, y: sy.value } : null; }
-    box.addEventListener("pointermove", (e) => {
-      const r = box.getBoundingClientRect();
-      live = true;
-      sx.to((e.clientX - r.left) / r.width);
-      sy.to((e.clientY - r.top) / r.height);
-    }, { passive: true });
-    box.addEventListener("pointerleave", () => {
-      // let the spring settle before the field forgets the pointer, so the
-      // disturbance decays instead of vanishing on one frame
-      setTimeout(() => { live = false; stage.pointer = null; }, 260);
-    });
+  // The field is the one built artefact on the page. It is loaded after first
+  // paint and only when it is about to be seen, so the hero's text is never
+  // waiting on a 265KB bundle -- the page reads fine before it arrives.
+  {
+    const box = document.getElementById("hero-3d");
+    // Vite's library mode emits the stylesheet but never loads it, so the
+    // stylesheet is fetched here alongside the module rather than blocking
+    // first paint from the <head>.
+    const load = () => {
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "assets/hero/hero.css";
+      document.head.appendChild(css);
+      return import("./assets/hero/hero.js").catch(() => box.remove());
+    };
+    if ("IntersectionObserver" in window) {
+      const o = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) { o.disconnect(); load(); }
+      }, { rootMargin: "200px" });
+      o.observe(box);
+    } else load();
   }
 
-  document.addEventListener("visibilitychange", () => document.hidden ? stage.stop() : stage.start());
 
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
