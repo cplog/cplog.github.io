@@ -1,60 +1,54 @@
 // A garden that becomes a QR code.
 //
-// One set of 1433 points, two arrangements. At rest they are a small 3D garden
-// -- soil, grass, four trees, flowerbeds, drifting pollen -- turning slowly
-// under a weak perspective. On hover or tap they fly to the centres of the
-// QR's dark modules, the scene flattens, and the colour drains to black.
+// 1433 elements, two arrangements. At rest they are a small garden turning
+// under a weak perspective; on hover or tap they fold into the QR's dark
+// modules, flatten, and drain to black.
 //
-// Colour is contained: it lives inside the framed scene and never leaks into
-// the page around it, which is what lets a garden sit inside a monochrome
-// document without wrecking it. It also has a job -- the garden is alive and
-// the code is not, so draining the colour *is* the transition.
+// The drawing language is borrowed from ThreeUI's ConnectivityGraph, which is
+// the best-looking thing in that library and does not need WebGL to be good.
+// Three properties do the work there, and all three are cheap in 2D:
 //
-// Three decisions carry the whole thing:
+//   · elements are tapered STROKES, not dots. A stroke has direction, and
+//     direction is what makes a canopy read as foliage rather than as gnats.
+//   · every stroke carries a bright tip. The eye reads the tips as the objects
+//     and the strokes as the structure holding them up.
+//   · depth is hard fade plus width, not merely scale. Far things go thin and
+//     pale rather than just small, which is what produces the sense of air
+//     between the near and the far side of the scene.
 //
-//   1. The particles never *are* the QR. They travel to its module grid, and
-//      the last stretch cross-fades into crisply drawn squares. Soft dots with
-//      antialiased edges do not scan, and a pretty morph that cannot be read is
-//      a failure rather than a trade.
+// Two decisions that are mine rather than borrowed:
 //
-//   2. Points are paired to modules by angle around each set's centroid. Pair
-//      by index and every particle crosses the frame, which reads as noise; a
-//      radial unwind keeps neighbours together and reads as one object folding.
+//   1. Elements never *are* the QR. They travel to its module grid and the
+//      last stretch cross-fades to crisply drawn squares. Soft antialiased
+//      marks do not scan, and a pretty morph that cannot be read is a failure
+//      rather than a trade.
 //
-//   3. Colours are quantised into buckets and drawn bucket by bucket. 1433
-//      per-particle `fillStyle` writes per frame is the difference between
-//      60fps and a slideshow.
+//   2. Colour is contained in the frame and drains to black as the scene
+//      becomes the code. The garden is alive and the code is not, so losing
+//      the colour IS the transition rather than an effect laid over one.
 
 import { SIZE, BITS } from "./qr.js";
 
 const QUIET = 4;               // modules of mandatory clear margin around a QR
 const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-
-// deterministic noise, so it is the same garden on every load
 const rnd = (i) => {
   const s = Math.sin(i * 127.1 + 311.7) * 43758.5453;
   return s - Math.floor(s);
 };
 
-/* ── palette ───────────────────────────────────────────────────────────────
-   Muted and slightly desaturated: this sits next to black text on white, and
-   a saturated garden would read as a toy. Greens carry the mass, warm tones
-   are rationed to the flowers so the eye has somewhere to land. */
+/* Muted, because this sits beside black text on white. Greens carry the mass;
+   warm tones are rationed to the flowers so the eye has one place to land. */
 const PALETTE = [
-  [ 74,  92,  62], // deep foliage
-  [ 96, 118,  74], // mid foliage
-  [124, 146,  92], // light foliage
-  [148, 166, 112], // sunlit leaf
-  [ 92, 106,  70], // grass
-  [116, 132,  82], // grass, lit
-  [107,  84,  62], // trunk
-  [ 84,  66,  50], // trunk, shaded
-  [196, 112,  86], // coral flower
-  [206, 152,  74], // amber flower
-  [178, 104, 122], // rose flower
-  [212, 206, 190], // pale flower / pollen
+  [ 68,  86,  58], [ 92, 114,  72], [122, 144,  92], [150, 168, 116],
+  [ 88, 102,  68], [114, 130,  82], [104,  82,  60], [ 80,  63,  48],
+  [198, 110,  84], [206, 150,  72], [178, 102, 120], [206, 200, 184],
 ];
+// Tips run brighter than the stroke they cap. This pairing is what gives the
+// borrowed look its glint, with no glow, no blur and no second pass.
+const TIP = PALETTE.map(([r, g, b]) => [
+  Math.min(255, r + 74), Math.min(255, g + 74), Math.min(255, b + 66),
+]);
 
 function qrTargets() {
   const out = [];
@@ -64,104 +58,102 @@ function qrTargets() {
   return out;
 }
 
-/** The scene, in normalised space: x,z in -1..1, y up, ground at -0.86. */
+/** Scene in normalised space: x,z in -1..1, y up, ground at -0.86.
+    Each element is [x, y, z, colour, dx, dy, dz] where d is its stroke. */
 function garden(n) {
-  const P = [];                                   // [x, y, z, paletteIndex]
+  const P = [];
   const G = -0.86;
-  const push = (x, y, z, c) => P.push([x, y, z, c]);
+  const put = (x, y, z, c, dx, dy, dz) => P.push([x, y, z, c, dx, dy, dz]);
 
   const TREES = [
-    { x: -0.60, z:  0.24, h: 0.86, r: 0.32, tilt: -0.04 },
-    { x:  0.10, z: -0.46, h: 1.02, r: 0.42, tilt:  0.03 },
-    { x:  0.66, z:  0.34, h: 0.72, r: 0.27, tilt:  0.05 },
-    { x: -0.18, z:  0.62, h: 0.54, r: 0.21, tilt: -0.02 },
+    { x: -0.62, z:  0.26, h: 0.80, r: 0.30 },
+    { x:  0.12, z: -0.48, h: 1.00, r: 0.40 },
+    { x:  0.68, z:  0.36, h: 0.66, r: 0.25 },
+    { x: -0.20, z:  0.64, h: 0.50, r: 0.20 },
   ];
 
-  // soil: a scattered ellipse, denser toward the middle
-  for (let i = 0; i < Math.round(n * 0.14); i++) {
-    const a = rnd(i) * Math.PI * 2, r = Math.sqrt(rnd(i + 91)) * 1.08;
-    push(Math.cos(a) * r, G + rnd(i + 17) * 0.03, Math.sin(a) * r, rnd(i + 5) > 0.7 ? 7 : 6);
+  // soil: the only elements with no direction, so they stay specks and read as
+  // ground instead of competing with the planting
+  for (let i = 0; i < Math.round(n * 0.11); i++) {
+    const a = rnd(i) * 6.2832, r = Math.sqrt(rnd(i + 91)) * 1.06;
+    put(Math.cos(a) * r, G + rnd(i + 17) * 0.02, Math.sin(a) * r,
+        rnd(i + 5) > 0.7 ? 7 : 6, 0, 0, 0);
   }
-  // grass: short blades, not dots -- a blade is 3 points climbing and leaning,
-  // which is what stops the ground reading as static noise
-  const blades = Math.round(n * 0.16 / 3);
-  for (let i = 0; i < blades; i++) {
-    const a = rnd(i + 200) * Math.PI * 2, r = Math.sqrt(rnd(i + 300)) * 1.05;
-    const bx = Math.cos(a) * r, bz = Math.sin(a) * r;
-    const hgt = 0.05 + rnd(i + 400) * 0.09, lean = (rnd(i + 500) - 0.5) * 0.05;
-    const c = rnd(i + 600) > 0.5 ? 4 : 5;
-    for (let k = 1; k <= 3; k++) {
-      const u = k / 3;
-      push(bx + lean * u * u, G + hgt * u, bz, c);
-    }
+  // grass: one leaning stroke each. Blades, not a scatter.
+  for (let i = 0; i < Math.round(n * 0.22); i++) {
+    const a = rnd(i + 200) * 6.2832, r = Math.sqrt(rnd(i + 300)) * 1.04;
+    const hgt = 0.06 + rnd(i + 400) * 0.10;
+    put(Math.cos(a) * r, G, Math.sin(a) * r, rnd(i + 600) > 0.5 ? 4 : 5,
+        (rnd(i + 500) - 0.5) * 0.07, hgt, (rnd(i + 700) - 0.5) * 0.03);
   }
-  // trunks, tapering and slightly tilted
-  const tp = Math.round(n * 0.08 / TREES.length);
+  // trunks: short vertical strokes stacked, narrowing as they climb
+  const tp = Math.round(n * 0.07 / TREES.length);
   TREES.forEach((t, ti) => {
     for (let i = 0; i < tp; i++) {
-      const k = i / tp, j = ti * 1000 + i, w = 0.045 * (1 - k * 0.5);
-      push(t.x + t.tilt * k + (rnd(j) - 0.5) * w, G + k * t.h,
-           t.z + (rnd(j + 7) - 0.5) * w, rnd(j + 3) > 0.55 ? 6 : 7);
+      const k = i / tp, j = ti * 1000 + i, w = 0.03 * (1 - k * 0.5);
+      put(t.x + (rnd(j) - 0.5) * w, G + k * t.h, t.z + (rnd(j + 7) - 0.5) * w,
+          rnd(j + 3) > 0.55 ? 6 : 7, 0, (t.h / tp) * 1.4, 0);
     }
   });
-  // canopies: three nested shells per tree, darkest inside. A solid ball reads
-  // as a blob; shells read as foliage with light falling on the outside.
-  const cp = Math.round(n * 0.46 / TREES.length);
+  // canopy: strokes pointing OUTWARD from the tree's heart. This is the whole
+  // trick — radial strokes with bright tips read instantly as foliage, where
+  // the same points drawn as dots read as noise.
+  const cp = Math.round(n * 0.44 / TREES.length);
   TREES.forEach((t, ti) => {
+    const hy = G + t.h + t.r * 0.16;
     for (let i = 0; i < cp; i++) {
       const j = ti * 2000 + i;
-      const shell = i % 3;                                  // 0 inner .. 2 outer
-      const u = rnd(j) * 2 - 1, a = rnd(j + 3) * Math.PI * 2;
+      const shell = i % 3;
+      const u = rnd(j) * 2 - 1, a = rnd(j + 3) * 6.2832;
       const s = Math.sqrt(1 - u * u);
-      const rr = t.r * (0.56 + shell * 0.22) * (0.9 + rnd(j + 11) * 0.2);
-      const y = G + t.h + t.r * 0.15 + u * rr * 0.8;
-      // lit from upper left, so the same shell is brighter on one side
-      const lit = (-Math.cos(a) * s + u) * 0.5 + 0.5;
+      const rr = t.r * (0.40 + shell * 0.26) * (0.88 + rnd(j + 11) * 0.24);
+      const ux = s * Math.cos(a), uy = u * 0.82, uz = s * Math.sin(a);
+      const lit = (-ux + uy) * 0.5 + 0.5;                 // light from upper left
       const c = shell === 0 ? 0 : lit > 0.62 ? 3 : lit > 0.34 ? 2 : 1;
-      push(t.x + t.tilt + s * Math.cos(a) * rr, y, t.z + s * Math.sin(a) * rr, c);
+      const len = t.r * (0.20 + rnd(j + 21) * 0.24);
+      put(t.x + ux * rr, hy + uy * rr, t.z + uz * rr, c, ux * len, uy * len, uz * len);
     }
   });
-  // flowerbeds: clustered, not evenly scattered -- flowers grow in patches
-  const beds = 6;
-  const perBed = Math.round(n * 0.15 / beds);
+  // flowerbeds: clustered, because flowers grow in patches. A stem stroke and
+  // three petals fanning out of its top.
+  const beds = 6, per = Math.round((n * 0.13) / beds / 4);
   for (let b = 0; b < beds; b++) {
-    const a = rnd(b + 700) * Math.PI * 2, r = 0.42 + rnd(b + 800) * 0.58;
+    const a = rnd(b + 700) * 6.2832, r = 0.44 + rnd(b + 800) * 0.56;
     const cx = Math.cos(a) * r, cz = Math.sin(a) * r;
-    const hue = [8, 9, 10, 11][b % 4];
-    for (let i = 0; i < perBed / 5; i++) {
+    const hue = [8, 9, 10, 8][b % 4];
+    for (let i = 0; i < per; i++) {
       const j = b * 300 + i;
-      const fx = cx + (rnd(j) - 0.5) * 0.30, fz = cz + (rnd(j + 9) - 0.5) * 0.30;
-      const fh = 0.10 + rnd(j + 19) * 0.14;
-      push(fx, G + fh * 0.5, fz, 4);                        // stem
-      push(fx, G + fh, fz, 11);                             // pale centre
-      for (let k = 0; k < 3; k++) {                         // petals
-        const pa = (k / 3) * Math.PI * 2 + rnd(j);
-        push(fx + Math.cos(pa) * 0.032, G + fh + 0.012, fz + Math.sin(pa) * 0.032, hue);
+      const fx = cx + (rnd(j) - 0.5) * 0.32, fz = cz + (rnd(j + 9) - 0.5) * 0.32;
+      const fh = 0.11 + rnd(j + 19) * 0.15;
+      put(fx, G, fz, 4, 0, fh, 0);                                  // stem
+      for (let k = 0; k < 3; k++) {                                 // petals
+        const pa = (k / 3) * 6.2832 + rnd(j) * 3;
+        put(fx, G + fh, fz, hue, Math.cos(pa) * 0.05, 0.022, Math.sin(pa) * 0.05);
       }
     }
   }
-  // pollen: a few motes above everything, to give the air some depth
+  // pollen: faint motes, for air between the planting and the frame
   for (let i = 0; i < Math.round(n * 0.03); i++) {
-    push((rnd(i + 900) - 0.5) * 2, G + 0.5 + rnd(i + 950) * 0.9,
-         (rnd(i + 990) - 0.5) * 2, 11);
+    put((rnd(i + 900) - 0.5) * 2, G + 0.45 + rnd(i + 950) * 0.85,
+        (rnd(i + 990) - 0.5) * 2, 11, 0, 0.016, 0);
   }
   while (P.length < n) {
     const i = P.length;
-    push((rnd(i) - 0.5) * 2, G + rnd(i + 3) * 0.02, (rnd(i + 5) - 0.5) * 2, 6);
+    put((rnd(i) - 0.5) * 2, G, (rnd(i + 5) - 0.5) * 2, 5,
+        (rnd(i + 2) - 0.5) * 0.05, 0.05 + rnd(i + 4) * 0.05, 0);
   }
   return P.slice(0, n);
 }
 
-/* ── the stage ─────────────────────────────────────────────────────────── */
+/* ── stage ─────────────────────────────────────────────────────────────── */
+
+const BANDS = 3;   // depth bands per colour, so width and fade vary with z
 
 export class Garden {
   constructor(canvas) {
     this.c = canvas;
-    this.ctx = canvas.getContext("2d", { alpha: true });
-    this.t = 0;
-    this.target = 0;
-    this.spin = 0;
-    this.raf = 0;
+    this.ctx = canvas.getContext("2d");
+    this.t = 0; this.target = 0; this.spin = 0; this.raf = 0;
     this.reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const mods = qrTargets();
@@ -171,23 +163,23 @@ export class Garden {
 
     const byAngle = (arr, cx, cy, get) =>
       arr.map((p, i) => { const [x, y] = get(p); return { i, a: Math.atan2(y - cy, x - cx) }; })
-         .sort((u, v) => u.a - v.a)
-         .map((o) => o.i);
+         .sort((u, v) => u.a - v.a).map((o) => o.i);
     const gi = byAngle(g, 0, -0.25, (p) => [p[0], p[1]]);
     const qi = byAngle(mods, (SIZE - 1) / 2, (SIZE - 1) / 2, (p) => [p[0], -p[1]]);
 
-    this.a = new Float32Array(this.n * 3);
-    this.b = new Uint8Array(this.n * 2);
+    this.pos = new Float32Array(this.n * 3);
+    this.dir = new Float32Array(this.n * 3);
+    this.qr = new Uint8Array(this.n * 2);
     this.col = new Uint8Array(this.n);
     for (let k = 0; k < this.n; k++) {
-      const gp = g[gi[k]], qp = mods[qi[k]];
-      this.a[k * 3] = gp[0]; this.a[k * 3 + 1] = gp[1]; this.a[k * 3 + 2] = gp[2];
-      this.col[k] = gp[3];
-      this.b[k * 2] = qp[0]; this.b[k * 2 + 1] = qp[1];
+      const p = g[gi[k]], q = mods[qi[k]];
+      this.pos[k * 3] = p[0]; this.pos[k * 3 + 1] = p[1]; this.pos[k * 3 + 2] = p[2];
+      this.dir[k * 3] = p[4]; this.dir[k * 3 + 1] = p[5]; this.dir[k * 3 + 2] = p[6];
+      this.col[k] = p[3];
+      this.qr[k * 2] = q[0]; this.qr[k * 2 + 1] = q[1];
     }
-    // draw order grouped by colour, so fillStyle is set once per bucket
-    this.buckets = PALETTE.map(() => []);
-    for (let k = 0; k < this.n; k++) this.buckets[this.col[k]].push(k);
+    // scratch, reused every frame so the draw loop allocates nothing
+    this.lanes = Array.from({ length: PALETTE.length * BANDS }, () => []);
 
     this.resize();
     this._r = () => this.resize();
@@ -202,12 +194,13 @@ export class Garden {
     this.c.width = Math.round(r.width * dpr);
     this.c.height = Math.round(r.height * dpr);
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.ctx.lineCap = "round";
     this.w = r.width; this.h = r.height;
-    // the QR must fit its quiet zone inside the frame or it will not scan
+    // the quiet zone must fit inside the frame or the code will not scan
     this.cell = Math.min(this.w, this.h) / (SIZE + QUIET * 2);
-    this.side = this.cell * SIZE;
-    this.ox = (this.w - this.side) / 2;
-    this.oy = (this.h - this.side) / 2;
+    const side = this.cell * SIZE;
+    this.ox = (this.w - side) / 2;
+    this.oy = (this.h - side) / 2;
     this.draw();
   }
 
@@ -221,10 +214,9 @@ export class Garden {
       last = now;
       this.t += (this.target - this.t) * Math.min(1, dt * 6);
       if (Math.abs(this.target - this.t) < 0.0015) this.t = this.target;
-      // the garden keeps turning; the code does not
-      if (this.t < 0.999) this.spin += dt * 0.17 * (1 - this.t);
+      if (this.t < 0.999) this.spin += dt * 0.15 * (1 - this.t);
       this.draw();
-      // park the loop once fully resolved -- a still QR costs no frames
+      // a settled code is a still image and costs no frames
       this.raf = this.t === 1 && this.target === 1 ? 0 : requestAnimationFrame(step);
     };
     this.raf = requestAnimationFrame(step);
@@ -238,8 +230,6 @@ export class Garden {
     const t = ease(clamp(this.t, 0, 1));
     ctx.clearRect(0, 0, w, h);
 
-    // past 90% the particles have arrived; hand over to real squares, which is
-    // the only form of this that a camera can actually read
     const crisp = clamp((t - 0.9) / 0.1, 0, 1);
     if (crisp > 0) {
       ctx.globalAlpha = crisp;
@@ -252,37 +242,60 @@ export class Garden {
     }
 
     const cs = Math.cos(this.spin), sn = Math.sin(this.spin);
-    // The scene spans roughly y -0.86..0.80, so it centres near y=0 and only
-    // needs a small nudge. An offset in fractions of the frame height pushed it
-    // into the bottom third and left the top empty.
-    const scale = Math.min(w, h) * 0.375;
+    const scale = Math.min(w, h) * 0.37;
     const fade = 1 - crisp;
+    for (const l of this.lanes) l.length = 0;
 
-    for (let bi = 0; bi < PALETTE.length; bi++) {
-      const list = this.buckets[bi];
-      if (!list.length) continue;
-      const [pr, pg, pb] = PALETTE[bi];
-      // colour drains to black as the scene becomes the code
-      const R = Math.round(pr * (1 - t)), G = Math.round(pg * (1 - t)), B = Math.round(pb * (1 - t));
-      ctx.fillStyle = `rgb(${R},${G},${B})`;
-      ctx.globalAlpha = fade;
-      for (let li = 0; li < list.length; li++) {
-        const k = list[li];
-        const ax = this.a[k * 3], ay = this.a[k * 3 + 1], az = this.a[k * 3 + 2];
-        const rx = ax * cs - az * sn, rz = ax * sn + az * cs;
-        // weak perspective: enough to read as depth, not enough to lurch
-        const p = 2.7 / (2.7 + rz);
-        const gx = w / 2 + rx * scale * p;
-        const gy = h / 2 - (ay + 0.03) * scale * p;
-        const gr = (1.15 + p * 1.0);
+    // Project once, then sort into colour x depth lanes, so a frame is a few
+    // dozen batched paths rather than 1433 individual style writes.
+    for (let k = 0; k < this.n; k++) {
+      const x = this.pos[k * 3], y = this.pos[k * 3 + 1], z = this.pos[k * 3 + 2];
+      const rx = x * cs - z * sn, rz = x * sn + z * cs;
+      const p = 2.7 / (2.7 + rz);
+      const sx = w / 2 + rx * scale * p;
+      const sy = h / 2 - (y + 0.03) * scale * p;
 
-        const qx = this.ox + this.b[k * 2] * this.cell;
-        const qy = this.oy + this.b[k * 2 + 1] * this.cell;
+      const dx = this.dir[k * 3], dy = this.dir[k * 3 + 1], dz = this.dir[k * 3 + 2];
+      const erx = (x + dx) * cs - (z + dz) * sn, erz = (x + dx) * sn + (z + dz) * cs;
+      const ep = 2.7 / (2.7 + erz);
+      const ex = w / 2 + erx * scale * ep;
+      const ey = h / 2 - (y + dy + 0.03) * scale * ep;
 
-        const size = gr + (this.cell - gr) * t;
-        const x = gx - gr / 2 + (qx - (gx - gr / 2)) * t;
-        const y = gy - gr / 2 + (qy - (gy - gr / 2)) * t;
-        ctx.fillRect(x, y, size, size);
+      const qx = this.ox + this.qr[k * 2] * this.cell + this.cell / 2;
+      const qy = this.oy + this.qr[k * 2 + 1] * this.cell + this.cell / 2;
+
+      // as it folds up every stroke retracts to a point on its module centre
+      const ax = sx + (qx - sx) * t, ay = sy + (qy - sy) * t;
+      const bx = ex + (qx - ex) * t, by = ey + (qy - ey) * t;
+      const band = p < 0.86 ? 0 : p < 1.02 ? 1 : 2;      // 0 far .. 2 near
+      this.lanes[this.col[k] * BANDS + band].push(ax, ay, bx, by);
+    }
+
+    for (let ci = 0; ci < PALETTE.length; ci++) {
+      const [r, g, b] = PALETTE[ci];
+      const [tr, tg, tb] = TIP[ci];
+      for (let band = 0; band < BANDS; band++) {
+        const lane = this.lanes[ci * BANDS + band];
+        if (!lane.length) continue;
+        // far strokes go thin AND pale; that pairing is what reads as air
+        const depth = 0.42 + band * 0.29;
+        ctx.globalAlpha = fade * depth * (1 - t * 0.15);
+        ctx.strokeStyle = `rgb(${(r * (1 - t)) | 0},${(g * (1 - t)) | 0},${(b * (1 - t)) | 0})`;
+        ctx.lineWidth = Math.max(0.35, (0.7 + band * 0.62) * (1 - t * 0.45));
+        ctx.beginPath();
+        for (let i = 0; i < lane.length; i += 4) {
+          ctx.moveTo(lane[i], lane[i + 1]);
+          ctx.lineTo(lane[i + 2], lane[i + 3]);
+        }
+        ctx.stroke();
+
+        // The tip: one bright mark at the far end of every stroke. This is the
+        // detail that separates "point cloud" from "drawing".
+        const ts = Math.max(0.7, (0.9 + band * 0.55) * (1 - t * 0.3));
+        ctx.globalAlpha = fade * Math.min(1, depth + 0.26);
+        ctx.fillStyle = `rgb(${(tr * (1 - t)) | 0},${(tg * (1 - t)) | 0},${(tb * (1 - t)) | 0})`;
+        for (let i = 0; i < lane.length; i += 4)
+          ctx.fillRect(lane[i + 2] - ts / 2, lane[i + 3] - ts / 2, ts, ts);
       }
     }
     ctx.globalAlpha = 1;
