@@ -31,6 +31,11 @@ no depth buffer and no additive accumulation, so no amount of tuning arrives.
   spent 60% of the budget, overflowed the total to ~140%, and `slice(0, n)`
   then silently dropped whatever was built last — two of the four canopies.
   Nothing errored; the trees just had no crowns.
+- **Branch depth compounds.** Depth 4 with 2-3 children is ~120 segments, and
+  because 2.5 children x 0.7 length shrink is greater than 1, the summed length
+  GROWS with depth. Allocating wood sprites by raw length then gave the trunk a
+  negligible share and the trees rendered with no visible stems. Three levels,
+  and weight the allocation by thickness as well as length.
 - **Additive light has no ceiling.** One dense clump saturates to white, so
   the fragment shader clamps.
 

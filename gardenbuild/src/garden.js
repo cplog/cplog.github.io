@@ -56,6 +56,74 @@ function qrTargets() {
   return out;
 }
 
+/* --- trees --------------------------------------------------------------
+   A recursive skeleton rather than a ball of leaves on a stick. Each branch
+   splits into two or three children, each shorter, thinner and turned off its
+   parent axis; leaves hang only off the TIPS. That last part is what makes a
+   crown read as a tree -- foliage on a real tree is a surface at the ends of
+   the structure, not a volume filled uniformly with green.
+
+   The turn is built from a vector perpendicular to the parent direction, so
+   branches lean away from where they came from at every scale. Rotating each
+   child around the world Y axis instead makes every tree look like a fan. */
+
+const norm = (v) => {
+  const l = Math.hypot(v[0], v[1], v[2]) || 1;
+  return [v[0] / l, v[1] / l, v[2] / l];
+};
+
+/** A unit vector perpendicular to d, rolled by `a` around d's own axis. */
+function perp(d, a) {
+  const up = Math.abs(d[1]) > 0.92 ? [1, 0, 0] : [0, 1, 0];
+  const x = norm([
+    d[1] * up[2] - d[2] * up[1],
+    d[2] * up[0] - d[0] * up[2],
+    d[0] * up[1] - d[1] * up[0],
+  ]);
+  const y = [
+    d[1] * x[2] - d[2] * x[1],
+    d[2] * x[0] - d[0] * x[2],
+    d[0] * x[1] - d[1] * x[0],
+  ];
+  const c = Math.cos(a), si = Math.sin(a);
+  return norm([x[0] * c + y[0] * si, x[1] * c + y[1] * si, x[2] * c + y[2] * si]);
+}
+
+/** The skeleton and its growing points. */
+function skeleton(t, seed) {
+  const segs = [], tips = [];
+  // Depth 4 with 2-3 children is ~120 segments whose summed length GROWS
+  // with depth (2.5 children x 0.7 shrink > 1), so allocating wood sprites
+  // by raw length gave the trunk a negligible share and the trees had no
+  // visible stems at all. Three levels keeps the structure legible.
+  const MAXD = 3;
+  const grow = (p, d, len, depth, sd) => {
+    const e = [p[0] + d[0] * len, p[1] + d[1] * len, p[2] + d[2] * len];
+    segs.push({ a: p, b: e, depth, len });
+    if (depth >= MAXD) { tips.push({ p: e, d }); return; }
+    // two children usually, three sometimes: a constant branching factor is
+    // the difference between a tree and a diagram of a tree
+    const kids = rnd(sd) > 0.78 ? 3 : 2;
+    const spread = 0.34 + rnd(sd + 5) * 0.24;
+    for (let k = 0; k < kids; k++) {
+      const roll = (k / kids) * 6.2832 + rnd(sd + k * 17) * 2.4;
+      const px = perp(d, roll);
+      const a = spread * (0.7 + rnd(sd + k * 31) * 0.6);
+      const nd = norm([
+        d[0] * Math.cos(a) + px[0] * Math.sin(a),
+        // bias every child upward, or deep branches wander into the grass
+        d[1] * Math.cos(a) + px[1] * Math.sin(a) + 0.14,
+        d[2] * Math.cos(a) + px[2] * Math.sin(a),
+      ]);
+      grow(e, nd, len * (0.6 + rnd(sd + k * 7) * 0.12), depth + 1, sd + k * 101 + 13);
+    }
+  };
+  grow([t.x, -0.86, t.z],
+       norm([(rnd(seed) - 0.5) * 0.2, 1, (rnd(seed + 3) - 0.5) * 0.2]),
+       t.h * 0.52, 0, seed);
+  return { segs, tips };
+}
+
 /** The scene. Ground at y=-0.86, everything in -1..1. */
 function build(n) {
   const P = [];
@@ -69,63 +137,82 @@ function build(n) {
     { x:  0.88, z: -0.04, h: 0.58, r: 0.24 },
   ];
 
-  for (let i = 0; i < Math.round(n * 0.10); i++) {          // soil
+  // Shares must sum to 1.0. Grass and flowers push several sprites per unit,
+  // so their loop counts are divided -- getting this wrong once overflowed the
+  // budget and slice(0, n) silently deleted two whole canopies.
+  const SH = { soil: 0.07, grass: 0.14, wood: 0.29, leaf: 0.34, flower: 0.13, pollen: 0.03 };
+
+  for (let i = 0; i < Math.round(n * SH.soil); i++) {
     const a = rnd(i) * 6.2832, r = Math.sqrt(rnd(i + 91)) * 1.06;
     put(Math.cos(a) * r, G + rnd(i + 17) * 0.02, Math.sin(a) * r,
         rnd(i + 5) > 0.7 ? PAL.barkDark : PAL.bark, 0.5, 0.3);
   }
-  // NB: three sprites per blade, so the loop count is the share DIVIDED by
-  // three. Iterating the full share here spent 60% of the budget on grass,
-  // overflowed the total to ~140%, and slice(0, n) then silently dropped
-  // whatever was built last -- which was two of the four tree canopies.
-  for (let i = 0; i < Math.round(n * 0.18 / 3); i++) {       // grass
+  for (let i = 0; i < Math.round((n * SH.grass) / 3); i++) {   // 3 sprites a blade
     const a = rnd(i + 200) * 6.2832, r = Math.sqrt(rnd(i + 300)) * 1.04;
     const bx = Math.cos(a) * r, bz = Math.sin(a) * r;
     const hgt = 0.05 + rnd(i + 400) * 0.11, lean = (rnd(i + 500) - 0.5) * 0.06;
-    // three points up each blade: a stroke made of sprites, so it still reads
-    // as a blade but every piece of it can glow and be fogged independently
     for (let k = 1; k <= 3; k++) {
       const u = k / 3;
       put(bx + lean * u * u, G + hgt * u, bz,
           rnd(i + 600) > 0.5 ? PAL.grass : PAL.grassLit, 0.55 + u * 0.25, 0.35 + u * 0.4);
     }
   }
-  const tp = Math.round(n * 0.10 / TREES.length);           // trunks
+
+  const woodEach = Math.round((n * SH.wood) / TREES.length);
+  const leafEach = Math.round((n * SH.leaf) / TREES.length);
   TREES.forEach((t, ti) => {
-    for (let i = 0; i < tp; i++) {
-      const k = i / tp, j = ti * 1000 + i, w = 0.026 * (1 - k * 0.5);
-      put(t.x + (rnd(j) - 0.5) * w, G + k * t.h, t.z + (rnd(j + 7) - 0.5) * w,
-          rnd(j + 3) > 0.55 ? PAL.bark : PAL.barkDark, 0.95, 0.55);
-    }
+    const { segs, tips } = skeleton(t, ti * 977 + 41);
+
+    // wood: sprites spread along every segment in proportion to its length, so
+    // the trunk gets many and a twig gets one or two
+    // Weight by thickness as well as length: a trunk is not just longer
+    // than a twig, it is far more visible, and by-length alone spreads the
+    // sprites evenly over a structure whose mass is anything but even.
+    const wt = (sg) => sg.len * Math.pow(2.2, 3 - sg.depth);
+    const total = segs.reduce((a, sg) => a + wt(sg), 0);
+    let spent = 0;
+    segs.forEach((sg, si) => {
+      const want = si === segs.length - 1
+        ? woodEach - spent
+        : Math.max(1, Math.round((wt(sg) / total) * woodEach));
+      const cnt = Math.max(0, Math.min(want, woodEach - spent));
+      spent += cnt;
+      const jit = 0.014 * (1 - sg.depth / 5);
+      for (let i = 0; i < cnt; i++) {
+        const u = (i + 0.5) / cnt, j = ti * 3000 + si * 31 + i;
+        put(sg.a[0] + (sg.b[0] - sg.a[0]) * u + (rnd(j) - 0.5) * jit,
+            sg.a[1] + (sg.b[1] - sg.a[1]) * u + (rnd(j + 3) - 0.5) * jit,
+            sg.a[2] + (sg.b[2] - sg.a[2]) * u + (rnd(j + 7) - 0.5) * jit,
+            sg.depth < 2 ? PAL.bark : PAL.barkDark,
+            0.95 - sg.depth * 0.13, 0.32 + sg.depth * 0.07);
+      }
+    });
+
+    // leaves: clustered on the tips only, thrown along each tip direction, so
+    // foliage sits on the outside of the structure rather than inside it
+    const perTip = Math.max(1, Math.round(leafEach / tips.length));
+    let ls = 0;
+    tips.forEach((tip, tj) => {
+      const cnt = tj === tips.length - 1 ? Math.max(0, leafEach - ls) : perTip;
+      ls += cnt;
+      const sp = t.r * 0.26;
+      for (let i = 0; i < cnt; i++) {
+        const j = ti * 5000 + tj * 53 + i;
+        const along = rnd(j + 11) * t.r * 0.3;
+        const px = tip.p[0] + tip.d[0] * along + (rnd(j) - 0.5) * sp;
+        const py = tip.p[1] + tip.d[1] * along + (rnd(j + 3) - 0.5) * sp * 0.8;
+        const pz = tip.p[2] + tip.d[2] * along + (rnd(j + 7) - 0.5) * sp;
+        // light from the upper left, so one side of each cluster catches sun
+        const lit = clamp((px - t.x) * -0.5 + (py - G - t.h) * 1.2 + 0.5, 0, 1);
+        const c = lit > 0.66 ? PAL.sun : lit > 0.44 ? PAL.lit : lit > 0.22 ? PAL.mid : PAL.deep;
+        put(px, py, pz, c, 0.6 + rnd(j + 13) * 0.58, 0.4 + lit * 0.55);
+      }
+    });
   });
-  // Canopy: clumped, not evenly spread over a shell. Real crowns are lumpy,
-  // and clumping is also what lets additive blending pile up into bright cores
-  // instead of an even wash.
-  const cp = Math.round(n * 0.44 / TREES.length);
-  TREES.forEach((t, ti) => {
-    const hy = G + t.h + t.r * 0.16;
-    const CLUMPS = 9;
-    for (let i = 0; i < cp; i++) {
-      const j = ti * 2000 + i;
-      const cl = i % CLUMPS;
-      const cu = rnd(ti * 77 + cl) * 2 - 1, ca = rnd(ti * 91 + cl + 3) * 6.2832;
-      const cs = Math.sqrt(1 - cu * cu);
-      const cr = t.r * (0.34 + rnd(ti * 55 + cl) * 0.42);
-      const bx = t.x + cs * Math.cos(ca) * cr;
-      const by = hy + cu * cr * 0.62;
-      const bz = t.z + cs * Math.sin(ca) * cr;
-      const sp = t.r * 0.40;
-      const px = bx + (rnd(j) - 0.5) * sp;
-      const py = by + (rnd(j + 3) - 0.5) * sp * 0.8;
-      const pz = bz + (rnd(j + 7) - 0.5) * sp;
-      const lit = ((px - t.x) * -1 + (py - hy) * 1.4) / t.r * 0.5 + 0.5;
-      const c = lit > 0.72 ? PAL.sun : lit > 0.52 ? PAL.lit : lit > 0.3 ? PAL.mid : PAL.deep;
-      put(px, py, pz, c, 0.7 + rnd(j + 11) * 0.7, 0.45 + lit * 0.55);
-    }
-  });
-  const beds = 6, per = Math.round((n * 0.15) / beds / 4);  // flowerbeds
+
+  const beds = 6, per = Math.round((n * SH.flower) / beds / 4);
   for (let b = 0; b < beds; b++) {
-    const a = rnd(b + 700) * 6.2832, r = 0.44 + rnd(b + 800) * 0.56;
+    const a = rnd(b + 700) * 6.2832, r = 0.46 + rnd(b + 800) * 0.54;
     const cx = Math.cos(a) * r, cz = Math.sin(a) * r;
     const hue = [PAL.coral, PAL.amber, PAL.rose, PAL.coral][b % 4];
     for (let i = 0; i < per; i++) {
@@ -139,7 +226,7 @@ function build(n) {
       }
     }
   }
-  for (let i = 0; i < Math.round(n * 0.03); i++) {          // pollen
+  for (let i = 0; i < Math.round(n * SH.pollen); i++) {
     put((rnd(i + 900) - 0.5) * 2, G + 0.45 + rnd(i + 950) * 0.85,
         (rnd(i + 990) - 0.5) * 2, PAL.pale, 0.5, 0.9);
   }
