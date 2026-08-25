@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Tai;Eric;;;
+FN:Eric Tai
+TITLE:Forward-deployed engineer
+EMAIL;TYPE=INTERNET,PREF:eric@crewio.ai
+URL:https://cplog.github.io/
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/eric-cp-tai/
+ADR;TYPE=WORK:;;;Hong Kong;;;Hong Kong
+NOTE:Agent and knowledge platforms. I get enterprise AI out of the pilot.
+END:VCARD

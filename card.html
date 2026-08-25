@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eric Tai — card</title>
+<meta name="description" content="Eric Tai, forward-deployed engineer, Hong Kong. Scan or save the contact.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>▦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --canvas:#FFFFFF; --ink:#000000;
+    --ink-2:rgb(0 0 0 / 64%); --ink-3:rgb(0 0 0 / 56%); --ink-4:rgb(0 0 0 / 44%);
+    --border:rgb(0 0 0 / 10%); --border-strong:rgb(0 0 0 / 18%);
+    --hover:rgb(0 0 0 / 5%); --tint:rgb(0 0 0 / 4%);
+    --font:"Inter",system-ui,-apple-system,sans-serif;
+  }
+  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+    min-height:100dvh;display:grid;place-items:center;padding:24px;
+    -webkit-font-smoothing:antialiased}
+  .card{width:min(100%,420px);display:grid;gap:26px}
+
+  .id h1{font-size:27px;font-weight:600;letter-spacing:-.02em}
+  .id p{margin-top:5px;font-size:15px;color:var(--ink-3)}
+
+  /* The stage is square so the QR's quiet zone always fits, whatever the
+     viewport does. A QR clipped by its own frame does not scan. */
+  .stage{position:relative;aspect-ratio:1;width:100%;border:1px solid var(--border);
+    border-radius:12px;background:var(--tint);overflow:hidden;cursor:pointer;
+    -webkit-tap-highlight-color:transparent}
+  .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .stage:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  /* the ground scatter reaches the bottom of the frame, so the hint needs its
+     own ground rather than sitting on top of the points */
+  .hint{position:absolute;left:50%;transform:translateX(-50%);bottom:10px;font-size:12.5px;
+    color:var(--ink-3);transition:opacity .25s ease;pointer-events:none;white-space:nowrap;
+    background:rgb(255 255 255 / 88%);border:1px solid var(--border);
+    padding:4px 10px;border-radius:100px}
+  .stage.is-qr .hint{opacity:0}
+
+  .rows{display:grid;gap:0}
+  .row{display:flex;align-items:baseline;gap:14px;padding:11px 0;
+    border-top:1px solid var(--border);font-size:15px;text-decoration:none;color:inherit}
+  .row:last-child{border-bottom:1px solid var(--border)}
+  .row span{color:var(--ink-4);min-width:64px;font-size:13px}
+  .row b{font-weight:400;color:var(--ink)}
+  @media (hover:hover){.row:hover b{text-decoration:underline}}
+
+  .btn{display:block;text-align:center;background:var(--ink);color:#fff;
+    text-decoration:none;font-size:15px;font-weight:500;padding:14px;border-radius:9px;
+    border:1px solid var(--ink);transition:transform .12s ease}
+  .btn:active{transform:scale(.98)}
+  .foot{font-size:12.5px;color:var(--ink-4);text-align:center;text-wrap:pretty}
+  .foot a{color:inherit}
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="id">
+      <h1>Eric Tai</h1>
+      <p>Forward-deployed engineer · Hong Kong</p>
+    </div>
+
+    <div class="stage" id="stage" tabindex="0" role="img"
+         aria-label="A garden of points that becomes a QR code linking to this page">
+      <canvas id="cv"></canvas>
+      <p class="hint" id="hint">Hover to reveal the code</p>
+    </div>
+
+    <nav class="rows">
+      <a class="row" href="mailto:eric@crewio.ai"><span>Email</span><b>eric@crewio.ai</b></a>
+      <a class="row" href="https://www.linkedin.com/in/eric-cp-tai/"><span>LinkedIn</span><b>eric-cp-tai</b></a>
+      <a class="row" href="https://cplog.github.io/"><span>Work</span><b>cplog.github.io</b></a>
+    </nav>
+
+    <a class="btn" id="save" href="assets/card/eric-tai.vcf" download="eric-tai.vcf">Save contact</a>
+
+    <p class="foot">The garden and the code are the same 566 points, rearranged.
+      <a href="https://cplog.github.io/">Back to the work</a></p>
+  </main>
+
+<script type="module">
+  import { Card } from "./assets/card/garden.js";
+
+  const stage = document.getElementById("stage");
+  const hint = document.getElementById("hint");
+  const card = new Card(document.getElementById("cv"));
+
+  // Touch has no hover, and the person who needs the code is usually looking at
+  // *this* screen rather than holding the device -- so the code has to be
+  // reachable by tap and by keyboard, and it should stay up once asked for.
+  const set = (v) => { card.to(v); stage.classList.toggle("is-qr", v === 1); };
+  const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+
+  if (fine) {
+    stage.addEventListener("pointerenter", () => set(1));
+    stage.addEventListener("pointerleave", () => { if (!stage.dataset.pinned) set(0); });
+    hint.textContent = "Hover to reveal the code";
+  } else {
+    hint.textContent = "Tap to reveal the code";
+  }
+  stage.addEventListener("click", () => {
+    const on = stage.dataset.pinned === "1";
+    stage.dataset.pinned = on ? "" : "1";
+    set(on ? 0 : 1);
+  });
+  stage.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    stage.click();
+  });
+
+  // ?present starts on the code, for holding the screen out to someone
+  if (new URLSearchParams(location.search).has("present")) {
+    stage.dataset.pinned = "1";
+    set(1);
+  }
+</script>
+</body>
+</html>
