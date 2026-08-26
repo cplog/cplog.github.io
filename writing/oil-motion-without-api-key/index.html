@@ -94,6 +94,15 @@
     overflow:hidden;background:var(--tint);margin-bottom:8px}
   .embed-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .embed-caption{text-align:center;font-size:13px;color:var(--ink-3);margin-top:0;margin-bottom:20px}
+  /* Breaks out of the article's 70ch column for a demo that needs real width
+     (a two-panel layout, a dashboard) — sized off the page grid, not the prose.
+     Centers on the article's own center regardless of the box's width: shift
+     the left edge to the parent's midpoint, then pull back by half of *this*
+     box's own rendered width. Degrades to the article's own width on narrow
+     viewports since the width formula never exceeds what's available. */
+  .embed-frame--wide{width:min(1000px,100vw - var(--pad)*2);max-width:1000px;
+    margin-left:50%;transform:translateX(-50%)}
+  @media (max-width:760px){.embed-frame--wide{width:100%;max-width:100%;margin-left:0;transform:none}}
   article a:hover{text-decoration-color:var(--ink)}
 </style>
 </head>
@@ -112,7 +121,7 @@
 <a class="back" href="https://cplog.github.io/writing/">&larr; Writing</a>
 <p class="meta">August 26, 2026</p>
 <h1>Running oil-motion without an API key</h1>
-<div class="embed-frame" style="aspect-ratio:1/1"><iframe src="demo/explainer.html" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" title="Live demo. Move your pointer around it, the mascot turns to face you. Generated end to end by oil-motion's own tooling, no hand-written JS."></iframe></div><p class="embed-caption">Live demo. Move your pointer around it, the mascot turns to face you. Generated end to end by oil-motion's own tooling, no hand-written JS.</p>
+<div class="embed-frame embed-frame--wide" style="height:760px"><iframe src="demo/explainer.html" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" title="Live demo. Move your pointer around it, the mascot turns to face you. Generated end to end by oil-motion's own tooling, no hand-written JS."></iframe></div><p class="embed-caption">Live demo. Move your pointer around it, the mascot turns to face you. Generated end to end by oil-motion's own tooling, no hand-written JS.</p>
 <h2>What this is</h2>
 <p><a href="https://github.com/oil-oil/oil-motion">oil-motion</a> is an agent skill, not a JS library. My own notes had it wrong: they called it "a lightweight animation library," GSAP-adjacent. It's actually paid AI video generation (ZenMux <code>minimax-h3</code>) producing the motion between confirmed keyframes, then a deterministic pipeline that cleans, packs, and wires that footage to scroll, pointer, drag, touch, or device-orientation input.</p>
 <p>I don't have a ZenMux key set up, so I ran only the deterministic half, on a synthetic test clip I built myself (rotating mascot, chroma-key green, PIL + ffmpeg). That's not what the tool is designed for. It's a stand-in to exercise the tooling; nothing here reflects AI-generated motion quality.</p>
