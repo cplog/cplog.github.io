@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Running oil-motion without an API key: what the deterministic half actually does — Eric Tai</title>
-<meta name="description" content="I installed oil-motion as a Claude Code skill this week. Before running anything, I had a note describing it as &quot;a lightweight interactive animation library,...">
+<title>Running oil-motion without an API key — Eric Tai</title>
+<meta name="description" content="oil-motion is an agent skill, not a JS library. My own notes had it wrong: they called it &quot;a lightweight animation library,&quot; GSAP-adjacent. It&#x27;s actually pai...">
 <link rel="canonical" href="https://cplog.github.io/writing/oil-motion-without-api-key/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://cplog.github.io/writing/oil-motion-without-api-key/">
-<meta property="og:title" content="Running oil-motion without an API key: what the deterministic half actually does">
-<meta property="og:description" content="I installed oil-motion as a Claude Code skill this week. Before running anything, I had a note describing it as &quot;a lightweight interactive animation library,...">
+<meta property="og:title" content="Running oil-motion without an API key">
+<meta property="og:description" content="oil-motion is an agent skill, not a JS library. My own notes had it wrong: they called it &quot;a lightweight animation library,&quot; GSAP-adjacent. It&#x27;s actually pai...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Running oil-motion without an API key: what the deterministic half actually does">
-<meta name="twitter:description" content="I installed oil-motion as a Claude Code skill this week. Before running anything, I had a note describing it as &quot;a lightweight interactive animation library,...">
+<meta name="twitter:title" content="Running oil-motion without an API key">
+<meta name="twitter:description" content="oil-motion is an agent skill, not a JS library. My own notes had it wrong: they called it &quot;a lightweight animation library,&quot; GSAP-adjacent. It&#x27;s actually pai...">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -90,6 +90,10 @@
   article figcaption{font-size:13px;color:var(--ink-3);margin-top:6px}
   article hr{border:none;border-top:1px solid var(--border);margin:36px 0}
   article a{text-decoration:underline;text-decoration-color:var(--border-strong);text-decoration-thickness:1px}
+  .embed-frame{position:relative;width:100%;border:1px solid var(--border);border-radius:10px;
+    overflow:hidden;background:var(--tint);margin-bottom:8px}
+  .embed-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .embed-caption{text-align:center;font-size:13px;color:var(--ink-3);margin-top:0;margin-bottom:20px}
   article a:hover{text-decoration-color:var(--ink)}
 </style>
 </head>
@@ -107,52 +111,21 @@
 <article>
 <a class="back" href="https://cplog.github.io/writing/">&larr; Writing</a>
 <p class="meta">August 26, 2026</p>
-<h1>Running oil-motion without an API key: what the deterministic half actually does</h1>
-<p>I installed <a href="https://github.com/oil-oil/oil-motion">oil-motion</a> as a Claude Code skill this week. Before running anything, I had a note describing it as "a lightweight interactive animation library," a plain-JS thing, GSAP-adjacent. Reading the actual <code>SKILL.md</code> took that apart in about thirty seconds: it's not a library, it's an agent skill that drives <em>paid AI video generation</em> (ZenMux's <code>minimax-h3</code>) to produce the connecting motion between confirmed keyframes, then runs that footage through a deterministic pipeline before wiring it to scroll, pointer, drag, touch, or device-orientation input.</p>
-<p>I don't have a ZenMux key configured yet, so I couldn't run the part that actually costs money. What I could run, and did, is the other half: extraction, chroma-keying, QA analysis, atlas packing, delivery-format selection, and the pilot-approval integrity gate. That half turned out to be more interesting than I expected, mostly because of a mistake I made along the way.</p>
-<h2>The setup: a synthetic stand-in, not an AI-generated asset</h2>
-<p>To exercise the pipeline I needed <em>some</em> footage, so I generated one myself: a flat vector mascot (circle, two dots, a triangle for a nose) rotating a full 360° over a green-screen background, built with PIL and ffmpeg. This is not what oil-motion is meant to consume. The whole point of the AI-generation step is producing the kind of motion a program can't fake: limb rotation, material change, one part occluding another. A shape spinning around its own center is exactly the case a naive CSS <code>rotate()</code> already handles. I'm using it here only to exercise the deterministic tooling, and I want that distinction to be explicit rather than something a reader has to infer.</p>
-<h2>Running the pipeline caught my own mistake</h2>
-<pre><code class="language-bash">motion_pipeline.py build source.mp4 build/ \
-  --key 00FF00 --cell-width 160 --cell-height 160 --columns 8 --normalize</code></pre>
-<p>This does four things in one pass: extract frames, key out the green background, run anomaly analysis, and pack an atlas. I didn't pass <code>--fps</code>, so it defaulted to 24, and my source clip was 12fps. The result: 76 extracted frames where only 38 were actually distinct, each duplicate immediately following its original.</p>
-<p>The QA step caught every single one:</p>
-<pre><code class="language-json">{
-  "frameCount": 76,
-  "summary": { "warningCount": 38 },
-  "warnings": [
-    { "frame": 1, "type": "near-duplicate", "value": 0.0,
-      "message": "frame_00002.png is very similar to its previous frame" },
-    ...
-  ]
-}</code></pre>
-<p>The contact sheet makes it obvious at a glance: frame 0000 and 0001 are pixel-identical, then 0002/0003, then 0004/0005, all the way down. This is exactly what a fps mismatch looks like, and the tool named it correctly on the first run rather than silently packing 38 wasted frames into the atlas. That's a small thing, but it's the kind of check that's easy to skip writing and expensive to skip having.</p>
-<h2>The delivery format it picked matches what the docs claim</h2>
-<p>The README's own decision table says a small, ring-shaped, frequently-random-access animation should become an alpha WebP atlas rather than a chroma-keyed video. I fed the actual parameters of this asset into the budget script rather than taking that on faith:</p>
-<pre><code class="language-bash">motion_budget.py --frames 76 --display 160x160 --dpr 2 \
-  --driver pointer --parameter-space circular --time-control scrub \
-  --background-owner page</code></pre>
-<pre><code class="language-json">{
-  "delivery": { "selected": "alpha-atlas", "reasonCodes": ["random-access-fits-atlas-budget"] },
-  "runtime": { "renderer": "css-alpha-atlas", "controller": "frame-scrub" },
-  "decodedFrameMemoryMiB": 29.7,
-  "passes": true
-}</code></pre>
-<p><code>alpha-atlas</code>, exactly as documented, with the actual reasoning (fits the decoded-memory budget for random access) rather than a rule I have to trust blindly. Small thing to verify, but it's the difference between a design doc and a design doc that's actually load-bearing.</p>
-<h2>The pilot-approval gate survives an actual tamper test</h2>
-<p>The one design idea in here I hadn't seen before: before any full production run, oil-motion locks a "pilot." It hashes the first frame, last frame, source video, and page-mount evidence into an approval file, and every later step has to check against that file before continuing.</p>
-<p>I didn't just read that claim, I broke it on purpose. Approved a pilot, confirmed <code>check-pilot</code> passed clean, then rotated the first frame's PNG by three degrees and reran the check:</p>
-<pre><code>错误：firstFrame 工件已变化，Pilot 批准失效：...\frame_00001.png</code></pre>
-<p>("Error: firstFrame artifact has changed, pilot approval invalidated.") Exit code 1, no ambiguity. A three-degree rotation is a tiny, almost invisible change, well within the range a lazy re-export or a careless re-encode could introduce by accident, and the gate still caught it. That's the actual guarantee working, not just a claim in a README.</p>
-<h2>What I didn't test, and why it's the part that matters most</h2>
-<p>I have not run the AI generation step, and that's the part this skill actually exists to solve: keyframe consistency, whether the model holds a character's proportions across a turn, how often a pilot gets rejected in practice. Everything above is the scaffolding around that step, careful and genuinely verified rather than assumed, but still scaffolding. Whether the generated motion is any good is still open on my end.</p>
-<h2>Also found: a real bug, unrelated to any of this</h2>
-<p>While getting the skill running at all, <code>oil_motion_config.py status</code> crashed outright:</p>
-<pre><code>UnicodeEncodeError: 'charmap' codec can't encode characters in position 15-18</code></pre>
-<p>None of the 13 Python scripts in the repo guard stdout/stderr encoding, and most of their output is Chinese. On a default Windows console (cp1252), that's an immediate crash the first time any of them tries to print. I patched all 13 with a UTF-8 reconfigure guard and reran the upstream test suite: 64 passed before my changes, 64 passed after. Small fix, but it means the skill is actually usable on Windows now rather than crashing on the first status check.</p>
-<h2>Try the deterministic half yourself</h2>
-<p>The synthetic mascot above, packed into an alpha atlas and wired to pointer angle by <code>create_explainer.py</code>. Move your pointer around it and it turns to face you. Everything on that page came out of the commands above; nothing on it is hand-written.</p>
-<p><a href="demo/explainer.html">Open the interactive explainer →</a></p>
+<h1>Running oil-motion without an API key</h1>
+<div class="embed-frame" style="aspect-ratio:1/1"><iframe src="demo/explainer.html" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" title="Live demo. Move your pointer around it, the mascot turns to face you. Generated end to end by oil-motion's own tooling, no hand-written JS."></iframe></div><p class="embed-caption">Live demo. Move your pointer around it, the mascot turns to face you. Generated end to end by oil-motion's own tooling, no hand-written JS.</p>
+<h2>What this is</h2>
+<p><a href="https://github.com/oil-oil/oil-motion">oil-motion</a> is an agent skill, not a JS library. My own notes had it wrong: they called it "a lightweight animation library," GSAP-adjacent. It's actually paid AI video generation (ZenMux <code>minimax-h3</code>) producing the motion between confirmed keyframes, then a deterministic pipeline that cleans, packs, and wires that footage to scroll, pointer, drag, touch, or device-orientation input.</p>
+<p>I don't have a ZenMux key set up, so I ran only the deterministic half, on a synthetic test clip I built myself (rotating mascot, chroma-key green, PIL + ffmpeg). That's not what the tool is designed for. It's a stand-in to exercise the tooling; nothing here reflects AI-generated motion quality.</p>
+<h2>What I ran</h2>
+<div class="table-wrap"><table><thead><tr><th>Step</th><th>Command</th><th>Result</th></tr></thead><tbody><tr><td>Extract, key, analyze, pack</td><td><code>motion_pipeline.py build source.mp4 build/ --key 00FF00 --cell-width 160 --cell-height 160</code></td><td>76 frames extracted. QA flagged 38 as near-duplicate, all correct (see appendix)</td></tr><tr><td>Pick a delivery format</td><td><code>motion_budget.py --frames 76 --display 160x160 --dpr 2 --driver pointer --parameter-space circular --time-control scrub --background-owner page</code></td><td>Selected <code>alpha-atlas</code>, reason <code>random-access-fits-atlas-budget</code>, matching the README's own decision table</td></tr><tr><td>Lock a pilot</td><td><code>production_gate.py approve-pilot --first-frame ... --last-frame ... --video ... --decision pass</code></td><td>Approval file written with SHA-256 hashes of each artifact</td></tr><tr><td>Break the pilot on purpose</td><td>rotate <code>frame_00001.png</code> by 3°, rerun <code>production_gate.py check-pilot</code></td><td><code>firstFrame 工件已变化，Pilot 批准失效</code> (artifact changed, approval invalidated). Exit 1</td></tr><tr><td>Build the interactive page</td><td><code>create_explainer.py --atlas-url motion.webp --manifest motion.json --driver pointer-angle</code></td><td>The demo above</td></tr></tbody></table></div>
+<p>The duplicate frames from the first step, visually:</p>
+<figure><img src="assets/duplicate-frames.png" alt="Frames 0000-0015 from the contact sheet, in matched pairs" loading="lazy"><figcaption>Frames 0000-0015 from the contact sheet, in matched pairs</figcaption></figure>
+<p>Each pair is pixel-identical. That's the fps mismatch explained in the appendix, and it's exactly what the QA step is supposed to catch.</p>
+<h2>Thoughts</h2>
+<p>Two things worth remembering. The delivery-format decision isn't just a claim in a README: running it with real parameters gives the same answer the docs claim. And the pilot-approval hash lock is a real guarantee, not a formality: a 3-degree rotation on one frame was enough to fail it.</p>
+<p>What I still don't know is the part that actually matters: whether the AI-generated motion holds a subject's identity and proportions across a turn, and how often a pilot gets rejected in real use. That's the half I haven't run.</p>
+<h2>Appendix: errors and fixes while building the demo</h2>
+<div class="table-wrap"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Rotation looked frozen, every sampled frame identical</td><td><code>ffmpeg -i mascot.png</code> without <code>-loop 1</code> reads a still image as a single frame, so the rotate filter only ever computed <code>t=0</code></td><td>Add <code>-loop 1</code> before the image input</td></tr><tr><td><code>Cannot find color 'none'</code></td><td><code>rotate=fillcolor=none@0</code> isn't valid ffmpeg color syntax</td><td>Use <code>fillcolor=black@0</code> (transparent black) instead</td></tr><tr><td>38 of 76 extracted frames near-duplicate</td><td>Source clip was 12fps, <code>motion_pipeline.py build</code> defaults to 24fps extraction</td><td>Pass <code>--fps 12</code> to match the source</td></tr><tr><td><code>oil_motion_config.py status</code> crashed with <code>UnicodeEncodeError</code></td><td>None of the 13 scripts in the repo guard stdout/stderr encoding, and most output is Chinese. Crashes immediately on a default Windows console (cp1252)</td><td>Patched all 13 with a UTF-8 reconfigure guard. Upstream test suite: 64 passed before, 64 after</td></tr></tbody></table></div>
 </article>
 </main>
 </body>
