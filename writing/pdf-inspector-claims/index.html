@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Testing pdf-inspector&#x27;s claims against PDFs I made up — Eric Tai</title>
-<meta name="description" content="pdf-inspector (Firecrawl, MIT, Rust core with a pip install pdf-inspector Python binding) claims two things: it classifies a PDF as text-based, scanned, or m...">
+<meta name="description" content="pdf-inspector (Firecrawl, MIT, Rust core with a pip install pdf-inspector Python binding) claims it can look at a PDF and tell you, in ~10-50ms, whether it&#x27;s...">
 <link rel="canonical" href="https://cplog.github.io/writing/pdf-inspector-claims/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://cplog.github.io/writing/pdf-inspector-claims/">
 <meta property="og:title" content="Testing pdf-inspector&#x27;s claims against PDFs I made up">
-<meta property="og:description" content="pdf-inspector (Firecrawl, MIT, Rust core with a pip install pdf-inspector Python binding) claims two things: it classifies a PDF as text-based, scanned, or m...">
+<meta property="og:description" content="pdf-inspector (Firecrawl, MIT, Rust core with a pip install pdf-inspector Python binding) claims it can look at a PDF and tell you, in ~10-50ms, whether it&#x27;s...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Testing pdf-inspector&#x27;s claims against PDFs I made up">
-<meta name="twitter:description" content="pdf-inspector (Firecrawl, MIT, Rust core with a pip install pdf-inspector Python binding) claims two things: it classifies a PDF as text-based, scanned, or m...">
+<meta name="twitter:description" content="pdf-inspector (Firecrawl, MIT, Rust core with a pip install pdf-inspector Python binding) claims it can look at a PDF and tell you, in ~10-50ms, whether it&#x27;s...">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -119,12 +119,12 @@
 <main class="wrap">
 <article>
 <a class="back" href="https://cplog.github.io/writing/">&larr; Writing</a>
-<p class="meta">August 27, 2026</p>
+<p class="meta">August 29, 2026</p>
 <h1>Testing pdf-inspector&#x27;s claims against PDFs I made up</h1>
+<p><a href="https://github.com/firecrawl/pdf-inspector">pdf-inspector</a> (Firecrawl, MIT, Rust core with a <code>pip install pdf-inspector</code> Python binding) claims it can look at a PDF and tell you, in ~10-50ms, whether it's text-based, scanned, or a mix of both — so a pipeline can route only the scanned pages to OCR instead of running every page through it. It also claims it can convert the text-based pages straight to Markdown, tables and all.</p>
+<p>To check the first claim, I needed three kinds of PDF and a ground truth for each: one that's real, extractable text; one that's a flat scanned image with no text layer at all; one that's both, mixed across pages. I built all three myself with PyMuPDF rather than use a real document, so I'd know the correct answer for every page before running the tool — no paid API, no external service, everything below ran locally. Here's what pdf-inspector said, against what I already knew was true:</p>
 <figure><img src="assets/classification-demo.png" alt="Three test PDFs and their classification results: text-based (confidence 1.00), scanned (confidence 0.95), and mixed (confidence 0.65) with per-page OCR routing shown on the mixed case" loading="lazy"><figcaption>Three test PDFs and their classification results: text-based (confidence 1.00), scanned (confidence 0.95), and mixed (confidence 0.65) with per-page OCR routing shown on the mixed case</figcaption></figure>
-<h2>What this is</h2>
-<p><a href="https://github.com/firecrawl/pdf-inspector">pdf-inspector</a> (Firecrawl, MIT, Rust core with a <code>pip install pdf-inspector</code> Python binding) claims two things: it classifies a PDF as text-based, scanned, or mixed in ~10-50ms so you route only scanned pages to OCR, and it converts the rest to Markdown with table, list, and heading detection.</p>
-<p>I don't have real PDFs I can put in a public post, so I built three with PyMuPDF: one real text, one the same page rendered as a flat image with zero text layer, one combining both. No paid API, no external service, everything below ran locally.</p>
+<p>All three came back correct, and on the mixed PDF it also correctly flagged only the scanned page for OCR — that combination (right label, right page-level routing) is the specific thing the tool is claiming to do, so this is the result that matters most in this post.</p>
 <h2>What I ran</h2>
 <div class="table-wrap"><table><thead><tr><th>Step</th><th>Call</th><th>Result</th></tr></thead><tbody><tr><td>Classify all three</td><td><code>pdf_inspector.detect_pdf(path)</code></td><td><code>text_based</code> 1.00, <code>scanned</code> 0.95, <code>mixed</code> 0.65. All three correct</td></tr><tr><td>Check per-page routing on the mixed case</td><td><code>pdf_inspector.process_pdf(path).pages_needing_ocr</code></td><td><code>[2]</code>. Page 1 (real text) correctly skipped, page 2 (image) correctly flagged, in 56ms</td></tr><tr><td>Convert the text PDF to Markdown</td><td><code>pdf_inspector.process_pdf(path).markdown</code></td><td>Headings, bold, italics, lists all converted. The table, one of two headings, a superscript footnote marker, and a hyperlink did not (see below)</td></tr></tbody></table></div>
 <p>The classification and routing claims hold up exactly as documented. The Markdown conversion is where it gets uneven.</p>
