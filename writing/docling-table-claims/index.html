@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Testing docling on the exact table pdf-inspector already failed on — Eric Tai</title>
+<meta name="description" content="A previous post here tested pdf-inspector, a fast PDF classifier. It correctly labeled three test PDFs as text-based, scanned, or mixed, but its Markdown con...">
+<link rel="canonical" href="https://cplog.github.io/writing/docling-table-claims/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cplog.github.io/writing/docling-table-claims/">
+<meta property="og:title" content="Testing docling on the exact table pdf-inspector already failed on">
+<meta property="og:description" content="A previous post here tested pdf-inspector, a fast PDF classifier. It correctly labeled three test PDFs as text-based, scanned, or mixed, but its Markdown con...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Testing docling on the exact table pdf-inspector already failed on">
+<meta name="twitter:description" content="A previous post here tested pdf-inspector, a fast PDF classifier. It correctly labeled three test PDFs as text-based, scanned, or mixed, but its Markdown con...">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --canvas:#FFFFFF;
+    --ink:#000000;
+    --ink-2:rgb(0 0 0 / 64%);
+    --ink-3:rgb(0 0 0 / 56%);
+    --ink-4:rgb(0 0 0 / 44%);
+    --border:rgb(0 0 0 / 10%);
+    --border-strong:rgb(0 0 0 / 18%);
+    --hover:rgb(0 0 0 / 5%);
+    --pressed:rgb(0 0 0 / 9%);
+    --tint:rgb(0 0 0 / 4%);
+    --font:"Inter",system-ui,-apple-system,sans-serif;
+    --pad:clamp(24px,5vw,64px);
+    --maxw:1200px;
+  }
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  a{color:inherit}
+  ::selection{background:var(--ink);color:var(--canvas)}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .nav__in{display:flex;align-items:center;gap:24px;height:64px;
+    width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}
+  .nav__links{margin-left:auto;display:flex;gap:8px}
+  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
+  @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
+  .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
+  @media(max-width:660px){.nav__links a{padding:6px 7px;font-size:13px}}
+
+  main{padding-block:48px 96px}
+  article{max-width:70ch;margin-inline:auto}
+  .back{display:inline-block;font-size:14px;color:var(--ink-3);text-decoration:none;margin-bottom:24px}
+  .back:hover{color:var(--ink)}
+  .meta{color:var(--ink-3);font-size:14px;margin-bottom:32px}
+  article h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin-bottom:8px;letter-spacing:-.01em}
+  article h2{margin-top:44px;margin-bottom:14px;font-size:23px;letter-spacing:-.01em}
+  article h3{margin-top:32px;margin-bottom:10px;font-size:18px}
+  article h4{margin-top:24px;margin-bottom:8px;font-size:16px;color:var(--ink-2)}
+  article p,article li{margin-bottom:14px}
+  article ul,article ol{padding-left:1.4em;margin-bottom:14px}
+  article li>ul,article li>ol{margin-top:8px;margin-bottom:0}
+  article li input[type=checkbox]{margin-right:6px}
+  article pre{background:var(--tint);border:1px solid var(--border);border-radius:8px;
+    padding:16px;overflow-x:auto;margin-bottom:16px;line-height:1.5}
+  article pre code{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:14px;background:none;padding:0}
+  article :not(pre)>code{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:0.9em;
+    background:var(--tint);padding:2px 6px;border-radius:4px}
+  .table-wrap{overflow-x:auto;margin-bottom:16px}
+  article table{width:100%;border-collapse:collapse;font-size:15px}
+  article th,article td{border:1px solid var(--border);padding:8px 12px;vertical-align:top}
+  article th{background:var(--tint);text-align:left;font-weight:600}
+  article blockquote{border-left:3px solid var(--border-strong);padding-left:16px;
+    color:var(--ink-2);margin-bottom:16px}
+  article .callout{border-left:3px solid var(--ink-3);background:var(--tint);border-radius:0 8px 8px 0;
+    padding:12px 16px;margin-bottom:16px}
+  article .callout-title{font-weight:600;margin-bottom:4px;font-size:14px;text-transform:uppercase;letter-spacing:.02em}
+  article .callout-warning{border-left-color:#b45309}
+  article .callout-danger{border-left-color:#b91c1c}
+  article .callout-tip{border-left-color:#15803d}
+  article mark{background:rgb(255 214 0 / 45%);padding:0 2px;border-radius:2px}
+  article .wikilink-unresolved{border-bottom:1px dashed var(--ink-4)}
+  article img{max-width:100%;border-radius:8px;display:block}
+  article figure{margin-bottom:16px}
+  article figcaption{font-size:13px;color:var(--ink-3);margin-top:6px}
+  article hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+  article a{text-decoration:underline;text-decoration-color:var(--border-strong);text-decoration-thickness:1px}
+  .embed-frame{position:relative;width:100%;border:1px solid var(--border);border-radius:10px;
+    overflow:hidden;background:var(--tint);margin-bottom:8px}
+  .embed-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .embed-caption{text-align:center;font-size:13px;color:var(--ink-3);margin-top:0;margin-bottom:20px}
+  /* Breaks out of the article's 70ch column for a demo that needs real width
+     (a two-panel layout, a dashboard) — sized off the page grid, not the prose.
+     Centers on the article's own center regardless of the box's width: shift
+     the left edge to the parent's midpoint, then pull back by half of *this*
+     box's own rendered width. Degrades to the article's own width on narrow
+     viewports since the width formula never exceeds what's available. */
+  .embed-frame--wide{width:min(1000px,100vw - var(--pad)*2);max-width:1000px;
+    margin-left:50%;transform:translateX(-50%)}
+  @media (max-width:760px){.embed-frame--wide{width:100%;max-width:100%;margin-left:0;transform:none}}
+  article a:hover{text-decoration-color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav__in">
+    <a href="https://cplog.github.io/" class="nav__name">Eric Tai</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="https://cplog.github.io/writing/" aria-current="true">Writing</a>
+      <a href="https://cplog.github.io/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+<article>
+<a class="back" href="https://cplog.github.io/writing/">&larr; Writing</a>
+<p class="meta">August 29, 2026</p>
+<h1>Testing docling on the exact table pdf-inspector already failed on</h1>
+<p>A previous post here tested <a href="https://github.com/firecrawl/pdf-inspector">pdf-inspector</a>, a fast PDF classifier. It correctly labeled three test PDFs as text-based, scanned, or mixed, but its Markdown conversion mangled a borderless table into one run-on paragraph. <a href="https://github.com/docling-project/docling">Docling</a> (IBM, MIT license) is a heavier tool aimed at exactly that job: layout detection, OCR, and a dedicated table-structure model (TableFormer), not a fast heuristic classifier.</p>
+<p>What you can expect from this post: the same three PDFs from the pdf-inspector test, run through Docling instead, checked against three things. Does Docling's own OCR produce readable text from a page with zero text layer. Does its table-structure model catch a table with real aligned cells but no drawn border lines, the exact case that broke pdf-inspector. Does anything else survive or break in the conversion. Docling ran locally, CPU only, no paid API.</p>
+<h2>What I ran</h2>
+<div class="table-wrap"><table><thead><tr><th>Step</th><th>Call</th><th>Result</th></tr></thead><tbody><tr><td>Convert the text-based PDF</td><td><code>DocumentConverter().convert(path)</code></td><td>49.8s including one-time model load. Zero tables detected via <code>doc.tables</code> and confirmed again by walking every <code>TableItem</code> in the document</td></tr><tr><td>Convert the scanned PDF (image only, zero text layer)</td><td>Same call</td><td>12.5s. Full paragraph and list text recovered through OCR, closely matching the source</td></tr><tr><td>Convert the mixed PDF (real text page, then a scanned page)</td><td>Same call</td><td>15.0s. Both pages converted, native-text path on page 1, OCR path on page 2, concatenated into one document</td></tr></tbody></table></div>
+<p>Docling's table-structure model is on by default: I checked <code>PdfPipelineOptions().do_table_structure</code>, confirmed <code>True</code> before ruling anything out as a config miss.</p>
+<figure><img src="assets/table-comparison.png" alt="Source table next to pdf-inspector's and docling's markdown output, both mangled into run-on text" loading="lazy"><figcaption>Source table next to pdf-inspector's and docling's markdown output, both mangled into run-on text</figcaption></figure>
+<p>Same table, same failure shape twice. Docling's own README leads with TableFormer as a headline feature, and on this file it detected zero tables, same result pdf-inspector produced. The columns are aligned and the cell values are real, so a layout model working from the rendered page image should have a visual signal to work from, even without border lines. It didn't use it.</p>
+<h2>What else changed between the two conversion paths</h2>
+<p>Docling extracts each page through one of two paths depending on whether it has a native text layer: direct text extraction, or OCR through RapidOCR when the page is an image. Running the same source content through both paths surfaced three more differences.</p>
+<p><strong>Headings survived OCR better than native extraction.</strong> In the pdf-inspector test, one of two identically styled <code>&lt;h3&gt;</code> headings dropped out of the conversion entirely. Docling kept both, <code>## Fulfillment</code> renders correctly on every one of the three PDFs, native-text and OCR paths alike.</p>
+<p><strong>The bullet list flipped depending on path.</strong> The native-text path kept the source's raw bullet glyph as a literal character (<code>·  Average ship time held at 1.8 days</code>), not a Markdown list. The OCR path on the same content produced a real <code>- Average ship time held at 1.8 days</code> list. The image-based layout model recognized list structure that the direct-text path didn't bother converting.</p>
+<p><strong>OCR reordered a numbered list.</strong> The source's three-item list came back from OCR as <code>1. Close the Warehouse B staffing gap</code>, <code>3. Re-run this report...</code>, <code>2. Finish SKU mapping backlog...</code>, items 2 and 3 swapped. Whatever position OCR read the text boxes in didn't match reading order.</p>
+<p><strong>The hyperlink and footnote both dropped, on every path.</strong> The one link in the source document (<code>the pdf-inspector repo</code>) came back as plain text in all three conversions, no <code>[text](url)</code> anywhere in any of the six output files. The footnote marker came back as a bare <code>1</code> glued onto the previous sentence, same failure pdf-inspector had, worded slightly differently.</p>
+<h2>My thoughts</h2>
+<p>The OCR path is the real win here: pdf-inspector only tells you a page needs OCR, it doesn't do it. Docling produces readable text from a zero-text-layer page unattended, close enough to the source that I'd trust it as a first pass on real scans.</p>
+<p>I would not trust the table extraction, and that's the one feature I most wanted to work. TableFormer is the headline capability in Docling's own documentation, and it missed a real table with aligned columns and correct cell data on a one-page test file, the same failure mode a much simpler heuristic tool already had. Two different projects, two different detection approaches, one shared blind spot: a table with no drawn border lines. If your source PDFs are also generated (invoices, reports, anything built from a template rather than scanned from paper), border-line-dependent table detection is worth checking directly against your own files before trusting either tool's table output unattended.</p>
+<h2>Appendix: building this comparison</h2>
+<div class="table-wrap"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Needed to confirm the table miss wasn't a disabled setting</td><td>Docling ships several pipeline options and it wasn't obvious which were on by default</td><td>Checked <code>PdfPipelineOptions().do_table_structure</code> directly in code before writing anything up: <code>True</code></td></tr><tr><td><code>doc.tables</code> alone felt like one code path to trust</td><td>A property could return an empty list even if tables existed elsewhere in the document tree</td><td>Cross-checked by walking <code>doc.iterate_items()</code> for every <code>TableItem</code>, got the same zero</td></tr><tr><td>Comparison image needed to show three different mangled outputs at once without dumping raw code fences</td><td>A wall of monospace text is hard to scan for what actually changed</td><td>Cropped the real source table from the PDF, stacked it above two labeled panels showing each tool's broken output side by side</td></tr></tbody></table></div>
+</article>
+</main>
+</body>
+</html>
