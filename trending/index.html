@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trending — Eric Tai</title>
+<meta name="description" content="Trending GitHub repositories, refreshed every few hours. The web preview of a Chrome new-tab extension.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fff'/><rect x='6' y='15' width='20' height='2' fill='%23000'/></svg>">
+<link rel="canonical" href="https://cplog.github.io/trending/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cplog.github.io/trending/">
+<meta property="og:title" content="Trending — Eric Tai">
+<meta property="og:description" content="Trending GitHub repositories, refreshed every few hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --canvas:#FFFFFF;
+    --ink:#000000;
+    --ink-2:rgb(0 0 0 / 64%);
+    --ink-3:rgb(0 0 0 / 56%);
+    --ink-4:rgb(0 0 0 / 44%);
+    --border:rgb(0 0 0 / 10%);
+    --border-strong:rgb(0 0 0 / 18%);
+    --hover:rgb(0 0 0 / 5%);
+    --pressed:rgb(0 0 0 / 9%);
+    --tint:rgb(0 0 0 / 4%);
+    --font:"Inter",system-ui,-apple-system,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+    --pad:clamp(24px,5vw,64px);
+    --maxw:1200px;
+  }
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  a{color:inherit}
+  ::selection{background:var(--ink);color:var(--canvas)}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .nav__in{display:flex;align-items:center;gap:24px;height:64px;
+    width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}
+  .nav__links{margin-left:auto;display:flex;gap:8px}
+  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
+  @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
+  .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
+
+  main{padding-block:40px 96px}
+  .head{max-width:70ch;margin-bottom:32px}
+  h1{font-size:clamp(28px,4vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.12}
+  .head p{margin-top:12px;color:var(--ink-2);font-size:17px;max-width:60ch}
+  .head .meta{margin-top:14px;font-size:13px;color:var(--ink-4);font-family:var(--mono)}
+
+  .controls{display:flex;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+  .since-btn{font-family:var(--mono);font-size:13px;color:var(--ink-2);
+    background:none;border:1px solid var(--border-strong);border-radius:6px;
+    padding:6px 10px;cursor:pointer;transition:background .18s ease}
+  @media (hover:hover) and (pointer:fine){.since-btn:hover{background:var(--hover)}}
+  .since-btn[aria-pressed="true"]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+
+  .repo-list{list-style:none;border-top:1px solid var(--border)}
+  .repo-list li{border-bottom:1px solid var(--border);padding:14px 0}
+  .repo__row{display:flex;align-items:baseline;gap:8px}
+  .repo__name{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .repo__owner{color:var(--ink-4);font-weight:400}
+  .repo__save{margin-left:auto;flex-shrink:0;border:none;background:none;color:var(--ink-4);
+    font-family:var(--mono);font-size:13px;cursor:pointer;padding:0 2px}
+  .repo__save--active{color:var(--ink)}
+  .repo__desc{margin:4px 0 6px;color:var(--ink-2);font-size:14px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .repo__meta{display:flex;align-items:center;gap:14px;font-family:var(--mono);
+    font-size:12px;color:var(--ink-4);font-variant-numeric:tabular-nums}
+  .repo__lang{font-weight:600}
+  .repo__period{color:var(--ink);font-weight:600}
+
+  .state{color:var(--ink-3);padding:40px 0;text-align:center}
+  .state--error{color:#b3261e}
+
+  .cta{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);
+    font-size:14px;color:var(--ink-3)}
+  .cta a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px;
+    text-decoration-color:var(--border-strong)}
+  @media (hover:hover) and (pointer:fine){.cta a:hover{color:var(--ink)}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav__in">
+    <a href="https://cplog.github.io/" class="nav__name">Eric Tai</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="https://cplog.github.io/writing/">Writing</a>
+      <a href="https://cplog.github.io/trending/" aria-current="true">Trending</a>
+      <a href="https://cplog.github.io/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="head">
+    <h1>Trending on GitHub</h1>
+    <p>The most-starred repositories today, this week, and this month, merged into one list. A
+      public preview of a Chrome new-tab extension I built and
+      <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">wrote up here</a>.
+      Refreshed automatically every few hours.</p>
+    <p class="meta" id="generatedAt">loading…</p>
+  </div>
+
+  <div class="controls" role="group" aria-label="Time range">
+    <button type="button" class="since-btn" data-since="daily" aria-pressed="false">today</button>
+    <button type="button" class="since-btn" data-since="weekly" aria-pressed="true">week</button>
+    <button type="button" class="since-btn" data-since="monthly" aria-pressed="false">month</button>
+  </div>
+
+  <div id="content">
+    <p class="state" id="stateMsg">Loading trending repositories…</p>
+    <ul class="repo-list" id="repoList" hidden></ul>
+  </div>
+
+  <p class="cta">The extension version adds language filtering, a grid view, and keyboard
+    navigation (j/k to move, o to open, s to save). Not published to the Chrome Web Store yet —
+    the <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">writeup</a>
+    has the full story.</p>
+</main>
+
+<script>
+(function () {
+  var SINCE_LABEL = { daily: 'today', weekly: 'week', monthly: 'month' };
+  var state = { data: null, since: 'weekly', saved: loadSaved() };
+
+  function loadSaved() {
+    try {
+      return JSON.parse(localStorage.getItem('trending-saved') || '{}');
+    } catch (e) {
+      return {};
+    }
+  }
+  function persistSaved() {
+    try {
+      localStorage.setItem('trending-saved', JSON.stringify(state.saved));
+    } catch (e) {}
+  }
+
+  function formatCount(n) {
+    if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1) + 'k';
+    return String(n);
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // Same merge idea as the extension: the selected period's own list stays
+  // primary (GitHub's own ordering), the other two periods fill in whatever
+  // isn't already present, sorted by total stars since they don't share one
+  // "stars in period" figure to sort by.
+  function mergedList(since) {
+    var primary = (state.data.since[since] || []).map(function (r) {
+      return Object.assign({}, r, { sourceSince: since });
+    });
+    var seen = {};
+    primary.forEach(function (r) { seen[r.id] = true; });
+
+    var supplemental = [];
+    Object.keys(SINCE_LABEL).forEach(function (s) {
+      if (s === since) return;
+      (state.data.since[s] || []).forEach(function (r) {
+        if (seen[r.id]) return;
+        seen[r.id] = true;
+        supplemental.push(Object.assign({}, r, { sourceSince: s }));
+      });
+    });
+    supplemental.sort(function (a, b) { return b.totalStars - a.totalStars; });
+
+    return primary.concat(supplemental);
+  }
+
+  function render() {
+    var listEl = document.getElementById('repoList');
+    var stateEl = document.getElementById('stateMsg');
+    var repos = mergedList(state.since);
+
+    if (repos.length === 0) {
+      stateEl.textContent = 'No data yet for this period.';
+      stateEl.hidden = false;
+      listEl.hidden = true;
+      return;
+    }
+
+    stateEl.hidden = true;
+    listEl.hidden = false;
+    listEl.innerHTML = repos.map(function (r) {
+      var saved = !!state.saved[r.id];
+      var period = r.starsInPeriod != null
+        ? '<span class="repo__meta repo__period">+' + formatCount(r.starsInPeriod) + '/' + SINCE_LABEL[r.sourceSince] + '</span>'
+        : '';
+      return (
+        '<li>' +
+          '<div class="repo__row">' +
+            '<a class="repo__name" href="' + r.url + '" target="_blank" rel="noreferrer">' +
+              '<span class="repo__owner">' + escapeHtml(r.owner) + '/</span>' + escapeHtml(r.name) +
+            '</a>' +
+            '<button type="button" class="repo__save' + (saved ? ' repo__save--active' : '') + '" data-id="' + escapeHtml(r.id) + '" aria-pressed="' + saved + '">' + (saved ? '[*]' : '[ ]') + '</button>' +
+          '</div>' +
+          (r.description ? '<p class="repo__desc">' + escapeHtml(r.description) + '</p>' : '') +
+          '<div class="repo__meta">' +
+            (r.language ? '<span class="repo__lang" style="color:' + (r.languageColor || 'inherit') + '">[' + escapeHtml(r.language) + ']</span>' : '') +
+            '<span>s:' + formatCount(r.totalStars) + '</span>' +
+            '<span>f:' + formatCount(r.totalForks) + '</span>' +
+          '</div>' +
+          period +
+        '</li>'
+      );
+    }).join('');
+
+    listEl.querySelectorAll('.repo__save').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-id');
+        if (state.saved[id]) delete state.saved[id];
+        else state.saved[id] = true;
+        persistSaved();
+        render();
+      });
+    });
+  }
+
+  document.querySelectorAll('.since-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.since-btn').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      state.since = btn.getAttribute('data-since');
+      render();
+    });
+  });
+
+  fetch('./data.json', { cache: 'no-store' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      state.data = data;
+      var d = new Date(data.generatedAt);
+      document.getElementById('generatedAt').textContent =
+        'Snapshot from ' + d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+      render();
+    })
+    .catch(function (err) {
+      document.getElementById('stateMsg').textContent = "Couldn't load trending data: " + err.message;
+      document.getElementById('stateMsg').className = 'state state--error';
+    });
+})();
+</script>
+</body>
+</html>

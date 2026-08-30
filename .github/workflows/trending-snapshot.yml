@@ -1,0 +1,38 @@
+name: Refresh trending snapshot
+
+on:
+  schedule:
+    # Every 6 hours. github.com/trending itself only changes gradually
+    # (it's a rolling window, not real-time), so this is frequent enough to
+    # feel current without hammering GitHub's own page.
+    - cron: '17 */6 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trending-snapshot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Scrape github.com/trending
+        run: node scripts/scrape-trending.mjs
+
+      - name: Commit snapshot if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add trending/data.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "trending: refresh snapshot"
+          git push
