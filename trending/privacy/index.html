@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trending — Privacy Policy</title>
+<meta name="description" content="Privacy policy for the Trending browser extension.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fff'/><rect x='6' y='15' width='20' height='2' fill='%23000'/></svg>">
+<link rel="canonical" href="https://cplog.github.io/trending/privacy/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --canvas:#FFFFFF;--ink:#000000;--ink-2:rgb(0 0 0 / 64%);--ink-3:rgb(0 0 0 / 56%);
+    --ink-4:rgb(0 0 0 / 44%);--border:rgb(0 0 0 / 10%);--border-strong:rgb(0 0 0 / 18%);
+    --hover:rgb(0 0 0 / 5%);--font:"Inter",system-ui,-apple-system,sans-serif;
+    --pad:clamp(24px,5vw,64px);--maxw:760px;
+  }
+  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  a{color:inherit}
+  ::selection{background:var(--ink);color:var(--canvas)}
+
+  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .nav__in{display:flex;align-items:center;gap:24px;height:64px;
+    width:min(1200px,100% - var(--pad)*2);margin-inline:auto}
+  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;text-decoration:none}
+  .nav__links{margin-left:auto;display:flex;gap:8px}
+  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:6px}
+  @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
+
+  main{padding-block:48px 96px}
+  h1{font-size:clamp(26px,4vw,34px);font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+  .updated{color:var(--ink-4);font-size:13px;margin-bottom:32px}
+  h2{font-size:19px;font-weight:600;margin:32px 0 10px;letter-spacing:-.01em}
+  p,li{color:var(--ink-2);margin-bottom:12px}
+  ul{padding-left:1.3em;margin-bottom:12px}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;
+    background:rgb(0 0 0 / 4%);padding:1px 5px;border-radius:4px}
+  .cta{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);
+    font-size:14px;color:var(--ink-3)}
+  .cta a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav__in">
+    <a href="https://cplog.github.io/" class="nav__name">Eric Tai</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="https://cplog.github.io/writing/">Writing</a>
+      <a href="https://cplog.github.io/trending/">Trending</a>
+      <a href="https://cplog.github.io/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Privacy Policy — Trending</h1>
+  <p class="updated">Last updated August 30, 2026</p>
+
+  <p>Trending is a browser extension that replaces your new tab page with the most-starred GitHub
+    repositories for the current day, week, or month. This page describes exactly what data it
+    accesses and what it does with it.</p>
+
+  <h2>What the extension does not do</h2>
+  <ul>
+    <li>It does not collect, transmit, sell, or share any personal data, usage data, or browsing
+      history.</li>
+    <li>It has no backend server of its own. It never sends anything you do inside the extension
+      to me or to any third party.</li>
+    <li>It injects no content scripts into any page you visit, and requests no permission beyond
+      what is listed below.</li>
+  </ul>
+
+  <h2>What it accesses, and why</h2>
+  <p><strong>Network access to <code>github.com</code>.</strong> The extension fetches
+    <code>github.com/trending</code> (a single public page) directly from your browser to show you
+    the current list. This is a normal, unauthenticated page load: no login, cookies, or session
+    data are sent, and the request goes straight from your browser to GitHub, not through any
+    server I operate.</p>
+  <p><strong>Local storage (<code>chrome.storage.local</code>).</strong> The extension remembers,
+    only on your own device: your list/grid view choice, your selected time range and language
+    filter, which repositories you've saved, and a short-lived cache of the fetched trending list
+    so a new tab opens instantly instead of re-fetching every time. None of this is transmitted
+    anywhere. Uninstalling the extension deletes it.</p>
+
+  <h2>Third parties</h2>
+  <p>The only third-party service this extension talks to is GitHub, for the single public page
+    described above. No analytics, advertising, or tracking libraries are included.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If what the extension accesses ever changes, this page will be updated to reflect it, with the
+    date above updated accordingly.</p>
+
+  <p class="cta">Source and technical details: <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">how this extension was built</a>.
+    Questions: <a href="mailto:eric@crewio.ai">eric@crewio.ai</a>.</p>
+</main>
+</body>
+</html>
