@@ -89,9 +89,18 @@
   .cta a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px;
     text-decoration-color:var(--border-strong)}
   @media (hover:hover) and (pointer:fine){.cta a:hover{color:var(--ink)}}
+
+  /* Animated WebGPU background (vgpu). Low-opacity and monochrome so real
+     content stays the thing being read; purely additive — see the
+     WebGPU-unavailable fallback in the script below, same fail-open pattern
+     as the homepage's own WebGL hero panel. */
+  #shaderBg{position:fixed;inset:0;width:100%;height:100%;z-index:0;
+    pointer-events:none;opacity:.08;mix-blend-mode:multiply}
+  .nav,main{position:relative;z-index:1}
 </style>
 </head>
 <body>
+<canvas id="shaderBg" aria-hidden="true"></canvas>
 <header class="nav">
   <div class="nav__in">
     <a href="https://cplog.github.io/" class="nav__name">Eric Tai</a>
@@ -129,6 +138,81 @@
     the <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">writeup</a>
     has the full story.</p>
 </main>
+
+<script type="module">
+// Same WGSL source as the extension's ShaderBackground.jsx, copied verbatim
+// since this static page has no build step to share a module between the
+// two repos. vgpu has no bundler-specific requirements for a plain template
+// string shader (only its .wgsl-file-import sugar needs one), so it loads
+// straight from esm.sh with no build step here at all.
+const FLOW_FIELD_WGSL = `
+struct Params {
+  time: f32,
+  aspect: f32,
+}
+@group(0) @binding(0) var<uniform> params: Params;
+
+fn hash(p: vec2f) -> f32 {
+  return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453123);
+}
+
+fn valueNoise(p: vec2f) -> f32 {
+  let i = floor(p);
+  let f = fract(p);
+  let u = f * f * (3.0 - 2.0 * f);
+  let a = hash(i);
+  let b = hash(i + vec2f(1.0, 0.0));
+  let c = hash(i + vec2f(0.0, 1.0));
+  let d = hash(i + vec2f(1.0, 1.0));
+  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+}
+
+fn fbm(p_in: vec2f) -> f32 {
+  var p = p_in;
+  var v = 0.0;
+  var amp = 0.5;
+  for (var i = 0; i < 5; i = i + 1) {
+    v = v + amp * valueNoise(p);
+    p = p * 2.02;
+    amp = amp * 0.5;
+  }
+  return v;
+}
+
+@fragment fn fs_main(@location(0) uv: vec2f) -> @location(0) vec4f {
+  var p = (uv - vec2f(0.5)) * vec2f(3.2 * params.aspect, 3.2) + vec2f(0.5);
+  let t = params.time * 0.06;
+  let warp = vec2f(fbm(p + vec2f(t, -t * 0.7)), fbm(p + vec2f(-t * 0.7, t)));
+  let n = fbm(p + warp * 1.6 + vec2f(t * 0.3, t * 0.2));
+  return vec4f(n, n, n, 1.0);
+}
+`;
+
+(async function () {
+  const canvas = document.getElementById('shaderBg');
+  if (!('gpu' in navigator)) { canvas.remove(); return; }
+  try {
+    const { init, effect, frameLoop, surface, clock } =
+      await import('https://esm.sh/vgpu@0.3.1');
+    const gpu = await init();
+    const canvasSurface = surface(gpu, canvas, { dpr: [1, 1.5] });
+    const field = effect(gpu, FLOW_FIELD_WGSL, {
+      set: { params: { time: 0, aspect: canvasSurface.size[0] / canvasSurface.size[1] } },
+    });
+    canvasSurface.onResize(() => {
+      field.set({ params: { aspect: canvasSurface.size[0] / canvasSurface.size[1] } });
+    });
+    const time = clock(gpu);
+    frameLoop(gpu, (frame) => {
+      field.set({ params: { time: time.time } });
+      frame.pass(canvasSurface, field);
+    });
+  } catch (err) {
+    console.warn('Shader background unavailable, skipping.', err);
+    canvas.remove();
+  }
+})();
+</script>
 
 <script>
 (function () {
