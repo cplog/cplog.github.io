@@ -129,7 +129,20 @@
      WebGPU-unavailable fallback in the script below, same fail-open pattern
      as the homepage's own WebGL hero panel. */
   #shaderBg{position:fixed;inset:0;width:100%;height:100%;z-index:0;
-    pointer-events:none;opacity:.08;mix-blend-mode:multiply}
+    pointer-events:none;opacity:.14;mix-blend-mode:multiply}
+  /* No dark-mode variant on purpose: this page is hard-coded light
+     (--canvas:#FFFFFF, no prefers-color-scheme block anywhere), so the ground
+     under the canvas is white whatever the OS is set to. `multiply` is the
+     correct blend against white; `screen` would push the noise toward white
+     and erase it. If this page ever gains a dark palette, the shader needs
+     `screen` at ~.16 alongside it — the extension already does exactly that. */
+  /* A full-viewport field drifting on a slow loop is exactly the motion this
+     setting exists to remove, and it carries no information — so it goes
+     entirely rather than being slowed. The script also never starts the
+     frame loop, so nothing keeps painting off-screen. */
+  @media (prefers-reduced-motion: reduce){
+    #shaderBg{display:none}
+  }
   .nav,main{position:relative;z-index:1}
 </style>
 </head>
@@ -241,6 +254,12 @@ fn fbm(p_in: vec2f) -> f32 {
 (async function () {
   const canvas = document.getElementById('shaderBg');
   if (!('gpu' in navigator)) { canvas.remove(); return; }
+  // Bail before init, not just visually: a hidden canvas still costs a GPU
+  // device and a frame every 16ms for motion the user asked not to see.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.remove();
+    return;
+  }
   try {
     const { init, effect, frameLoop, surface, clock } =
       await import('https://esm.sh/vgpu@0.3.1');
