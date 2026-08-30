@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reviving a Chrome extension Manifest V2 killed — Eric Tai</title>
+<meta name="description" content="githunt replaced your new tab with trending GitHub repos. I liked using it, then it stopped working, and the reason turned out to be simple: Chrome disabled ...">
+<link rel="canonical" href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">
+<meta property="og:title" content="Reviving a Chrome extension Manifest V2 killed">
+<meta property="og:description" content="githunt replaced your new tab with trending GitHub repos. I liked using it, then it stopped working, and the reason turned out to be simple: Chrome disabled ...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reviving a Chrome extension Manifest V2 killed">
+<meta name="twitter:description" content="githunt replaced your new tab with trending GitHub repos. I liked using it, then it stopped working, and the reason turned out to be simple: Chrome disabled ...">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --canvas:#FFFFFF;
+    --ink:#000000;
+    --ink-2:rgb(0 0 0 / 64%);
+    --ink-3:rgb(0 0 0 / 56%);
+    --ink-4:rgb(0 0 0 / 44%);
+    --border:rgb(0 0 0 / 10%);
+    --border-strong:rgb(0 0 0 / 18%);
+    --hover:rgb(0 0 0 / 5%);
+    --pressed:rgb(0 0 0 / 9%);
+    --tint:rgb(0 0 0 / 4%);
+    --font:"Inter",system-ui,-apple-system,sans-serif;
+    --pad:clamp(24px,5vw,64px);
+    --maxw:1200px;
+  }
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  a{color:inherit}
+  ::selection{background:var(--ink);color:var(--canvas)}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .nav__in{display:flex;align-items:center;gap:24px;height:64px;
+    width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
+  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}
+  .nav__links{margin-left:auto;display:flex;gap:8px}
+  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
+  @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
+  .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
+  @media(max-width:660px){.nav__links a{padding:6px 7px;font-size:13px}}
+
+  main{padding-block:48px 96px}
+  article{max-width:70ch;margin-inline:auto}
+  .back{display:inline-block;font-size:14px;color:var(--ink-3);text-decoration:none;margin-bottom:24px}
+  .back:hover{color:var(--ink)}
+  .meta{color:var(--ink-3);font-size:14px;margin-bottom:32px}
+  article h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin-bottom:8px;letter-spacing:-.01em}
+  article h2{margin-top:44px;margin-bottom:14px;font-size:23px;letter-spacing:-.01em}
+  article h3{margin-top:32px;margin-bottom:10px;font-size:18px}
+  article h4{margin-top:24px;margin-bottom:8px;font-size:16px;color:var(--ink-2)}
+  article p,article li{margin-bottom:14px}
+  article ul,article ol{padding-left:1.4em;margin-bottom:14px}
+  article li>ul,article li>ol{margin-top:8px;margin-bottom:0}
+  article li input[type=checkbox]{margin-right:6px}
+  article pre{background:var(--tint);border:1px solid var(--border);border-radius:8px;
+    padding:16px;overflow-x:auto;margin-bottom:16px;line-height:1.5}
+  article pre code{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:14px;background:none;padding:0}
+  article :not(pre)>code{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:0.9em;
+    background:var(--tint);padding:2px 6px;border-radius:4px}
+  .table-wrap{overflow-x:auto;margin-bottom:16px}
+  article table{width:100%;border-collapse:collapse;font-size:15px}
+  article th,article td{border:1px solid var(--border);padding:8px 12px;vertical-align:top}
+  article th{background:var(--tint);text-align:left;font-weight:600}
+  article blockquote{border-left:3px solid var(--border-strong);padding-left:16px;
+    color:var(--ink-2);margin-bottom:16px}
+  article .callout{border-left:3px solid var(--ink-3);background:var(--tint);border-radius:0 8px 8px 0;
+    padding:12px 16px;margin-bottom:16px}
+  article .callout-title{font-weight:600;margin-bottom:4px;font-size:14px;text-transform:uppercase;letter-spacing:.02em}
+  article .callout-warning{border-left-color:#b45309}
+  article .callout-danger{border-left-color:#b91c1c}
+  article .callout-tip{border-left-color:#15803d}
+  article mark{background:rgb(255 214 0 / 45%);padding:0 2px;border-radius:2px}
+  article .wikilink-unresolved{border-bottom:1px dashed var(--ink-4)}
+  article img{max-width:100%;border-radius:8px;display:block}
+  article figure{margin-bottom:16px}
+  article figcaption{font-size:13px;color:var(--ink-3);margin-top:6px}
+  article hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+  article a{text-decoration:underline;text-decoration-color:var(--border-strong);text-decoration-thickness:1px}
+  .embed-frame{position:relative;width:100%;border:1px solid var(--border);border-radius:10px;
+    overflow:hidden;background:var(--tint);margin-bottom:8px}
+  .embed-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .embed-caption{text-align:center;font-size:13px;color:var(--ink-3);margin-top:0;margin-bottom:20px}
+  /* Breaks out of the article's 70ch column for a demo that needs real width
+     (a two-panel layout, a dashboard) — sized off the page grid, not the prose.
+     Centers on the article's own center regardless of the box's width: shift
+     the left edge to the parent's midpoint, then pull back by half of *this*
+     box's own rendered width. Degrades to the article's own width on narrow
+     viewports since the width formula never exceeds what's available. */
+  .embed-frame--wide{width:min(1000px,100vw - var(--pad)*2);max-width:1000px;
+    margin-left:50%;transform:translateX(-50%)}
+  @media (max-width:760px){.embed-frame--wide{width:100%;max-width:100%;margin-left:0;transform:none}}
+  article a:hover{text-decoration-color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav__in">
+    <a href="https://cplog.github.io/" class="nav__name">Eric Tai</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="https://cplog.github.io/writing/" aria-current="true">Writing</a>
+      <a href="https://cplog.github.io/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+<article>
+<a class="back" href="https://cplog.github.io/writing/">&larr; Writing</a>
+<p class="meta">August 30, 2026</p>
+<h1>Reviving a Chrome extension Manifest V2 killed</h1>
+<p><a href="https://github.com/nilbuild/githunt">githunt</a> replaced your new tab with trending GitHub repos. I liked using it, then it stopped working, and the reason turned out to be simple: Chrome disabled Manifest V2 extensions entirely, and githunt's manifest declared <code>manifest_version: 2</code>. No code rot, no broken dependency, just a platform that moved out from under it in 2018-era code.</p>
+<p>What you can expect below: a from-scratch Manifest V3 rebuild, a real bug the rebuild introduced and then fixed with an automated design critique, and a concrete number for what "no pagination" actually meant once I tried to fix it.</p>
+<figure><img src="assets/hero.png" alt="The rebuilt extension's new-tab view: a flat, ruled list of trending repos with a keyboard cursor and command-style filters" loading="lazy"><figcaption>The rebuilt extension's new-tab view: a flat, ruled list of trending repos with a keyboard cursor and command-style filters</figcaption></figure>
+<h2>Why it was actually broken</h2>
+<p>Manifest V2's <code>browser_action</code> and <code>manifest_version: 2</code> aren't just old syntax, they're keys Chrome's extension loader now refuses outright. Rebuilding meant a real Manifest V3 manifest: <code>chrome_url_overrides.newtab</code>, <code>host_permissions</code> instead of the old wildcard permission scheme, and no more relying on a persistent background page.</p>
+<p>One thing worth keeping from the original and one thing worth dropping. Worth keeping: it never had an official trending API to call, because there isn't one. Worth dropping: githunt approximated "trending" through the GitHub Search API, sorted by star count within a creation-date window. That's a different thing from trending. My rebuild scrapes <code>github.com/trending</code> directly instead, which is what "trending" actually means (recent star velocity, not just total stars on new repos), and it works in Manifest V3 without a CORS proxy because <code>host_permissions</code> grants the extension cross-origin fetch rights the browser would otherwise block.</p>
+<h2>A critique caught a real bug, not just a taste problem</h2>
+<p>Once the extension worked again, I ran it through an automated design critique (two independent passes, one reading the code, one scripting a real browser against the built extension). Score: 23 out of 36. The finding that mattered wasn't a taste note, it was a genuine defect: the keyboard-selected row's highlight was supposed to invert the row's colors, foreground for background, terminal-style. Instead the highlight was invisible.</p>
+<p>The cause was a CSS quirk I hadn't hit before. I'd written a rule that both set a background from <code>var(--ink)</code> and redefined <code>--ink</code> for that same element's children:</p>
+<pre><code class="language-css">.repo--selected {
+  background: var(--ink);
+  --ink: var(--paper);
+}</code></pre>
+<p>CSS custom properties don't have a declaration order the way JavaScript statements do. Both lines apply to the same element, so <code>var(--ink)</code> in the background resolves using the <em>already-redefined</em> value, not the one that existed before this rule ran. The background silently became the same color as everything else. Fix: a second variable, <code>--row-ink</code>, defined once at the page root and never redeclared, so the background has something stable to point at while the children still get the inverted color.</p>
+<h2>"Load more" turned out to be a wrong question</h2>
+<p>Once the redesign settled, the next ask was to load more repos. <code>github.com/trending</code> has no pagination. One fetch is the entire result GitHub's own page shows, typically 19 to 25 repositories depending on the day. There's no second page to request.</p>
+<p>So "more" had to come from combining separate fetches instead of paginating one. The rebuild now fetches the two time windows you didn't pick (today, this week, this month) for the same language filter, and, when no language filter is set, five popular languages for the same time window, all in parallel, then merges in whatever wasn't already in the primary result. Each repo remembers which fetch it actually came from, so a repo pulled in from "this month" still says "this month" next to its count instead of silently borrowing whatever window you have selected.</p>
+<p>Concrete result: the default view (weekly, all languages) went from 21 repos to 119.</p>
+<h2>What I'd change next</h2>
+<p>Two things I know are wrong and didn't fix. The footer's Crewio wordmark is locked to a light background regardless of theme, because no dark-mode variant of the mark exists yet, and recoloring a brand mark with a CSS filter is off the table. And five fixed "popular languages" for the merge step is a guess, not a measurement. It should probably be based on what showed up most often across the last several fetches instead of a hardcoded list.</p>
+<p>What I'd keep without changing: scraping the real trending page instead of approximating it through search, and the rule that every merged-in repo has to say where it actually came from. Both were cheap decisions that would have been easy to skip and would have quietly made the tool worse.</p>
+</article>
+</main>
+</body>
+</html>
