@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T10:20:20.539Z",
+  "generatedAt": "2026-08-30T10:29:07.118Z",
   "since": {
     "daily": [
       {
@@ -11,8 +11,8 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 32596,
-        "totalForks": 2053,
+        "totalStars": 32618,
+        "totalForks": 2054,
         "starsInPeriod": 3902
       },
       {
@@ -24,8 +24,8 @@
         "description": "A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 13170,
-        "totalForks": 2596,
+        "totalStars": 13184,
+        "totalForks": 2597,
         "starsInPeriod": 1855
       },
       {
@@ -37,7 +37,7 @@
         "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 38291,
+        "totalStars": 38296,
         "totalForks": 3598,
         "starsInPeriod": 1587
       },
@@ -50,7 +50,7 @@
         "description": "like netcat, but over Tailscale's data plane, without Tailscale's control plane",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 3895,
+        "totalStars": 3902,
         "totalForks": 120,
         "starsInPeriod": 789
       },
@@ -63,7 +63,7 @@
         "description": "Open Multi-Agent Interactive Classroom — Get an immersive, multi-agent learning experience in just one click",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 22753,
+        "totalStars": 22761,
         "totalForks": 4375,
         "starsInPeriod": 907
       },
@@ -76,7 +76,7 @@
         "description": "Fully automatic censorship removal for language models",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 28868,
+        "totalStars": 28870,
         "totalForks": 3179,
         "starsInPeriod": 150
       },
@@ -89,7 +89,7 @@
         "description": "</> htmx - high power tools for HTML",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 49206,
+        "totalStars": 49208,
         "totalForks": 1641,
         "starsInPeriod": 32
       },
@@ -115,7 +115,7 @@
         "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 74030,
+        "totalStars": 74034,
         "totalForks": 8475,
         "starsInPeriod": 73
       },
@@ -128,8 +128,8 @@
         "description": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video production studio.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 54347,
-        "totalForks": 6735,
+        "totalStars": 54353,
+        "totalForks": 6736,
         "starsInPeriod": 806
       },
       {
@@ -141,7 +141,7 @@
         "description": "Open source alternative to Semrush and Ahrefs",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 14828,
+        "totalStars": 14833,
         "totalForks": 1776,
         "starsInPeriod": 517
       },
@@ -167,7 +167,7 @@
         "description": "Drop in a screenshot and convert it to clean code (HTML/Tailwind/React/Vue)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 76208,
+        "totalStars": 76209,
         "totalForks": 9278,
         "starsInPeriod": 550
       },
@@ -180,7 +180,7 @@
         "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 35553,
+        "totalStars": 35556,
         "totalForks": 3966,
         "starsInPeriod": 358
       },
@@ -194,7 +194,7 @@
         "language": "C++",
         "languageColor": "#f34b7d",
         "totalStars": 39362,
-        "totalForks": 10879,
+        "totalForks": 10880,
         "starsInPeriod": 128
       },
       {
@@ -219,8 +219,8 @@
         "description": "🕵️‍♂️ (2-in-1) Email & Username OSINT suite for deep data extraction just from a single Email/Username. Analyzes 465+ actively maintained scan vectors (175+ email / 290+ username) for security research, investigations, and digital footprinting.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 3828,
-        "totalForks": 431,
+        "totalStars": 3831,
+        "totalForks": 432,
         "starsInPeriod": 39
       },
       {
@@ -232,7 +232,7 @@
         "description": "Production-grade engineering skills for AI coding agents.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 90850,
+        "totalStars": 90851,
         "totalForks": 9714,
         "starsInPeriod": 196
       },
@@ -245,7 +245,7 @@
         "description": "Model router for agentic systems. Routes every prompt to the right model in <50ms. Cut costs 40-70% with just an endpoint change.",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 2957,
+        "totalStars": 2962,
         "totalForks": 83,
         "starsInPeriod": 284
       }
@@ -260,7 +260,7 @@
         "description": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 25337,
+        "totalStars": 25341,
         "totalForks": 2489,
         "starsInPeriod": 13141
       },
@@ -273,7 +273,7 @@
         "description": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 2784,
+        "totalStars": 2785,
         "totalForks": 235,
         "starsInPeriod": 2234
       },
@@ -286,7 +286,7 @@
         "description": "Beautiful, Modern & Opinionated Linux",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 35062,
+        "totalStars": 35067,
         "totalForks": 3600,
         "starsInPeriod": 6475
       },
@@ -299,8 +299,8 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 32596,
-        "totalForks": 2053,
+        "totalStars": 32618,
+        "totalForks": 2054,
         "starsInPeriod": 14875
       },
       {
@@ -338,8 +338,8 @@
         "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 38255,
-        "totalForks": 12985,
+        "totalStars": 38256,
+        "totalForks": 12986,
         "starsInPeriod": 5145
       },
       {
@@ -351,7 +351,7 @@
         "description": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. All behind one /v1 endpoint, plus any custom OpenAI-compatible endpoint. Smart routing, automatic failover, encrypted keys. Personal experimentation only.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 22361,
+        "totalStars": 22364,
         "totalForks": 3126,
         "starsInPeriod": 2691
       },
@@ -377,7 +377,7 @@
         "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 35553,
+        "totalStars": 35556,
         "totalForks": 3966,
         "starsInPeriod": 1603
       },
@@ -390,8 +390,8 @@
         "description": "Learn it. Build it. Ship it for others.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 51104,
-        "totalForks": 8849,
+        "totalStars": 51106,
+        "totalForks": 8850,
         "starsInPeriod": 3488
       },
       {
@@ -403,7 +403,7 @@
         "description": "Cursor plugin specification and official plugins",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 6217,
+        "totalStars": 6218,
         "totalForks": 491,
         "starsInPeriod": 1571
       },
@@ -416,7 +416,7 @@
         "description": "Your Personal AI super intelligence. A brain that builds a local-first memory of your life, a fantastic orchestrator of agent fleets and workflows, and a deep researcher.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 38907,
+        "totalStars": 38908,
         "totalForks": 3822,
         "starsInPeriod": 2434
       },
@@ -429,7 +429,7 @@
         "description": "ConardLi's open-source Skills collection, featuring web design, knowledge retrieval, image generation, and more.",
         "language": "CSS",
         "languageColor": "#663399",
-        "totalStars": 11699,
+        "totalStars": 11700,
         "totalForks": 1452,
         "starsInPeriod": 1154
       },
@@ -443,7 +443,7 @@
         "language": "C++",
         "languageColor": "#f34b7d",
         "totalStars": 39362,
-        "totalForks": 10879,
+        "totalForks": 10880,
         "starsInPeriod": 335
       },
       {
@@ -455,8 +455,8 @@
         "description": "Use Claude Code, Codex, Pi, and OpenCode and more for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 51696,
-        "totalForks": 8319,
+        "totalStars": 51700,
+        "totalForks": 8320,
         "starsInPeriod": 4942
       },
       {
@@ -481,7 +481,7 @@
         "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 38291,
+        "totalStars": 38296,
         "totalForks": 3598,
         "starsInPeriod": 3642
       }
@@ -496,7 +496,7 @@
         "description": "Beautiful, Modern & Opinionated Linux",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 35062,
+        "totalStars": 35067,
         "totalForks": 3600,
         "starsInPeriod": 10384
       },
@@ -509,7 +509,7 @@
         "description": "Cursor plugin specification and official plugins",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 6217,
+        "totalStars": 6218,
         "totalForks": 491,
         "starsInPeriod": 3744
       },
@@ -522,7 +522,7 @@
         "description": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 25215,
+        "totalStars": 25216,
         "totalForks": 2352,
         "starsInPeriod": 15923
       },
@@ -535,7 +535,7 @@
         "description": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 25337,
+        "totalStars": 25341,
         "totalForks": 2489,
         "starsInPeriod": 16345
       },
@@ -548,7 +548,7 @@
         "description": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 2784,
+        "totalStars": 2785,
         "totalForks": 235,
         "starsInPeriod": 2423
       },
@@ -561,8 +561,8 @@
         "description": "Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 | 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端",
         "language": "PowerShell",
         "languageColor": "#012456",
-        "totalStars": 31157,
-        "totalForks": 4238,
+        "totalStars": 31166,
+        "totalForks": 4239,
         "starsInPeriod": 21491
       },
       {
@@ -587,7 +587,7 @@
         "description": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 34379,
+        "totalStars": 34381,
         "totalForks": 2623,
         "starsInPeriod": 6764
       },
@@ -639,8 +639,8 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 32596,
-        "totalForks": 2053,
+        "totalStars": 32618,
+        "totalForks": 2054,
         "starsInPeriod": 22882
       },
       {
@@ -678,7 +678,7 @@
         "description": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 25645,
+        "totalStars": 25646,
         "totalForks": 1615,
         "starsInPeriod": 12364
       },
@@ -691,8 +691,8 @@
         "description": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 27152,
-        "totalForks": 2814,
+        "totalStars": 27157,
+        "totalForks": 2815,
         "starsInPeriod": 14775
       },
       {
@@ -704,8 +704,8 @@
         "description": "Never stop coding. Free MIT AI gateway: one endpoint, 350 providers (90+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 450+ contributors",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 58306,
-        "totalForks": 8059,
+        "totalStars": 58310,
+        "totalForks": 8060,
         "starsInPeriod": 24598
       },
       {
@@ -730,8 +730,8 @@
         "description": "A collective list of free APIs",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 472997,
-        "totalForks": 52213,
+        "totalStars": 473004,
+        "totalForks": 52215,
         "starsInPeriod": 20485
       },
       {
@@ -756,7 +756,7 @@
         "description": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 5173,
+        "totalStars": 5172,
         "totalForks": 355,
         "starsInPeriod": 3846
       },
