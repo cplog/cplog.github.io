@@ -89,15 +89,7 @@
 
   /* Grouped list: same rows as before, now bucketed under a language heading
      instead of one undifferentiated feed. */
-  .lang-group{margin-bottom:8px}
-  .lang-group__head{display:flex;align-items:baseline;gap:10px;
-    padding:20px 0 8px;border-top:1px solid var(--border)}
-  .lang-group:first-child .lang-group__head{border-top:none}
-  .lang-group__name{font-size:15px;font-weight:600}
-  .lang-group__count{font-size:13px;color:var(--ink-4);font-family:var(--mono)}
-  .lang-group__dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-
-  .repo-list{list-style:none}
+  .repo-list{list-style:none;border-top:1px solid var(--border)}
   .repo-list li{border-bottom:1px solid var(--border);padding:14px 0}
   .repo__row{display:flex;align-items:baseline;gap:8px}
   .repo__name{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;
@@ -393,40 +385,20 @@ fn fbm(p_in: vec2f) -> f32 {
       featuredSection.hidden = true;
     }
 
-    // Group the full merged list by language. Groups are ordered by their
-    // own top item's total stars, so the "hottest" language surfaces first
-    // rather than an arbitrary or alphabetical order.
-    var groups = {};
-    var order = [];
-    repos.forEach(function (r) {
-      var key = r.language || 'Other';
-      if (!groups[key]) { groups[key] = []; order.push(key); }
-      groups[key].push(r);
-    });
-    function groupTopStars(key) {
-      return groups[key].reduce(function (max, r) { return Math.max(max, r.totalStars); }, 0);
-    }
-    order.sort(function (a, b) { return groupTopStars(b) - groupTopStars(a); });
-
-    var languageCount = order.filter(function (k) { return k !== 'Other'; }).length;
+    // Flat list, sorted the same way the featured section is: language
+    // grouping was tried and made the page harder to scan, not easier —
+    // most languages here only have one or two entries, so grouping just
+    // added a lot of one-line sections and repetition instead of structure.
+    var languageCount = Object.keys(repos.reduce(function (acc, r) {
+      if (r.language) acc[r.language] = true;
+      return acc;
+    }, {})).length;
     summaryEl.textContent = repos.length + ' repositories across ' + languageCount + ' languages';
 
-    groupedEl.innerHTML = order.map(function (key) {
-      var items = groups[key];
-      var dotColor = items[0].languageColor || 'var(--ink-4)';
-      return (
-        '<div class="lang-group">' +
-          '<div class="lang-group__head">' +
-            (key !== 'Other' ? '<span class="lang-group__dot" style="background:' + dotColor + '"></span>' : '') +
-            '<span class="lang-group__name">' + escapeHtml(key) + '</span>' +
-            '<span class="lang-group__count">' + items.length + '</span>' +
-          '</div>' +
-          '<ul class="repo-list">' +
-            items.map(function (r) { return '<li>' + repoRowHtml(r) + '</li>'; }).join('') +
-          '</ul>' +
-        '</div>'
-      );
-    }).join('');
+    groupedEl.innerHTML =
+      '<ul class="repo-list">' +
+        repos.map(function (r) { return '<li>' + repoRowHtml(r) + '</li>'; }).join('') +
+      '</ul>';
     groupedEl.querySelectorAll('.repo__save').forEach(bindSaveButton);
   }
 
