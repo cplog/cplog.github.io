@@ -46,11 +46,14 @@
   .nav__in{display:flex;align-items:center;gap:24px;height:64px;
     width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
   .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}
-  .nav__links{margin-left:auto;display:flex;gap:8px}
+  .nav__links{margin-left:auto;display:flex;align-items:center;gap:8px}
   .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
     padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
   @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
   .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
+  .nav__sponsor{display:inline-flex;align-items:center;gap:6px;font-weight:500;
+    color:var(--canvas)!important;background:var(--ink);border-radius:6px}
+  @media (hover:hover) and (pointer:fine){.nav__sponsor:hover{background:rgb(0 0 0 / 84%)!important}}
 
   main{padding-block:40px 96px}
   .head{max-width:70ch;margin-bottom:32px}
@@ -58,14 +61,43 @@
   .head p{margin-top:12px;color:var(--ink-2);font-size:17px;max-width:60ch}
   .head .meta{margin-top:14px;font-size:13px;color:var(--ink-4);font-family:var(--mono)}
 
-  .controls{display:flex;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+  .controls{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
   .since-btn{font-family:var(--mono);font-size:13px;color:var(--ink-2);
     background:none;border:1px solid var(--border-strong);border-radius:6px;
     padding:6px 10px;cursor:pointer;transition:background .18s ease}
   @media (hover:hover) and (pointer:fine){.since-btn:hover{background:var(--hover)}}
   .since-btn[aria-pressed="true"]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
 
-  .repo-list{list-style:none;border-top:1px solid var(--border)}
+  .summary{font-size:13px;color:var(--ink-4);font-family:var(--mono);margin-bottom:40px}
+
+  /* Featured: the fastest-growing repos for the selected period, pulled out
+     of the flat feed so a reader's first pass answers "what's hot right now"
+     in three seconds, not by scanning fifty rows. */
+  .featured{margin-bottom:48px}
+  .section-label{font-size:13px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-3);margin-bottom:16px}
+  .featured__grid{display:grid;gap:0;border-top:1px solid var(--border);
+    border-left:1px solid var(--border)}
+  @media(min-width:700px){.featured__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .featured__item{border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding:20px}
+  .featured__rank{font-family:var(--mono);font-size:12px;color:var(--ink-4);margin-bottom:8px}
+  .featured__item .repo__name{font-size:16px}
+  .featured__item .repo__desc{white-space:normal;display:-webkit-box;
+    -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .featured__item .repo__period{font-size:15px}
+
+  /* Grouped list: same rows as before, now bucketed under a language heading
+     instead of one undifferentiated feed. */
+  .lang-group{margin-bottom:8px}
+  .lang-group__head{display:flex;align-items:baseline;gap:10px;
+    padding:20px 0 8px;border-top:1px solid var(--border)}
+  .lang-group:first-child .lang-group__head{border-top:none}
+  .lang-group__name{font-size:15px;font-weight:600}
+  .lang-group__count{font-size:13px;color:var(--ink-4);font-family:var(--mono)}
+  .lang-group__dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+  .repo-list{list-style:none}
   .repo-list li{border-bottom:1px solid var(--border);padding:14px 0}
   .repo__row{display:flex;align-items:baseline;gap:8px}
   .repo__name{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;
@@ -90,6 +122,16 @@
     text-decoration-color:var(--border-strong)}
   @media (hover:hover) and (pointer:fine){.cta a:hover{color:var(--ink)}}
 
+  .sponsor-cta{margin-top:16px;padding:20px;border:1px solid var(--border-strong);
+    border-radius:10px;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap}
+  .sponsor-cta p{color:var(--ink-2);font-size:14px;max-width:44ch}
+  .sponsor-cta strong{color:var(--ink)}
+  .sponsor-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;
+    text-decoration:none;padding:10px 16px;border-radius:8px;background:var(--ink);
+    color:var(--canvas);white-space:nowrap;transition:background .18s ease}
+  @media (hover:hover) and (pointer:fine){.sponsor-btn:hover{background:rgb(0 0 0 / 84%)}}
+
   /* Animated WebGPU background (vgpu). Low-opacity and monochrome so real
      content stays the thing being read; purely additive — see the
      WebGPU-unavailable fallback in the script below, same fail-open pattern
@@ -108,6 +150,7 @@
       <a href="https://cplog.github.io/writing/">Writing</a>
       <a href="https://cplog.github.io/trending/" aria-current="true">Trending</a>
       <a href="https://cplog.github.io/#contact">Contact</a>
+      <a href="https://github.com/sponsors/cplog" class="nav__sponsor" target="_blank" rel="noreferrer">♥ Sponsor</a>
     </nav>
   </div>
 </header>
@@ -127,16 +170,31 @@
     <button type="button" class="since-btn" data-since="weekly" aria-pressed="true">week</button>
     <button type="button" class="since-btn" data-since="monthly" aria-pressed="false">month</button>
   </div>
+  <p class="summary" id="summaryLine"></p>
 
   <div id="content">
     <p class="state" id="stateMsg">Loading trending repositories…</p>
-    <ul class="repo-list" id="repoList" hidden></ul>
+
+    <div class="featured" id="featuredSection" hidden>
+      <p class="section-label">Biggest movers this period</p>
+      <div class="featured__grid" id="featuredGrid"></div>
+    </div>
+
+    <div id="groupedLists"></div>
   </div>
 
   <p class="cta">The extension version adds language filtering, a grid view, and keyboard
     navigation (j/k to move, o to open, s to save). Not published to the Chrome Web Store yet —
     the <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">writeup</a>
     has the full story.</p>
+
+  <div class="sponsor-cta">
+    <p><strong>This runs on a scheduled scrape and a Saturday afternoon.</strong> If it's useful,
+      a coffee's worth of sponsorship keeps side projects like this one alive.</p>
+    <a class="sponsor-btn" href="https://github.com/sponsors/cplog" target="_blank" rel="noreferrer">
+      ♥ Sponsor on GitHub
+    </a>
+  </div>
 </main>
 
 <script type="module">
@@ -217,6 +275,7 @@ fn fbm(p_in: vec2f) -> f32 {
 <script>
 (function () {
   var SINCE_LABEL = { daily: 'today', weekly: 'week', monthly: 'month' };
+  var FEATURED_COUNT = 3;
   var state = { data: null, since: 'weekly', saved: loadSaved() };
 
   function loadSaved() {
@@ -268,52 +327,116 @@ fn fbm(p_in: vec2f) -> f32 {
     return primary.concat(supplemental);
   }
 
+  function repoRowHtml(r) {
+    var saved = !!state.saved[r.id];
+    var period = r.starsInPeriod != null
+      ? '<span class="repo__meta repo__period">+' + formatCount(r.starsInPeriod) + '/' + SINCE_LABEL[r.sourceSince] + '</span>'
+      : '';
+    return (
+      '<div class="repo__row">' +
+        '<a class="repo__name" href="' + r.url + '" target="_blank" rel="noreferrer">' +
+          '<span class="repo__owner">' + escapeHtml(r.owner) + '/</span>' + escapeHtml(r.name) +
+        '</a>' +
+        '<button type="button" class="repo__save' + (saved ? ' repo__save--active' : '') + '" data-id="' + escapeHtml(r.id) + '" aria-pressed="' + saved + '">' + (saved ? '[*]' : '[ ]') + '</button>' +
+      '</div>' +
+      (r.description ? '<p class="repo__desc">' + escapeHtml(r.description) + '</p>' : '') +
+      '<div class="repo__meta">' +
+        (r.language ? '<span class="repo__lang" style="color:' + (r.languageColor || 'inherit') + '">[' + escapeHtml(r.language) + ']</span>' : '') +
+        '<span>s:' + formatCount(r.totalStars) + '</span>' +
+        '<span>f:' + formatCount(r.totalForks) + '</span>' +
+      '</div>' +
+      period
+    );
+  }
+
   function render() {
-    var listEl = document.getElementById('repoList');
     var stateEl = document.getElementById('stateMsg');
+    var featuredSection = document.getElementById('featuredSection');
+    var featuredGrid = document.getElementById('featuredGrid');
+    var groupedEl = document.getElementById('groupedLists');
+    var summaryEl = document.getElementById('summaryLine');
     var repos = mergedList(state.since);
 
     if (repos.length === 0) {
       stateEl.textContent = 'No data yet for this period.';
       stateEl.hidden = false;
-      listEl.hidden = true;
+      featuredSection.hidden = true;
+      groupedEl.innerHTML = '';
+      summaryEl.textContent = '';
       return;
     }
-
     stateEl.hidden = true;
-    listEl.hidden = false;
-    listEl.innerHTML = repos.map(function (r) {
-      var saved = !!state.saved[r.id];
-      var period = r.starsInPeriod != null
-        ? '<span class="repo__meta repo__period">+' + formatCount(r.starsInPeriod) + '/' + SINCE_LABEL[r.sourceSince] + '</span>'
-        : '';
+
+    // Featured: top movers from THIS period's own primary list only — mixing
+    // in supplemental repos pulled from a different since-window would
+    // compare a month's stars against a week's, which isn't a fair "biggest
+    // mover" ranking.
+    var primaryOnly = (state.data.since[state.since] || []);
+    var featured = primaryOnly
+      .filter(function (r) { return r.starsInPeriod != null; })
+      .slice()
+      .sort(function (a, b) { return b.starsInPeriod - a.starsInPeriod; })
+      .slice(0, FEATURED_COUNT);
+
+    if (featured.length > 0) {
+      featuredSection.hidden = false;
+      featuredGrid.innerHTML = featured.map(function (r, i) {
+        return (
+          '<div class="featured__item">' +
+            '<div class="featured__rank">#' + (i + 1) + '</div>' +
+            repoRowHtml(Object.assign({}, r, { sourceSince: state.since })) +
+          '</div>'
+        );
+      }).join('');
+      featuredGrid.querySelectorAll('.repo__save').forEach(bindSaveButton);
+    } else {
+      featuredSection.hidden = true;
+    }
+
+    // Group the full merged list by language. Groups are ordered by their
+    // own top item's total stars, so the "hottest" language surfaces first
+    // rather than an arbitrary or alphabetical order.
+    var groups = {};
+    var order = [];
+    repos.forEach(function (r) {
+      var key = r.language || 'Other';
+      if (!groups[key]) { groups[key] = []; order.push(key); }
+      groups[key].push(r);
+    });
+    function groupTopStars(key) {
+      return groups[key].reduce(function (max, r) { return Math.max(max, r.totalStars); }, 0);
+    }
+    order.sort(function (a, b) { return groupTopStars(b) - groupTopStars(a); });
+
+    var languageCount = order.filter(function (k) { return k !== 'Other'; }).length;
+    summaryEl.textContent = repos.length + ' repositories across ' + languageCount + ' languages';
+
+    groupedEl.innerHTML = order.map(function (key) {
+      var items = groups[key];
+      var dotColor = items[0].languageColor || 'var(--ink-4)';
       return (
-        '<li>' +
-          '<div class="repo__row">' +
-            '<a class="repo__name" href="' + r.url + '" target="_blank" rel="noreferrer">' +
-              '<span class="repo__owner">' + escapeHtml(r.owner) + '/</span>' + escapeHtml(r.name) +
-            '</a>' +
-            '<button type="button" class="repo__save' + (saved ? ' repo__save--active' : '') + '" data-id="' + escapeHtml(r.id) + '" aria-pressed="' + saved + '">' + (saved ? '[*]' : '[ ]') + '</button>' +
+        '<div class="lang-group">' +
+          '<div class="lang-group__head">' +
+            (key !== 'Other' ? '<span class="lang-group__dot" style="background:' + dotColor + '"></span>' : '') +
+            '<span class="lang-group__name">' + escapeHtml(key) + '</span>' +
+            '<span class="lang-group__count">' + items.length + '</span>' +
           '</div>' +
-          (r.description ? '<p class="repo__desc">' + escapeHtml(r.description) + '</p>' : '') +
-          '<div class="repo__meta">' +
-            (r.language ? '<span class="repo__lang" style="color:' + (r.languageColor || 'inherit') + '">[' + escapeHtml(r.language) + ']</span>' : '') +
-            '<span>s:' + formatCount(r.totalStars) + '</span>' +
-            '<span>f:' + formatCount(r.totalForks) + '</span>' +
-          '</div>' +
-          period +
-        '</li>'
+          '<ul class="repo-list">' +
+            items.map(function (r) { return '<li>' + repoRowHtml(r) + '</li>'; }).join('') +
+          '</ul>' +
+        '</div>'
       );
     }).join('');
+    groupedEl.querySelectorAll('.repo__save').forEach(bindSaveButton);
+  }
 
-    listEl.querySelectorAll('.repo__save').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var id = btn.getAttribute('data-id');
-        if (state.saved[id]) delete state.saved[id];
-        else state.saved[id] = true;
-        persistSaved();
-        render();
-      });
+  function bindSaveButton(btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-id');
+      if (state.saved[id]) delete state.saved[id];
+      else state.saved[id] = true;
+      persistSaved();
+      render();
     });
   }
 
