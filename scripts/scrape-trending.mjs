@@ -12,17 +12,61 @@
 // is what makes "more than one snapshot" possible; language filtering is
 // the extension's job, this page is a lighter public preview of it.
 
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const SINCE_PERIODS = ['daily', 'weekly', 'monthly'];
-const OUT_PATH = path.join(
+const TRENDING_DIR = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
-  'trending',
-  'data.json'
+  'trending'
 );
+const OUT_PATH = path.join(TRENDING_DIR, 'data.json');
+const HISTORY_PATH = path.join(TRENDING_DIR, 'history.json');
+
+// A repo we've never seen before is dropped from history after this many
+// days without a re-appearance -- keeps the committed file from growing
+// forever for one-off repos that trended once and never again.
+const HISTORY_RETENTION_DAYS = 21;
+// Cap on distinct seen-dates kept per repo. A repo trending 60+ separate
+// days is already well past any streak a reader cares about; this just
+// bounds worst-case growth for freak long-runners.
+const MAX_SEEN_DATES = 60;
+
+function todayUTC() {
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
+function daysBetween(a, b) {
+  return Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
+}
+
+// Streak = consecutive calendar days seen, counting back from today. A gap
+// of even one day (the scrape ran but the repo wasn't trending) breaks it --
+// this deliberately doesn't count "seen 5 times this week" as a streak
+// unless those 5 times were 5 days in a row.
+function computeStreak(seenDates, today) {
+  const set = new Set(seenDates);
+  let streak = 0;
+  let cursor = today;
+  while (set.has(cursor)) {
+    streak += 1;
+    const d = new Date(cursor + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() - 1);
+    cursor = d.toISOString().slice(0, 10);
+  }
+  return streak;
+}
+
+async function loadHistory() {
+  try {
+    const raw = await readFile(HISTORY_PATH, 'utf8');
+    return JSON.parse(raw);
+  } catch {
+    return { repos: {} }; // first run, or file doesn't exist yet
+  }
+}
 
 function parseCount(text) {
   const cleaned = (text || '').replace(/,/g, '').trim();
@@ -121,14 +165,64 @@ async function main() {
     process.exit(1);
   }
 
+  // History tracking: this is the actual differentiator over just mirroring
+  // github.com/trending, which only ever shows one snapshot. Anyone can
+  // scrape the same page; nobody reading it once can tell you a repo has
+  // now trended 4 days running, or that it's brand new today. That
+  // requires remembering past runs, which is the one thing a live re-fetch
+  // (ours or a competitor's) structurally can't do.
+  const today = todayUTC();
+  const history = await loadHistory();
+  const nowIso = new Date().toISOString();
+
+  // Every distinct repo seen in this run, across all three since-periods --
+  // a repo can be in "today" and "week" simultaneously, it should only
+  // count once for streak purposes.
+  const seenThisRun = new Set();
+  for (const list of Object.values(bySince)) {
+    for (const repo of list) seenThisRun.add(repo.id);
+  }
+
+  for (const id of seenThisRun) {
+    const existing = history.repos[id];
+    if (existing) {
+      if (existing.seenDates[existing.seenDates.length - 1] !== today) {
+        existing.seenDates.push(today);
+        if (existing.seenDates.length > MAX_SEEN_DATES) existing.seenDates.shift();
+      }
+      existing.lastSeen = nowIso;
+    } else {
+      history.repos[id] = { firstSeen: nowIso, lastSeen: nowIso, seenDates: [today] };
+    }
+  }
+
+  // Prune repos not seen in a while so the committed file doesn't grow
+  // forever -- most repos trend once and never again.
+  for (const [id, rec] of Object.entries(history.repos)) {
+    if (daysBetween(rec.lastSeen, nowIso) > HISTORY_RETENTION_DAYS) {
+      delete history.repos[id];
+    }
+  }
+
+  // Attach the derived fields to every repo object in this run's output.
+  for (const list of Object.values(bySince)) {
+    for (const repo of list) {
+      const rec = history.repos[repo.id];
+      repo.streakDays = rec ? computeStreak(rec.seenDates, today) : 1;
+      repo.isNew = rec ? rec.seenDates.length === 1 && rec.seenDates[0] === today : true;
+    }
+  }
+
   const payload = {
-    generatedAt: new Date().toISOString(),
+    generatedAt: nowIso,
     since: bySince,
   };
 
-  await mkdir(path.dirname(OUT_PATH), { recursive: true });
+  await mkdir(TRENDING_DIR, { recursive: true });
   await writeFile(OUT_PATH, JSON.stringify(payload, null, 2) + '\n');
+  await writeFile(HISTORY_PATH, JSON.stringify(history, null, 2) + '\n');
   console.log(`Wrote ${OUT_PATH}`);
+  console.log(`Wrote ${HISTORY_PATH} (${Object.keys(history.repos).length} repos tracked)`);
 }
 
 main().catch((err) => {

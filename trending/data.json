@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T05:44:38.829Z",
+  "generatedAt": "2026-08-31T07:46:07.140Z",
   "since": {
     "daily": [
       {
@@ -11,9 +11,11 @@
         "description": "Open Multi-Agent Interactive Classroom — Get an immersive, multi-agent learning experience in just one click",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 24762,
-        "totalForks": 4542,
-        "starsInPeriod": 1370
+        "totalStars": 25104,
+        "totalForks": 4586,
+        "starsInPeriod": 1370,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "K-Dense-AI/scientific-agent-skills",
@@ -24,9 +26,11 @@
         "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 39698,
-        "totalForks": 3694,
-        "starsInPeriod": 1114
+        "totalStars": 39952,
+        "totalForks": 3713,
+        "starsInPeriod": 1114,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "Lakr233/vphone-cli",
@@ -37,9 +41,11 @@
         "description": "",
         "language": "Swift",
         "languageColor": "#F05138",
-        "totalStars": 9791,
-        "totalForks": 1294,
-        "starsInPeriod": 361
+        "totalStars": 9851,
+        "totalForks": 1296,
+        "starsInPeriod": 361,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "tt-a1i/archify",
@@ -50,9 +56,11 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 35647,
-        "totalForks": 2286,
-        "starsInPeriod": 3722
+        "totalStars": 36117,
+        "totalForks": 2313,
+        "starsInPeriod": 3722,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "p-e-w/heretic",
@@ -63,9 +71,11 @@
         "description": "Fully automatic censorship removal for language models",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 29284,
-        "totalForks": 3212,
-        "starsInPeriod": 369
+        "totalStars": 29341,
+        "totalForks": 3218,
+        "starsInPeriod": 369,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "unclecode/crawl4ai",
@@ -76,9 +86,11 @@
         "description": "🚀🤖 Crawl4AI: Open-source LLM Friendly Web Crawler & Scraper. Don't be shy, join here: https://discord.gg/jP8KfhDhyN",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 80369,
-        "totalForks": 8318,
-        "starsInPeriod": 221
+        "totalStars": 80440,
+        "totalForks": 8324,
+        "starsInPeriod": 221,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "mvanhorn/last30days-skill",
@@ -89,9 +101,11 @@
         "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 60619,
-        "totalForks": 5302,
-        "starsInPeriod": 230
+        "totalStars": 60667,
+        "totalForks": 5305,
+        "starsInPeriod": 230,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "majd/ipatool",
@@ -102,9 +116,11 @@
         "description": "Command-line tool that allows searching and downloading app packages (known as ipa files) for iOS, iPadOS, tvOS, and visionOS from the App Store.",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 10300,
-        "totalForks": 886,
-        "starsInPeriod": 58
+        "totalStars": 10338,
+        "totalForks": 887,
+        "starsInPeriod": 58,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "punkpeye/awesome-mcp-servers",
@@ -115,9 +131,11 @@
         "description": "A collection of MCP servers.",
         "language": "",
         "languageColor": null,
-        "totalStars": 93450,
-        "totalForks": 15325,
-        "starsInPeriod": 96
+        "totalStars": 93496,
+        "totalForks": 15330,
+        "starsInPeriod": 96,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "checkstyle/checkstyle",
@@ -128,9 +146,11 @@
         "description": "Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard. By default it supports the Google Java Style Guide and Sun Code Conventions, but is highly configurable. It can be invoked with an ANT task and a command line program.",
         "language": "Java",
         "languageColor": "#b07219",
-        "totalStars": 9246,
-        "totalForks": 4197,
-        "starsInPeriod": 115
+        "totalStars": 9262,
+        "totalForks": 4199,
+        "starsInPeriod": 115,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "NationalSecurityAgency/ghidra",
@@ -141,9 +161,11 @@
         "description": "Ghidra is a software reverse engineering (SRE) framework",
         "language": "Java",
         "languageColor": "#b07219",
-        "totalStars": 74008,
-        "totalForks": 8070,
-        "starsInPeriod": 198
+        "totalStars": 74049,
+        "totalForks": 8074,
+        "starsInPeriod": 198,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "pollen-robotics/microduck_rl",
@@ -154,9 +176,11 @@
         "description": "RL training environments for Microduck (mjlab)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 879,
-        "totalForks": 152,
-        "starsInPeriod": 168
+        "totalStars": 931,
+        "totalForks": 158,
+        "starsInPeriod": 168,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "handsomestWei/patent-disclosure-skill",
@@ -167,9 +191,11 @@
         "description": "中国专利.skill：专利点挖掘与交底书（发明/实用/外观）编写，通俗解读专利，嗅探政策动向，辅助审查答复。",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 5854,
-        "totalForks": 710,
-        "starsInPeriod": 62
+        "totalStars": 5950,
+        "totalForks": 713,
+        "starsInPeriod": 62,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "corsairdev/corsair",
@@ -180,9 +206,11 @@
         "description": "Connect your users to their apps",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 11032,
-        "totalForks": 528,
-        "starsInPeriod": 126
+        "totalStars": 11067,
+        "totalForks": 529,
+        "starsInPeriod": 126,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "every-app/open-seo",
@@ -193,9 +221,11 @@
         "description": "Open source alternative to Semrush and Ahrefs",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 15308,
-        "totalForks": 1833,
-        "starsInPeriod": 469
+        "totalStars": 15375,
+        "totalForks": 1837,
+        "starsInPeriod": 469,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "colinhacks/zod",
@@ -206,9 +236,11 @@
         "description": "TypeScript-first schema validation with static type inference",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 43678,
+        "totalStars": 43696,
         "totalForks": 2160,
-        "starsInPeriod": 31
+        "starsInPeriod": 31,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "tashfeenahmed/freellmapi",
@@ -219,9 +251,11 @@
         "description": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. All behind one /v1 endpoint, plus any custom OpenAI-compatible endpoint. Smart routing, automatic failover, encrypted keys. Personal experimentation only.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 22974,
-        "totalForks": 3166,
-        "starsInPeriod": 504
+        "totalStars": 23060,
+        "totalForks": 3172,
+        "starsInPeriod": 504,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "livekit/agents",
@@ -232,9 +266,11 @@
         "description": "A framework for building realtime voice AI agents 🤖🎙️📹",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 13833,
-        "totalForks": 3660,
-        "starsInPeriod": 132
+        "totalStars": 13863,
+        "totalForks": 3662,
+        "starsInPeriod": 132,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "abhigyanpatwari/GitNexus",
@@ -245,9 +281,11 @@
         "description": "GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a git repository (Github, Gitlab, Azure, Local) or ZIP file, and get an interactive knowledge graph with a built in Graph RAG Agent. Perfect for code exploration",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 46640,
-        "totalForks": 5130,
-        "starsInPeriod": 182
+        "totalStars": 46664,
+        "totalForks": 5129,
+        "starsInPeriod": 182,
+        "streakDays": 1,
+        "isNew": true
       }
     ],
     "weekly": [
@@ -260,9 +298,11 @@
         "description": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 25877,
-        "totalForks": 2543,
-        "starsInPeriod": 13413
+        "totalStars": 25979,
+        "totalForks": 2549,
+        "starsInPeriod": 13413,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "anthropics/claude-plugins-community",
@@ -273,9 +313,11 @@
         "description": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 2933,
+        "totalStars": 2954,
         "totalForks": 237,
-        "starsInPeriod": 2162
+        "starsInPeriod": 2162,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "tt-a1i/archify",
@@ -286,9 +328,11 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 35647,
-        "totalForks": 2286,
-        "starsInPeriod": 18103
+        "totalStars": 36118,
+        "totalForks": 2313,
+        "starsInPeriod": 18103,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "omacom/omarchy",
@@ -299,9 +343,11 @@
         "description": "Beautiful, Modern & Opinionated Linux",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 35667,
-        "totalForks": 3679,
-        "starsInPeriod": 6692
+        "totalStars": 35727,
+        "totalForks": 3682,
+        "starsInPeriod": 6692,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "apache/maka",
@@ -312,9 +358,11 @@
         "description": "Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 4236,
-        "totalForks": 391,
-        "starsInPeriod": 1973
+        "totalStars": 4250,
+        "totalForks": 392,
+        "starsInPeriod": 1973,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "tashfeenahmed/freellmapi",
@@ -325,9 +373,11 @@
         "description": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. All behind one /v1 endpoint, plus any custom OpenAI-compatible endpoint. Smart routing, automatic failover, encrypted keys. Personal experimentation only.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 22974,
-        "totalForks": 3166,
-        "starsInPeriod": 3037
+        "totalStars": 23060,
+        "totalForks": 3172,
+        "starsInPeriod": 3037,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "MadsLorentzen/ai-job-search",
@@ -338,9 +388,11 @@
         "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 38644,
-        "totalForks": 13115,
-        "starsInPeriod": 5348
+        "totalStars": 38706,
+        "totalForks": 13128,
+        "starsInPeriod": 5348,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "anthropics/claude-plugins-official",
@@ -351,9 +403,11 @@
         "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 35641,
-        "totalForks": 3974,
-        "starsInPeriod": 1940
+        "totalStars": 35656,
+        "totalForks": 3977,
+        "starsInPeriod": 1940,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "AprilNEA/OpenLogi",
@@ -364,9 +418,11 @@
         "description": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 17953,
+        "totalStars": 17973,
         "totalForks": 524,
-        "starsInPeriod": 3406
+        "starsInPeriod": 3406,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "rohitg00/ai-engineering-from-scratch",
@@ -377,9 +433,11 @@
         "description": "Learn it. Build it. Ship it for others.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 51367,
-        "totalForks": 8895,
-        "starsInPeriod": 3720
+        "totalStars": 51401,
+        "totalForks": 8901,
+        "starsInPeriod": 3720,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "cursor/plugins",
@@ -390,9 +448,11 @@
         "description": "Cursor plugin specification and official plugins",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 6299,
-        "totalForks": 508,
-        "starsInPeriod": 1503
+        "totalStars": 6305,
+        "totalForks": 509,
+        "starsInPeriod": 1503,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "K-Dense-AI/scientific-agent-skills",
@@ -403,9 +463,11 @@
         "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 39698,
-        "totalForks": 3694,
-        "starsInPeriod": 4309
+        "totalStars": 39952,
+        "totalForks": 3713,
+        "starsInPeriod": 4309,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "ConardLi/garden-skills",
@@ -416,9 +478,11 @@
         "description": "ConardLi's open-source Skills collection, featuring web design, knowledge retrieval, image generation, and more.",
         "language": "CSS",
         "languageColor": "#663399",
-        "totalStars": 11812,
+        "totalStars": 11825,
         "totalForks": 1456,
-        "starsInPeriod": 1222
+        "starsInPeriod": 1222,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "google/googletest",
@@ -429,9 +493,11 @@
         "description": "GoogleTest - Google Testing and Mocking Framework",
         "language": "C++",
         "languageColor": "#f34b7d",
-        "totalStars": 39393,
+        "totalStars": 39395,
         "totalForks": 10883,
-        "starsInPeriod": 441
+        "starsInPeriod": 441,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "Alishahryar1/free-claude-code",
@@ -442,9 +508,11 @@
         "description": "Use Claude Code, Codex, Pi, and OpenCode and more for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 52016,
-        "totalForks": 8377,
-        "starsInPeriod": 4324
+        "totalStars": 52045,
+        "totalForks": 8381,
+        "starsInPeriod": 4324,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "THU-MAIC/OpenMAIC",
@@ -455,9 +523,11 @@
         "description": "Open Multi-Agent Interactive Classroom — Get an immersive, multi-agent learning experience in just one click",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 24762,
-        "totalForks": 4542,
-        "starsInPeriod": 2085
+        "totalStars": 25105,
+        "totalForks": 4586,
+        "starsInPeriod": 2085,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "abi/screenshot-to-code",
@@ -468,9 +538,11 @@
         "description": "Drop in a screenshot and convert it to clean code (HTML/Tailwind/React/Vue)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 76481,
-        "totalForks": 9308,
-        "starsInPeriod": 1909
+        "totalStars": 76517,
+        "totalForks": 9311,
+        "starsInPeriod": 1909,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "openai/codex",
@@ -481,9 +553,11 @@
         "description": "Lightweight coding agent that runs in your terminal",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 120195,
-        "totalForks": 18362,
-        "starsInPeriod": 5510
+        "totalStars": 120250,
+        "totalForks": 18376,
+        "starsInPeriod": 5510,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "tinyhumansai/openhuman",
@@ -494,9 +568,11 @@
         "description": "Your Personal AI super intelligence. A brain that builds a local-first memory of your life, a fantastic orchestrator of agent fleets and workflows, and a deep researcher.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 39052,
-        "totalForks": 3836,
-        "starsInPeriod": 2526
+        "totalStars": 39073,
+        "totalForks": 3837,
+        "starsInPeriod": 2526,
+        "streakDays": 1,
+        "isNew": true
       }
     ],
     "monthly": [
@@ -509,9 +585,11 @@
         "description": "Beautiful, Modern & Opinionated Linux",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 35667,
-        "totalForks": 3679,
-        "starsInPeriod": 11259
+        "totalStars": 35727,
+        "totalForks": 3682,
+        "starsInPeriod": 11259,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "firecrawl/pdf-inspector",
@@ -522,9 +600,11 @@
         "description": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 17056,
+        "totalStars": 17075,
         "totalForks": 1184,
-        "starsInPeriod": 15341
+        "starsInPeriod": 15341,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "freestylefly/awesome-gpt-image-2",
@@ -535,9 +615,11 @@
         "description": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 25877,
-        "totalForks": 2543,
-        "starsInPeriod": 16908
+        "totalStars": 25979,
+        "totalForks": 2549,
+        "starsInPeriod": 16908,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "TencentCloud/TencentDB-Agent-Memory",
@@ -548,9 +630,11 @@
         "description": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 25309,
-        "totalForks": 2359,
-        "starsInPeriod": 15913
+        "totalStars": 25326,
+        "totalForks": 2361,
+        "starsInPeriod": 15913,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "anthropics/claude-plugins-community",
@@ -561,9 +645,11 @@
         "description": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 2933,
+        "totalStars": 2954,
         "totalForks": 237,
-        "starsInPeriod": 2543
+        "starsInPeriod": 2543,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "zhaoxuya520/reverse-skill",
@@ -574,9 +660,11 @@
         "description": "Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 | 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端",
         "language": "PowerShell",
         "languageColor": "#012456",
-        "totalStars": 32264,
-        "totalForks": 4345,
-        "starsInPeriod": 21984
+        "totalStars": 32427,
+        "totalForks": 4367,
+        "starsInPeriod": 21984,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "cactus-compute/needle",
@@ -587,9 +675,11 @@
         "description": "14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 9802,
-        "totalForks": 630,
-        "starsInPeriod": 6450
+        "totalStars": 9817,
+        "totalForks": 631,
+        "starsInPeriod": 6450,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "volcengine/OpenViking",
@@ -600,9 +690,11 @@
         "description": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 34540,
-        "totalForks": 2636,
-        "starsInPeriod": 6903
+        "totalStars": 34563,
+        "totalForks": 2637,
+        "starsInPeriod": 6903,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "AprilNEA/OpenLogi",
@@ -613,9 +705,11 @@
         "description": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 17953,
+        "totalStars": 17973,
         "totalForks": 524,
-        "starsInPeriod": 9946
+        "starsInPeriod": 9946,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "apache/maka",
@@ -626,9 +720,11 @@
         "description": "Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 4236,
-        "totalForks": 391,
-        "starsInPeriod": 3257
+        "totalStars": 4250,
+        "totalForks": 392,
+        "starsInPeriod": 3257,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "tt-a1i/archify",
@@ -639,9 +735,11 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 35647,
-        "totalForks": 2286,
-        "starsInPeriod": 25275
+        "totalStars": 36118,
+        "totalForks": 2313,
+        "starsInPeriod": 25275,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "modular/modular",
@@ -652,9 +750,11 @@
         "description": "The Modular Platform (includes MAX & Mojo)",
         "language": "Mojo",
         "languageColor": "#ff4c1f",
-        "totalStars": 29386,
-        "totalForks": 3126,
-        "starsInPeriod": 2825
+        "totalStars": 29388,
+        "totalForks": 3125,
+        "starsInPeriod": 2825,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "pingdotgg/t3code",
@@ -665,9 +765,11 @@
         "description": "",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 21107,
-        "totalForks": 5074,
-        "starsInPeriod": 5445
+        "totalStars": 21118,
+        "totalForks": 5077,
+        "starsInPeriod": 5445,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "ayghri/i-have-adhd",
@@ -678,9 +780,11 @@
         "description": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 25828,
-        "totalForks": 1623,
-        "starsInPeriod": 11902
+        "totalStars": 25867,
+        "totalForks": 1625,
+        "starsInPeriod": 11902,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "megadose/holehe",
@@ -691,9 +795,11 @@
         "description": "holehe allows you to check if the mail is used on different sites like twitter, instagram and will retrieve information on sites with the forgotten password function.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 14476,
-        "totalForks": 1849,
-        "starsInPeriod": 2652
+        "totalStars": 14479,
+        "totalForks": 1850,
+        "starsInPeriod": 2652,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "virgiliojr94/book-to-skill",
@@ -704,9 +810,11 @@
         "description": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 27379,
-        "totalForks": 2837,
-        "starsInPeriod": 13879
+        "totalStars": 27420,
+        "totalForks": 2838,
+        "starsInPeriod": 13879,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "public-apis/public-apis",
@@ -717,9 +825,11 @@
         "description": "A collective list of free APIs",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 473401,
-        "totalForks": 52252,
-        "starsInPeriod": 20630
+        "totalStars": 473438,
+        "totalForks": 52259,
+        "starsInPeriod": 20630,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "unclebob/swarm-forge",
@@ -730,9 +840,11 @@
         "description": "A simple tool for coordinating several AI agents.",
         "language": "Clojure",
         "languageColor": "#db5855",
-        "totalStars": 3394,
+        "totalStars": 3399,
         "totalForks": 332,
-        "starsInPeriod": 1897
+        "starsInPeriod": 1897,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "akitaonrails/ai-memory",
@@ -743,9 +855,11 @@
         "description": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 5261,
+        "totalStars": 5279,
         "totalForks": 361,
-        "starsInPeriod": 3902
+        "starsInPeriod": 3902,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "diegosouzapw/OmniRoute",
@@ -756,9 +870,11 @@
         "description": "Never stop coding. Free MIT AI gateway: one endpoint, 350 providers (90+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 450+ contributors",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 58789,
-        "totalForks": 8155,
-        "starsInPeriod": 24211
+        "totalStars": 58857,
+        "totalForks": 8168,
+        "starsInPeriod": 24211,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "lyogavin/airllm",
@@ -769,9 +885,11 @@
         "description": "AirLLM 70B inference with single 4GB GPU",
         "language": "Jupyter Notebook",
         "languageColor": "#DA5B0B",
-        "totalStars": 33233,
-        "totalForks": 3488,
-        "starsInPeriod": 8974
+        "totalStars": 33258,
+        "totalForks": 3489,
+        "starsInPeriod": 8974,
+        "streakDays": 1,
+        "isNew": true
       },
       {
         "id": "earendil-works/pi",
@@ -782,9 +900,11 @@
         "description": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 99579,
-        "totalForks": 12357,
-        "starsInPeriod": 18925
+        "totalStars": 99665,
+        "totalForks": 12363,
+        "starsInPeriod": 18925,
+        "streakDays": 1,
+        "isNew": true
       }
     ]
   }
