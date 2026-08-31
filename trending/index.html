@@ -109,6 +109,22 @@
   .repo__lang{font-weight:600}
   .repo__period{color:var(--ink);font-weight:600}
 
+  /* Hacker News: a second, independent source -- deliberately not merged
+     into the GitHub list (different unit: stories, not repos; no since
+     filter; no language/stars). Same hairline-row/badge system so it reads
+     as part of the same page, in its own section so the "biggest movers"
+     and since-filter above stay GitHub-only and honest. */
+  .hn{margin-top:48px}
+  .hn-list{list-style:none;border-top:1px solid var(--border)}
+  .hn-list li{border-bottom:1px solid var(--border);padding:14px 0}
+  .hn-item{display:flex;align-items:baseline;gap:8px}
+  .hn-item__title{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hn-item__meta{display:flex;align-items:center;gap:14px;margin-top:4px;
+    font-family:var(--mono);font-size:12px;color:var(--ink-4);
+    font-variant-numeric:tabular-nums}
+  .hn-item__meta a{color:inherit}
+
   .state{color:var(--ink-3);padding:40px 0;text-align:center}
   .state--error{color:#b3261e}
   .retry-link{border:none;background:none;color:inherit;font:inherit;
@@ -169,10 +185,10 @@
 <main class="wrap">
   <div class="head">
     <h1>Trending on GitHub</h1>
-    <p>The most-starred repositories today, this week, and this month, merged into one list. A
-      public preview of a Chrome new-tab extension I built and
-      <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">wrote up here</a>.
-      Refreshed automatically every few hours.</p>
+    <p>The most-starred repositories today, this week, and this month, merged into one list, plus
+      the current Hacker News front page below. A public preview of a Chrome new-tab extension I
+      built and <a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">wrote
+      up here</a>. Refreshed automatically every few hours.</p>
     <p class="meta" id="generatedAt">loading…</p>
   </div>
 
@@ -192,6 +208,11 @@
     </div>
 
     <div id="groupedLists"></div>
+
+    <div class="hn" id="hnSection" hidden>
+      <p class="section-label">Trending on Hacker News</p>
+      <ul class="hn-list" id="hnList"></ul>
+    </div>
   </div>
 
   <p class="cta">The extension version adds language filtering, a grid view, and keyboard
@@ -348,6 +369,53 @@ fn fbm(p_in: vec2f) -> f32 {
     return primary.concat(supplemental);
   }
 
+  function hnItemHtml(s) {
+    var badge = '';
+    if (s.isNew) {
+      badge = '<span class="repo__badge repo__badge--new">new</span>';
+    } else if (s.streakDays >= 2) {
+      badge = '<span class="repo__badge repo__badge--streak">' + s.streakDays + 'd streak</span>';
+    }
+    var host = '';
+    try { host = new URL(s.url).hostname.replace(/^www\./, ''); } catch (e) {}
+    return (
+      '<li>' +
+        '<div class="hn-item">' +
+          '<a class="hn-item__title" href="' + escapeHtml(s.url) + '" target="_blank" rel="noreferrer">' +
+            escapeHtml(s.title) +
+          '</a>' +
+          badge +
+        '</div>' +
+        '<div class="hn-item__meta">' +
+          (host ? '<span>' + escapeHtml(host) + '</span>' : '') +
+          '<span>' + formatCount(s.points) + ' points</span>' +
+          '<a href="' + escapeHtml(s.hnUrl) + '" target="_blank" rel="noreferrer">' +
+            formatCount(s.numComments) + ' comments' +
+          '</a>' +
+        '</div>' +
+      '</li>'
+    );
+  }
+
+  // HN has no since-filter (today/week/month is a GitHub-list-only concept),
+  // so this renders once from the raw payload rather than reacting to
+  // state.since -- switching the GitHub filter shouldn't touch this section.
+  function renderHN() {
+    var hn = state.data.hn || [];
+    var section = document.getElementById('hnSection');
+    var list = document.getElementById('hnList');
+    if (hn.length === 0) {
+      section.hidden = true;
+      return;
+    }
+    section.hidden = false;
+    list.innerHTML = hn
+      .slice()
+      .sort(function (a, b) { return b.points - a.points; })
+      .map(hnItemHtml)
+      .join('');
+  }
+
   function repoRowHtml(r) {
     var saved = !!state.saved[r.id];
     var period = r.starsInPeriod != null
@@ -475,6 +543,7 @@ fn fbm(p_in: vec2f) -> f32 {
         document.getElementById('generatedAt').textContent =
           'Snapshot from ' + d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
         render();
+        renderHN();
       })
       .catch(function (err) {
         // A stale cached snapshot beats no snapshot: only replace the view

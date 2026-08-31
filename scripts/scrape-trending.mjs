@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-// Scrapes github.com/trending for the /trending page's static data snapshot.
-// Runs in CI (GitHub Actions), not a browser, so there's no DOMParser and no
-// host_permissions trick to bypass CORS -- a plain server-side fetch has
-// neither problem. No dependencies on purpose: this is the entire ingest
-// pipeline for a small static page, and a regex-based extraction of GitHub's
-// fairly stable trending-page markup keeps the CI job to "node one script",
-// no npm install step.
+// Scrapes github.com/trending (and, as of the second source, the HN front
+// page) for the /trending page's static data snapshot. Runs in CI (GitHub
+// Actions), not a browser, so there's no DOMParser and no host_permissions
+// trick to bypass CORS -- a plain server-side fetch has neither problem. No
+// dependencies on purpose: this is the entire ingest pipeline for a small
+// static page, and a regex-based extraction of GitHub's fairly stable
+// trending-page markup keeps the CI job to "node one script", no npm
+// install step.
 //
 // Deliberately scoped down from the browser extension's version: no
 // per-language merge, three since-periods only (all languages). That alone
@@ -82,6 +83,38 @@ function decodeEntities(s) {
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .trim();
+}
+
+// Second source. Uses the Algolia HN Search API's front_page tag rather
+// than scraping news.ycombinator.com's HTML -- it's the same data GitHub's
+// own trending page can't give us (an independent signal, not another view
+// of the same repos), and Algolia returns clean JSON with points/comments
+// already computed, so there's no HTML-parsing fragility to match the
+// GitHub scraper's regex approach.
+const HN_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page';
+
+async function fetchHN() {
+  const res = await fetch(HN_URL, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; cplog-trending-snapshot/1.0)' },
+  });
+  if (!res.ok) {
+    throw new Error(`HN Algolia API returned ${res.status}`);
+  }
+  const { hits } = await res.json();
+  return hits
+    .filter((h) => h.objectID && h.title)
+    .map((h) => ({
+      // Prefixed so an HN story id can never collide with a GitHub
+      // "owner/name" id in the shared history map.
+      id: `hn:${h.objectID}`,
+      title: h.title,
+      url: h.url || `https://news.ycombinator.com/item?id=${h.objectID}`,
+      hnUrl: `https://news.ycombinator.com/item?id=${h.objectID}`,
+      author: h.author,
+      points: h.points || 0,
+      numComments: h.num_comments || 0,
+      createdAt: h.created_at,
+    }));
 }
 
 async function fetchSince(since) {
@@ -165,6 +198,16 @@ async function main() {
     process.exit(1);
   }
 
+  // HN is additive, not load-bearing: its failure shouldn't take down a
+  // snapshot that GitHub already succeeded at.
+  let hn = [];
+  try {
+    hn = await fetchHN();
+    console.log(`hn: ${hn.length} stories`);
+  } catch (err) {
+    console.error('Failed to fetch HN front page:', err.message);
+  }
+
   // History tracking: this is the actual differentiator over just mirroring
   // github.com/trending, which only ever shows one snapshot. Anyone can
   // scrape the same page; nobody reading it once can tell you a repo has
@@ -182,6 +225,7 @@ async function main() {
   for (const list of Object.values(bySince)) {
     for (const repo of list) seenThisRun.add(repo.id);
   }
+  for (const story of hn) seenThisRun.add(story.id);
 
   for (const id of seenThisRun) {
     const existing = history.repos[id];
@@ -204,18 +248,21 @@ async function main() {
     }
   }
 
-  // Attach the derived fields to every repo object in this run's output.
+  // Attach the derived fields to every repo/story object in this run's output.
+  const attachHistory = (item) => {
+    const rec = history.repos[item.id];
+    item.streakDays = rec ? computeStreak(rec.seenDates, today) : 1;
+    item.isNew = rec ? rec.seenDates.length === 1 && rec.seenDates[0] === today : true;
+  };
   for (const list of Object.values(bySince)) {
-    for (const repo of list) {
-      const rec = history.repos[repo.id];
-      repo.streakDays = rec ? computeStreak(rec.seenDates, today) : 1;
-      repo.isNew = rec ? rec.seenDates.length === 1 && rec.seenDates[0] === today : true;
-    }
+    for (const repo of list) attachHistory(repo);
   }
+  for (const story of hn) attachHistory(story);
 
   const payload = {
     generatedAt: nowIso,
     since: bySince,
+    hn,
   };
 
   await mkdir(TRENDING_DIR, { recursive: true });
