@@ -112,9 +112,11 @@
   /* Hacker News: a second, independent source -- deliberately not merged
      into the GitHub list (different unit: stories, not repos; no since
      filter; no language/stars). Same hairline-row/badge system so it reads
-     as part of the same page, in its own section so the "biggest movers"
-     and since-filter above stay GitHub-only and honest. */
-  .hn{margin-top:48px}
+     as part of the same page, but needs a real break before it, not just a
+     label: without one the ~50-row GitHub list flows straight into this
+     one and the page reads as a single undifferentiated column. Matches
+     the weight the .cta divider below already uses for the same reason. */
+  .hn{margin-top:56px;padding-top:32px;border-top:1px solid var(--border-strong)}
   .hn-list{list-style:none;border-top:1px solid var(--border)}
   .hn-list li{border-bottom:1px solid var(--border);padding:14px 0}
   .hn-item{display:flex;align-items:baseline;gap:8px}
@@ -370,12 +372,14 @@ fn fbm(p_in: vec2f) -> f32 {
   }
 
   function hnItemHtml(s) {
-    var badge = '';
-    if (s.isNew) {
-      badge = '<span class="repo__badge repo__badge--new">new</span>';
-    } else if (s.streakDays >= 2) {
-      badge = '<span class="repo__badge repo__badge--streak">' + s.streakDays + 'd streak</span>';
-    }
+    // No "new" badge here on purpose: HN's front page churns in hours, so
+    // nearly every story would read "new" nearly every time this runs --
+    // that's not signal, just noise repeated 10-20 times down the page.
+    // "Nd streak" stays because a story still on the front page after
+    // multiple days genuinely is rare and worth marking.
+    var badge = s.streakDays >= 2
+      ? '<span class="repo__badge repo__badge--streak">' + s.streakDays + 'd streak</span>'
+      : '';
     var host = '';
     try { host = new URL(s.url).hostname.replace(/^www\./, ''); } catch (e) {}
     return (
@@ -409,9 +413,13 @@ fn fbm(p_in: vec2f) -> f32 {
       return;
     }
     section.hidden = false;
+    // Top 10, not all ~20-30 front-page stories: this follows the featured
+    // GitHub movers' own precedent (top 3 pulled out of ~50 repos) -- a
+    // fast-glance page reads better as a highlight reel than a full dump.
     list.innerHTML = hn
       .slice()
       .sort(function (a, b) { return b.points - a.points; })
+      .slice(0, 10)
       .map(hnItemHtml)
       .join('');
   }
