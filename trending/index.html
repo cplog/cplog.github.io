@@ -129,7 +129,7 @@
      WebGPU-unavailable fallback in the script below, same fail-open pattern
      as the homepage's own WebGL hero panel. */
   #shaderBg{position:fixed;inset:0;width:100%;height:100%;z-index:0;
-    pointer-events:none;opacity:.14;mix-blend-mode:multiply}
+    pointer-events:none;opacity:.24;mix-blend-mode:multiply}
   /* No dark-mode variant on purpose: this page is hard-coded light
      (--canvas:#FFFFFF, no prefers-color-scheme block anywhere), so the ground
      under the canvas is white whatever the OS is set to. `multiply` is the
@@ -244,9 +244,13 @@ fn fbm(p_in: vec2f) -> f32 {
 
 @fragment fn fs_main(@location(0) uv: vec2f) -> @location(0) vec4f {
   var p = (uv - vec2f(0.5)) * vec2f(3.2 * params.aspect, 3.2) + vec2f(0.5);
-  let t = params.time * 0.06;
+  let t = params.time * 0.09;
   let warp = vec2f(fbm(p + vec2f(t, -t * 0.7)), fbm(p + vec2f(-t * 0.7, t)));
-  let n = fbm(p + warp * 1.6 + vec2f(t * 0.3, t * 0.2));
+  let raw = fbm(p + warp * 1.6 + vec2f(t * 0.3, t * 0.2));
+  // Raw fbm clusters tightly around 0.4-0.6, reading as a flat haze at any
+  // opacity. Push it through a steep smoothstep so the field actually shows
+  // distinct light/dark regions moving, not just a uniform grey wash.
+  let n = smoothstep(0.35, 0.65, raw);
   return vec4f(n, n, n, 1.0);
 }
 `;
