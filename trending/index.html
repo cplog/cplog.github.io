@@ -56,7 +56,8 @@
   @media (hover:hover) and (pointer:fine){.nav__sponsor:hover{background:rgb(0 0 0 / 84%)!important}}
 
   main{padding-block:40px 96px}
-  .head{max-width:70ch;margin-bottom:32px}
+  .head{max-width:70ch;margin-bottom:32px;position:relative}
+  .head h1,.head p{position:relative;z-index:1}
   h1{font-size:clamp(28px,4vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.12}
   .head p{margin-top:12px;color:var(--ink-2);font-size:17px;max-width:60ch}
   .head .meta{margin-top:14px;font-size:13px;color:var(--ink-4);font-family:var(--mono)}
@@ -151,19 +152,25 @@
   /* Animated WebGPU background (vgpu). Low-opacity and monochrome so real
      content stays the thing being read; purely additive — see the
      WebGPU-unavailable fallback in the script below, same fail-open pattern
-     as the homepage's own WebGL hero panel. */
-  #shaderBg{position:fixed;inset:0;width:100%;height:100%;z-index:0;
-    pointer-events:none;opacity:.24;mix-blend-mode:multiply}
+     as the homepage's own WebGL hero panel.
+
+     Scoped to the .head block, not position:fixed over the whole viewport --
+     it was originally full-viewport-fixed, which meant it stayed glued to
+     the screen for the entire scroll of what's now a ~7000px page (two
+     merged sources), reading as something following the reader down the
+     page rather than a hero flourish. Confined here it shows once, behind
+     the title, and scrolls away like normal content once you move past it. */
+  #shaderBg{position:absolute;inset:0;width:100%;height:100%;z-index:0;
+    pointer-events:none;opacity:.16;mix-blend-mode:multiply}
   /* No dark-mode variant on purpose: this page is hard-coded light
      (--canvas:#FFFFFF, no prefers-color-scheme block anywhere), so the ground
      under the canvas is white whatever the OS is set to. `multiply` is the
      correct blend against white; `screen` would push the noise toward white
      and erase it. If this page ever gains a dark palette, the shader needs
      `screen` at ~.16 alongside it — the extension already does exactly that. */
-  /* A full-viewport field drifting on a slow loop is exactly the motion this
-     setting exists to remove, and it carries no information — so it goes
-     entirely rather than being slowed. The script also never starts the
-     frame loop, so nothing keeps painting off-screen. */
+  /* This motion carries no information, so it goes entirely rather than
+     being slowed. The script also never starts the frame loop, so nothing
+     keeps painting off-screen. */
   @media (prefers-reduced-motion: reduce){
     #shaderBg{display:none}
   }
@@ -171,7 +178,6 @@
 </style>
 </head>
 <body>
-<canvas id="shaderBg" aria-hidden="true"></canvas>
 <header class="nav">
   <div class="nav__in">
     <a href="https://cplog.github.io/" class="nav__name">Eric Tai</a>
@@ -186,6 +192,7 @@
 
 <main class="wrap">
   <div class="head">
+    <canvas id="shaderBg" aria-hidden="true"></canvas>
     <h1>Trending on GitHub</h1>
     <p>The most-starred repositories today, this week, and this month, merged into one list, plus
       the current Hacker News front page below. A public preview of a Chrome new-tab extension I
