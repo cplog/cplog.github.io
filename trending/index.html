@@ -504,6 +504,17 @@ fn fbm(p_in: vec2f) -> f32 {
     // grouping was tried and made the page harder to scan, not easier —
     // most languages here only have one or two entries, so grouping just
     // added a lot of one-line sections and repetition instead of structure.
+    //
+    // Excludes whatever's already shown in the featured grid above -- those
+    // rows were repeating verbatim as the first 1-3 rows of this list,
+    // right within the same viewport as their featured card. The count/
+    // language-count below is unaffected: it still describes everything in
+    // the merged period, the featured cards are a highlight of it, not a
+    // separate pool.
+    var featuredIds = {};
+    featured.forEach(function (r) { featuredIds[r.id] = true; });
+    var restRepos = repos.filter(function (r) { return !featuredIds[r.id]; });
+
     var languageCount = Object.keys(repos.reduce(function (acc, r) {
       if (r.language) acc[r.language] = true;
       return acc;
@@ -512,7 +523,7 @@ fn fbm(p_in: vec2f) -> f32 {
 
     groupedEl.innerHTML =
       '<ul class="repo-list">' +
-        repos.map(function (r) { return '<li>' + repoRowHtml(r) + '</li>'; }).join('') +
+        restRepos.map(function (r) { return '<li>' + repoRowHtml(r) + '</li>'; }).join('') +
       '</ul>';
     groupedEl.querySelectorAll('.repo__save').forEach(bindSaveButton);
   }
