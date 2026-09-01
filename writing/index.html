@@ -8,43 +8,54 @@
 <link rel="canonical" href="https://cplog.github.io/writing/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  /* passport world, one-ink recipe: charcoal + signal red on security-paper cream. See /index.html for the direction contract. */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --canvas:#FFFFFF;
-    --ink:#000000;
-    --ink-2:rgb(0 0 0 / 64%);
-    --ink-3:rgb(0 0 0 / 56%);
-    --ink-4:rgb(0 0 0 / 44%);
-    --border:rgb(0 0 0 / 10%);
-    --border-strong:rgb(0 0 0 / 18%);
-    --hover:rgb(0 0 0 / 5%);
-    --pressed:rgb(0 0 0 / 9%);
-    --tint:rgb(0 0 0 / 4%);
-    --font:"Inter",system-ui,-apple-system,sans-serif;
+    --canvas:#efe3c9;
+    --canvas-2:#e8dabb;
+    --ink-rgb:27 25 23;
+    --ink:rgb(var(--ink-rgb));
+    --ink-2:rgb(var(--ink-rgb) / 66%);
+    --ink-3:rgb(var(--ink-rgb) / 56%);
+    --ink-4:rgb(var(--ink-rgb) / 44%);
+    --border:rgb(var(--ink-rgb) / 16%);
+    --border-strong:rgb(var(--ink-rgb) / 30%);
+    --hover:rgb(var(--ink-rgb) / 7%);
+    --pressed:rgb(var(--ink-rgb) / 12%);
+    --tint:rgb(var(--ink-rgb) / 6%);
+    --stamp:#c22a1e;
+    --font:"Source Serif 4",Georgia,serif;
+    --font-display:"Spectral",Georgia,serif;
+    --font-mono:"Courier Prime",ui-monospace,SFMono-Regular,Menlo,monospace;
     --pad:clamp(24px,5vw,64px);
     --maxw:1200px;
+    --security-paper:
+      repeating-linear-gradient(115deg, rgb(var(--ink-rgb) / 3.5%) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(25deg, rgb(var(--ink-rgb) / 3%) 0 1px, transparent 1px 9px);
   }
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+  body{background:var(--canvas) var(--security-paper);color:var(--ink);font-family:var(--font);
     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
   .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
   a{color:inherit}
-  ::selection{background:var(--ink);color:var(--canvas)}
-  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
-  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+  ::selection{background:var(--stamp);color:var(--canvas)}
+  :focus-visible{outline:2px solid var(--stamp);outline-offset:3px;border-radius:2px}
+  h1{font-family:var(--font-display)}
+  .nav{position:sticky;top:0;z-index:50;background:rgb(239 227 201 / 90%);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   .nav__in{display:flex;align-items:center;gap:24px;height:64px;
     width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
-  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}
-  .nav__links{margin-left:auto;display:flex;gap:8px}
-  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
-    padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
+  .nav__name{font-weight:600;font-size:15px;letter-spacing:.03em;white-space:nowrap;text-decoration:none;
+    text-transform:uppercase;font-family:var(--font-display)}
+  .nav__links{margin-left:auto;display:flex;gap:8px;font-family:var(--font-mono)}
+  .nav__links a{font-size:13px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:4px;letter-spacing:.02em;transition:color .18s ease,background .18s ease}
   @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
-  .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
-  @media(max-width:660px){.nav__links a{padding:6px 7px;font-size:13px}}
+  .nav__links a[aria-current="true"]{color:var(--stamp);background:var(--hover);font-weight:700}
+  @media(max-width:660px){.nav__links a{padding:6px 7px;font-size:12.5px}}
 
   main{padding-block:48px 96px}
   .index{max-width:70ch;margin-inline:auto}
@@ -54,9 +65,9 @@
   .post-list li{border-top:1px solid var(--border);padding-block:20px}
   .post-list li:first-child{border-top:none}
   .post-list a{display:block;text-decoration:none;color:inherit}
-  .post-list .post-title{font-size:19px;font-weight:500;margin-bottom:4px}
-  .post-list a:hover .post-title{text-decoration:underline}
-  .post-list .post-meta{font-size:14px;color:var(--ink-3);margin-bottom:6px}
+  .post-list .post-title{font-size:19px;font-weight:600;margin-bottom:4px;font-family:var(--font-display)}
+  .post-list a:hover .post-title{text-decoration:underline;text-decoration-color:var(--stamp)}
+  .post-list .post-meta{font-size:13px;color:var(--stamp);margin-bottom:6px;font-family:var(--font-mono)}
   .post-list .post-desc{font-size:15px;color:var(--ink-2)}
   .empty{color:var(--ink-3);font-style:italic}
 </style>

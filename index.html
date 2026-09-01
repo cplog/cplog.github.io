@@ -21,43 +21,57 @@
 <link rel="canonical" href="https://cplog.github.io/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --canvas:#FFFFFF;
-    --ink:#000000;
-    --ink-2:rgb(0 0 0 / 64%);
-    --ink-3:rgb(0 0 0 / 56%);          /* lifted: real reading sits here */
-    --ink-4:rgb(0 0 0 / 44%);          /* glyphs and genuinely optional text */
-    --border:rgb(0 0 0 / 10%);
-    --border-strong:rgb(0 0 0 / 18%);
-    --hover:rgb(0 0 0 / 5%);
-    --pressed:rgb(0 0 0 / 9%);
-    --tint:rgb(0 0 0 / 4%);
-    --font:"Inter",system-ui,-apple-system,sans-serif;
+    --canvas:#efe3c9;
+    --canvas-2:#e8dabb;
+    --ink-rgb:27 25 23;
+    --ink:rgb(var(--ink-rgb));
+    --ink-2:rgb(var(--ink-rgb) / 66%);
+    --ink-3:rgb(var(--ink-rgb) / 56%);  /* lifted: real reading sits here */
+    --ink-4:rgb(var(--ink-rgb) / 44%);  /* glyphs and genuinely optional text */
+    --border:rgb(var(--ink-rgb) / 16%);
+    --border-strong:rgb(var(--ink-rgb) / 30%);
+    --hover:rgb(var(--ink-rgb) / 7%);
+    --pressed:rgb(var(--ink-rgb) / 12%);
+    --tint:rgb(var(--ink-rgb) / 6%);
+    --stamp:#c22a1e;
+    --font:"Source Serif 4",Georgia,serif;
+    --font-display:"Spectral",Georgia,serif;
+    --font-mono:"Courier Prime",ui-monospace,SFMono-Regular,Menlo,monospace;
     --pad:clamp(24px,5vw,64px);
     --maxw:1200px;
     --chapter:clamp(64px,10vw,128px);
+    /* fine interlaced guilloché line-work, the security-paper ground; one ink
+       only, tiled at low opacity so it reads as paper stock, never a graphic */
+    --security-paper:
+      repeating-linear-gradient(115deg, rgb(var(--ink-rgb) / 3.5%) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(25deg, rgb(var(--ink-rgb) / 3%) 0 1px, transparent 1px 9px);
   }
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
-    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{background:var(--canvas) var(--security-paper);color:var(--ink);font-family:var(--font);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
   .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
   a{color:inherit}
-  ::selection{background:var(--ink);color:var(--canvas)}
-  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+  ::selection{background:var(--stamp);color:var(--canvas)}
+  :focus-visible{outline:2px solid var(--stamp);outline-offset:3px;border-radius:2px}
+  h1,h2,h3,.nav__name,.hero__role,.role__org{font-family:var(--font-display)}
 
   /* nav ------------------------------------------------------------------ */
-  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+  .nav{position:sticky;top:0;z-index:50;background:rgb(239 227 201 / 90%);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-  .nav__in{display:flex;align-items:center;gap:24px;height:64px;
+  .nav__in{display:flex;align-items:center;gap:12px;height:64px;
     width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
-  .nav__name{font-weight:500;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
-  .nav__links{margin-left:auto;display:flex;gap:8px}
-  .nav__links a{font-size:14px;color:var(--ink-3);text-decoration:none;
-    padding:6px 10px;border-radius:6px;transition:color .18s ease,background .18s ease}
+  .nav__crest{flex:none;color:var(--stamp)}
+  .nav__name{font-weight:600;font-size:15px;letter-spacing:.03em;white-space:nowrap;
+    text-transform:uppercase}
+  .nav__links{margin-left:auto;display:flex;gap:8px;font-family:var(--font-mono)}
+  .nav__links a{font-size:13px;color:var(--ink-3);text-decoration:none;
+    padding:6px 10px;border-radius:4px;letter-spacing:.02em;
+    transition:color .18s ease,background .18s ease}
   @media (hover:hover) and (pointer:fine){.nav__links a:hover{color:var(--ink);background:var(--hover)}}
   .nav__links a[aria-current="true"]{color:var(--ink);background:var(--hover);font-weight:500}
   @media(max-width:660px){.nav__links a{padding:6px 7px;font-size:13px}}
@@ -75,19 +89,22 @@
   h1{font-size:clamp(34px,5.2vw,60px);font-weight:600;line-height:1.06;
     letter-spacing:-.032em;max-width:15ch;text-wrap:balance}
   h1 span{color:var(--ink-2)}
-  .hero__role{font-size:14px;font-weight:500;color:var(--ink-3);margin-bottom:18px;
-    padding-bottom:14px;border-bottom:1px solid var(--border);display:inline-block}
+  .hero__role{font-size:12px;font-weight:600;color:var(--stamp);margin-bottom:18px;
+    padding-bottom:14px;border-bottom:1px solid var(--border);display:inline-block;
+    text-transform:uppercase;letter-spacing:.14em}
   .hero__lede{margin-top:24px;font-size:18px;color:var(--ink-2);max-width:56ch;text-wrap:pretty}
   .hero__meta{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
 
-  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;
-    text-decoration:none;padding:11px 18px;border-radius:8px;border:1px solid var(--border-strong);
-    color:var(--ink);background:var(--canvas);
+  /* Engraved plate buttons: a passport's stamped metal plates, not app chrome. */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);
+    font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    text-decoration:none;padding:11px 18px;border-radius:3px;border:1.5px solid var(--border-strong);
+    color:var(--ink);background:var(--canvas-2);
     transition:background .18s ease,border-color .18s ease}
-  @media (hover:hover) and (pointer:fine){.btn:hover{background:var(--hover)}}
+  @media (hover:hover) and (pointer:fine){.btn:hover{background:var(--hover);border-color:var(--stamp)}}
   .btn:active{background:var(--pressed)}
-  .btn--primary{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
-  @media (hover:hover) and (pointer:fine){.btn--primary:hover{background:rgb(0 0 0 / 84%)}}
+  .btn--primary{background:var(--stamp);color:var(--canvas);border-color:var(--stamp)}
+  @media (hover:hover) and (pointer:fine){.btn--primary:hover{background:#712029}}
 
   /* the one expressive interruption, in ink */
   /* Square, because the QR's four-module quiet zone has to fit inside the
@@ -95,11 +112,17 @@
   /* Capped, and pushed to the outer edge. A square panel given a whole hero
      column runs to ~560px and takes the page over; the claim is the headline
      and this is the thing beside it. */
-  .field{position:relative;border:1px solid var(--border);border-radius:10px;overflow:hidden;
-    background:#0C1310;aspect-ratio:1;width:100%;max-width:396px;margin-inline:auto 0;
+  /* the photo panel: a passport photo sits inside a double-ruled frame with a
+     specimen label and a corner seal, not a floating card */
+  .photo{width:100%;max-width:412px;margin-inline:auto 0}
+  @media(max-width:919px){.photo{margin-inline:auto}}
+  .photo__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;
+    color:var(--ink-3);text-transform:uppercase;margin-bottom:8px;padding-left:2px}
+  .field{position:relative;border:1px solid var(--border-strong);outline:1px solid var(--border);
+    outline-offset:4px;border-radius:2px;overflow:hidden;
+    background:#0C1310;aspect-ratio:1;width:100%;
     min-width:0;cursor:pointer;
     -webkit-tap-highlight-color:transparent}
-  @media(max-width:919px){.field{margin-inline:auto}}
   /* Two stacked canvases: the WebGL garden, and the crisp code drawn in 2D on
      top of it. Additive soft sprites are the opposite of what a camera needs,
      so the pretty half and the scannable half stay separate. */
@@ -124,19 +147,24 @@
   .exp__item{padding-block:28px;border-top:1px solid var(--border)}
   .exp__item h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
   .exp__item p{margin-top:8px;color:var(--ink-2);max-width:48ch;font-size:16px}
-  .exp__tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;list-style:none}
-  .exp__tags li{font-size:13px;color:var(--ink-3);background:var(--tint);
-    border-radius:999px;padding:4px 11px}
+  .exp__tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;list-style:none;
+    font-family:var(--font-mono)}
+  .exp__tags li{font-size:12px;color:var(--ink-3);background:var(--tint);
+    border:1px solid var(--border);border-radius:3px;padding:4px 9px;letter-spacing:.01em}
 
-  .how{margin-top:40px;background:var(--tint);border-radius:10px;padding:clamp(16px,2.5vw,28px)}
+  .how{margin-top:40px;background:var(--canvas-2);border:1px solid var(--border);
+    border-radius:6px;padding:clamp(16px,2.5vw,28px)}
   .how .dia{background:transparent}
   /* A step is a claim with the work that proves it directly underneath. The
      rule sits above the claim, so the eye reads claim-then-evidence rather
      than finding a project and hunting upward for what it demonstrates. */
   .step{padding-top:clamp(40px,5vw,64px);margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--border)}
-  .step__claim{display:grid;grid-template-columns:minmax(0,32px) minmax(0,1fr);gap:0 16px;align-items:start}
-  .step__n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;
-    color:var(--ink-4);padding-top:5px;font-variant-numeric:tabular-nums}
+  .step__claim{display:grid;grid-template-columns:minmax(0,46px) minmax(0,1fr);gap:0 18px;align-items:start}
+  /* entry stamps: a rubber-stamped ordinal, canted like an inked date stamp */
+  .step__n{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+    margin-top:2px;border:1.5px solid var(--stamp);border-radius:50%;
+    transform:rotate(-9deg);font-family:var(--font-mono);font-size:12px;font-weight:700;
+    color:var(--stamp);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
   .step__claim h3{font-size:clamp(21px,2.4vw,27px);font-weight:600;letter-spacing:-.018em}
   .step__claim p{margin-top:10px;color:var(--ink-2);font-size:17px;max-width:56ch;text-wrap:pretty}
   .step__proof{margin-top:28px;margin-left:48px}
@@ -149,11 +177,16 @@
   .roles{margin-top:48px}
   .role{display:grid;gap:6px;padding-block:32px;border-top:1px solid var(--border)}
   @media(min-width:860px){.role{grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:0 clamp(32px,5vw,72px)}}
-  .role__when{font-size:14px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  /* Entry/exit stamp: the dates that give a passport its shape. */
+  .role__when{font-family:var(--font-mono);font-size:13px;color:var(--ink-2);
+    font-variant-numeric:tabular-nums;letter-spacing:.01em}
   /* A drawn mark, not a scraped logo: real marks exist for two of seven
      employers, and a mixed set would be the loudest thing on the page. One
-     family, one weight, one optical size. */
-  .role__mark{display:flex;align-items:center;height:34px;margin-bottom:12px}
+     family, one weight, one optical size. Held inside a seal ring so it reads
+     as an office's stamp, not a sponsor badge. */
+  .role__mark{display:flex;align-items:center;justify-content:center;width:34px;height:34px;
+    margin-bottom:12px;border:1px solid var(--border-strong);border-radius:50%;
+    background:rgb(169 129 47 / 6%)}
   /* Optical sizing, not box sizing. Measured ink coverage inside a square box:
      crewio 85%, hkt 90% (solid tiles) against lifung 51%, shkp 55% (open marks).
      Each mark is scaled by sqrt(target/actual) so they carry equal weight. */
@@ -186,32 +219,34 @@
   .project__media{border-radius:10px;overflow:hidden;background:var(--tint)}
   .project__media img{width:100%;height:100%;object-fit:cover;display:block;
     filter:grayscale(1) contrast(1.04)}
-  .project__where{margin-top:4px;font-size:14px;color:var(--ink-3)}
+  .project__where{margin-top:4px;font-size:12.5px;color:var(--ink-2);font-family:var(--font-mono);
+    letter-spacing:.02em}
   .project h3{font-size:20px;font-weight:600;letter-spacing:-.014em}
   .project p{margin-top:10px;color:var(--ink-2);max-width:52ch;font-size:16px;text-wrap:pretty}
 
   /* project diagrams: the work explained, not illustrated. Same ink ladder as
      the page, so they read as part of the document rather than as pictures. */
-  .dia{width:100%;height:auto;display:block;background:var(--tint);border-radius:10px}
-  .dia .box{fill:var(--canvas);stroke:rgb(0 0 0 / 22%);stroke-width:1}
-  .dia .box--key{stroke:var(--ink);stroke-width:1.5}
-  .dia .edge{fill:none;stroke:rgb(0 0 0 / 34%);stroke-width:1.25}
+  .dia{width:100%;height:auto;display:block;background:var(--tint);border-radius:6px;
+    border:1px solid var(--border)}
+  .dia .box{fill:var(--canvas);stroke:rgb(var(--ink-rgb) / 26%);stroke-width:1}
+  .dia .box--key{stroke:var(--stamp);stroke-width:1.5}
+  .dia .edge{fill:none;stroke:rgb(var(--ink-rgb) / 38%);stroke-width:1.25}
   .dia .edge--stop{stroke-dasharray:4 4}
-  .dia .lbl{font-family:var(--font);font-size:12px;font-weight:500;fill:var(--ink)}
-  .dia .lbl--q{font-family:var(--font);font-size:11px;font-weight:400;fill:rgb(0 0 0 / 56%)}
-  .dia .gate{fill:none;stroke:var(--ink);stroke-width:1.5}
+  .dia .lbl{font-family:var(--font-mono);font-size:11.5px;font-weight:400;fill:var(--ink)}
+  .dia .lbl--q{font-family:var(--font-mono);font-size:10.5px;font-weight:400;fill:rgb(var(--ink-rgb) / 58%)}
+  .dia .gate{fill:none;stroke:var(--stamp);stroke-width:1.5}
   /* Edge labels sit clear of the arrow band rather than on it, so none of them
      needs a mask painted over the tinted ground -- a mask that then has to be
      kept in sync with the ground colour is how these drawings break. */
-  .dia .edge-lbl{font-family:var(--font);font-size:11px;font-weight:400;
-    fill:rgb(0 0 0 / 52%);letter-spacing:.005em}
-  .project__constraint{margin-top:16px;font-size:14px;color:var(--ink-3);
-    padding-left:14px;border-left:1px solid var(--border-strong)}
+  .dia .edge-lbl{font-family:var(--font-mono);font-size:10.5px;font-weight:400;
+    fill:rgb(var(--ink-rgb) / 54%);letter-spacing:.005em}
+  .project__constraint{margin-top:16px;font-size:13.5px;color:var(--ink-3);font-family:var(--font-mono);
+    padding-left:14px;border-left:2px solid var(--stamp)}
 
   .contact h2{font-size:clamp(26px,3.6vw,40px);max-width:24ch;letter-spacing:-.026em;line-height:1.12}
   .contact__actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
   .foot{margin-top:var(--chapter);padding-top:24px;border-top:1px solid var(--border);
-    display:grid;gap:8px;font-size:14px;color:var(--ink-3)}
+    display:grid;gap:8px;font-size:12.5px;color:var(--ink-3);font-family:var(--font-mono)}
   @media(min-width:720px){.foot{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
   .foot a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;
     text-decoration-color:var(--border-strong)}
@@ -252,16 +287,36 @@
 </style>
 </head>
 <body>
+<!--
+THESIS: the site as a passport — a record, not a pitch. Refuses the generic
+AI-founder gradient page and the plain-CV opposite.
+OWN-WORLD: burgundy/gold on security-paper cream, engraved-capital Spectral
+display, Source Serif 4 body, Courier Prime data lines; stamps, seals,
+double-ruled page frames; depth by paper overlap, never shadow.
+STORY: a visitor reads the data page (who, claim), then the stamp field
+(real posts and roles as dated entries), then applies at the back cover.
+FIRST VIEWPORT: data page — crest/name bar, headline and lede left, the
+garden/QR "photo" panel right in a ruled photo frame, primary action as an
+engraved plate button.
+FORM: The Well-Traveled Passport, direction 7 of 7, seed key 395b8dcc.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, DESIGN.md, and every shipping raster carrying
+its provenance.
+-->
 
 <svg width="0" height="0" aria-hidden="true" style="position:absolute">
   <defs>
     <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0 1 L7 4 L0 7" fill="none" stroke="rgb(0 0 0 / 34%)" stroke-width="1.2"/>
+      <path d="M0 1 L7 4 L0 7" fill="none" stroke="rgb(27 25 23 / 42%)" stroke-width="1.2"/>
     </marker>
   </defs>
 </svg>
 <header class="nav">
   <div class="nav__in">
+    <svg class="nav__crest" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2 4 5v6c0 5.2 3.4 9 8 11 4.6-2 8-5.8 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M12 8v8M8.5 10.5 12 8l3.5 2.5" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
     <span class="nav__name">Eric Tai</span>
     <nav class="nav__links" aria-label="Sections">
       <a href="/writing/">Writing</a>
@@ -286,11 +341,14 @@
           <a class="btn" href="https://www.linkedin.com/in/eric-cp-tai/" rel="me">LinkedIn</a>
         </div>
       </div>
-      <div class="field" data-in>
-        <canvas id="gardenGL"></canvas>
-        <canvas id="gardenFlat"></canvas>
-        <button type="button" class="field__hint" id="gardenHint"
-                aria-pressed="false" aria-controls="garden">Hover for my card</button>
+      <div class="photo" data-in>
+        <p class="photo__label">Specimen — hover to reveal</p>
+        <div class="field">
+          <canvas id="gardenGL"></canvas>
+          <canvas id="gardenFlat"></canvas>
+          <button type="button" class="field__hint" id="gardenHint"
+                  aria-pressed="false" aria-controls="garden">Hover for my card</button>
+        </div>
       </div>
     </div>
   </div>

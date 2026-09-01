@@ -9,22 +9,27 @@
 <link rel="canonical" href="https://cplog.github.io/trending/privacy/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  /* passport world, one-ink recipe: charcoal + signal red on security-paper cream. See /index.html for the direction contract. */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --canvas:#FFFFFF;--ink:#000000;--ink-2:rgb(0 0 0 / 64%);--ink-3:rgb(0 0 0 / 56%);
-    --ink-4:rgb(0 0 0 / 44%);--border:rgb(0 0 0 / 10%);--border-strong:rgb(0 0 0 / 18%);
-    --hover:rgb(0 0 0 / 5%);--font:"Inter",system-ui,-apple-system,sans-serif;
+    --canvas:#efe3c9;--ink-rgb:27 25 23;--ink:rgb(var(--ink-rgb));--ink-2:rgb(var(--ink-rgb) / 66%);--ink-3:rgb(var(--ink-rgb) / 56%);
+    --ink-4:rgb(var(--ink-rgb) / 44%);--border:rgb(var(--ink-rgb) / 16%);--border-strong:rgb(var(--ink-rgb) / 30%);
+    --hover:rgb(var(--ink-rgb) / 7%);--stamp:#c22a1e;--font:"Source Serif 4",Georgia,serif;
+    --font-display:"Spectral",Georgia,serif;--mono:"Courier Prime",ui-monospace,SFMono-Regular,Menlo,monospace;
     --pad:clamp(24px,5vw,64px);--maxw:760px;
+    --security-paper:repeating-linear-gradient(115deg, rgb(var(--ink-rgb) / 3.5%) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(25deg, rgb(var(--ink-rgb) / 3%) 0 1px, transparent 1px 9px);
   }
-  body{background:var(--canvas);color:var(--ink);font-family:var(--font);
+  body{background:var(--canvas) var(--security-paper);color:var(--ink);font-family:var(--font);
     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
   .wrap{width:min(var(--maxw),100% - var(--pad)*2);margin-inline:auto}
   a{color:inherit}
-  ::selection{background:var(--ink);color:var(--canvas)}
+  ::selection{background:var(--stamp);color:var(--canvas)}
+  h1,h2{font-family:var(--font-display)}
 
-  .nav{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / 88%);
+  .nav{position:sticky;top:0;z-index:50;background:rgb(239 227 201 / 90%);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   .nav__in{display:flex;align-items:center;gap:24px;height:64px;
     width:min(1200px,100% - var(--pad)*2);margin-inline:auto}
@@ -40,8 +45,8 @@
   h2{font-size:19px;font-weight:600;margin:32px 0 10px;letter-spacing:-.01em}
   p,li{color:var(--ink-2);margin-bottom:12px}
   ul{padding-left:1.3em;margin-bottom:12px}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;
-    background:rgb(0 0 0 / 4%);padding:1px 5px;border-radius:4px}
+  code{font-family:var(--mono);font-size:.92em;
+    background:rgb(var(--ink-rgb) / 6%);padding:1px 5px;border-radius:4px}
   .cta{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);
     font-size:14px;color:var(--ink-3)}
   .cta a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
