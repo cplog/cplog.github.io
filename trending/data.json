@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T22:55:01.455Z",
+  "generatedAt": "2026-09-01T05:18:01.123Z",
   "since": {
     "daily": [
       {
@@ -11,11 +11,11 @@
         "description": "Open Multi-Agent Interactive Classroom — Get an immersive, multi-agent learning experience in just one click",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 26881,
-        "totalForks": 4742,
-        "starsInPeriod": 2819,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 27774,
+        "totalForks": 4828,
+        "starsInPeriod": 2824,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "tt-a1i/archify",
@@ -26,11 +26,11 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 38522,
-        "totalForks": 2465,
-        "starsInPeriod": 3993,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 39586,
+        "totalForks": 2523,
+        "starsInPeriod": 3991,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "K-Dense-AI/scientific-agent-skills",
@@ -41,11 +41,11 @@
         "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 40681,
-        "totalForks": 3766,
-        "starsInPeriod": 1968,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 40933,
+        "totalForks": 3784,
+        "starsInPeriod": 1980,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "k1tbyte/Wand-Enhancer",
@@ -56,11 +56,11 @@
         "description": "Advanced UX and interoperability extension for Wand (WeMod) app",
         "language": "C#",
         "languageColor": "#7355dd",
-        "totalStars": 23343,
-        "totalForks": 59523,
-        "starsInPeriod": 511,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 23462,
+        "totalForks": 59690,
+        "starsInPeriod": 582,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "majd/ipatool",
@@ -71,11 +71,11 @@
         "description": "Command-line tool that allows searching and downloading app packages (known as ipa files) for iOS, iPadOS, tvOS, and visionOS from the App Store.",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 10514,
-        "totalForks": 895,
-        "starsInPeriod": 376,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 10610,
+        "totalForks": 898,
+        "starsInPeriod": 373,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "jingyaogong/minimind",
@@ -86,11 +86,11 @@
         "description": "🧠 Train a 64M-parameter LLM from scratch in just 2h!",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 56057,
-        "totalForks": 7313,
-        "starsInPeriod": 472,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 56371,
+        "totalForks": 7344,
+        "starsInPeriod": 495,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "Osmantic/ODS",
@@ -101,11 +101,11 @@
         "description": "Turn your PC, Mac, or Linux box into an AI server. LLM inference, chat UI, voice, agents, workflows, RAG, and image generation.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 5454,
-        "totalForks": 772,
-        "starsInPeriod": 163,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 5613,
+        "totalForks": 785,
+        "starsInPeriod": 77,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "checkstyle/checkstyle",
@@ -116,11 +116,11 @@
         "description": "Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard. By default it supports the Google Java Style Guide and Sun Code Conventions, but is highly configurable. It can be invoked with an ANT task and a command line program.",
         "language": "Java",
         "languageColor": "#b07219",
-        "totalStars": 9401,
-        "totalForks": 4206,
-        "starsInPeriod": 199,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 9448,
+        "totalForks": 4208,
+        "starsInPeriod": 198,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "zhaoxuya520/reverse-skill",
@@ -131,11 +131,11 @@
         "description": "Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 | 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端",
         "language": "PowerShell",
         "languageColor": "#012456",
-        "totalStars": 33072,
-        "totalForks": 4488,
-        "starsInPeriod": 1439,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 33343,
+        "totalForks": 4521,
+        "starsInPeriod": 1401,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "affaan-m/ECC",
@@ -146,11 +146,11 @@
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 245212,
-        "totalForks": 37046,
-        "starsInPeriod": 548,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 245356,
+        "totalForks": 37060,
+        "starsInPeriod": 512,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "kaifcodec/user-scanner",
@@ -161,11 +161,11 @@
         "description": "🕵️‍♂️ (2-in-1) Email & Username OSINT suite for deep data extraction just from a single Email/Username. Analyzes 465+ actively maintained scan vectors (175+ email / 290+ username) for security research, investigations, and digital footprinting.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 4200,
-        "totalForks": 444,
-        "starsInPeriod": 184,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 4362,
+        "totalForks": 452,
+        "starsInPeriod": 93,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "every-app/open-seo",
@@ -176,11 +176,11 @@
         "description": "Open source alternative to Semrush and Ahrefs",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 15720,
-        "totalForks": 1895,
-        "starsInPeriod": 608,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 15849,
+        "totalForks": 1910,
+        "starsInPeriod": 610,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "p-e-w/heretic",
@@ -191,11 +191,11 @@
         "description": "Fully automatic censorship removal for language models",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 29626,
-        "totalForks": 3247,
-        "starsInPeriod": 536,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 29749,
+        "totalForks": 3256,
+        "starsInPeriod": 537,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "handsomestWei/patent-disclosure-skill",
@@ -206,11 +206,11 @@
         "description": "中国专利.skill：专利点挖掘与交底书（发明/实用/外观）编写，通俗解读专利，嗅探政策动向，辅助审查答复。",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 6191,
-        "totalForks": 728,
+        "totalStars": 6368,
+        "totalForks": 740,
         "starsInPeriod": 571,
-        "streakDays": 1,
-        "isNew": true
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "firecrawl/pdf-inspector",
@@ -221,11 +221,11 @@
         "description": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 17334,
-        "totalForks": 1198,
-        "starsInPeriod": 199,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 17478,
+        "totalForks": 1205,
+        "starsInPeriod": 228,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "pollen-robotics/microduck_rl",
@@ -236,11 +236,11 @@
         "description": "RL training environments for Microduck (mjlab)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 1119,
-        "totalForks": 193,
-        "starsInPeriod": 384,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 1228,
+        "totalForks": 210,
+        "starsInPeriod": 385,
+        "streakDays": 2,
+        "isNew": false
       }
     ],
     "weekly": [
@@ -253,11 +253,11 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 38522,
-        "totalForks": 2465,
-        "starsInPeriod": 18103,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 39586,
+        "totalForks": 2523,
+        "starsInPeriod": 22095,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "freestylefly/awesome-gpt-image-2",
@@ -268,11 +268,11 @@
         "description": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 26339,
-        "totalForks": 2572,
-        "starsInPeriod": 13413,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 26535,
+        "totalForks": 2589,
+        "starsInPeriod": 11711,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "anthropics/claude-plugins-community",
@@ -283,11 +283,11 @@
         "description": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 3038,
-        "totalForks": 242,
-        "starsInPeriod": 2162,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 3070,
+        "totalForks": 245,
+        "starsInPeriod": 1846,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "omacom/omarchy",
@@ -298,11 +298,11 @@
         "description": "Beautiful, Modern & Opinionated Linux",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 36169,
-        "totalForks": 3742,
-        "starsInPeriod": 6692,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 36330,
+        "totalForks": 3766,
+        "starsInPeriod": 6382,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "THU-MAIC/OpenMAIC",
@@ -313,11 +313,11 @@
         "description": "Open Multi-Agent Interactive Classroom — Get an immersive, multi-agent learning experience in just one click",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 26881,
-        "totalForks": 4742,
-        "starsInPeriod": 2085,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 27776,
+        "totalForks": 4828,
+        "starsInPeriod": 5014,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "MadsLorentzen/ai-job-search",
@@ -328,11 +328,11 @@
         "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 39072,
-        "totalForks": 13249,
-        "starsInPeriod": 5348,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 39245,
+        "totalForks": 13296,
+        "starsInPeriod": 5463,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "apache/maka",
@@ -343,11 +343,11 @@
         "description": "Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 4317,
-        "totalForks": 405,
-        "starsInPeriod": 1973,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 4357,
+        "totalForks": 406,
+        "starsInPeriod": 1697,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "K-Dense-AI/scientific-agent-skills",
@@ -358,11 +358,11 @@
         "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 40681,
-        "totalForks": 3766,
-        "starsInPeriod": 4309,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 40933,
+        "totalForks": 3784,
+        "starsInPeriod": 6248,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "tashfeenahmed/freellmapi",
@@ -373,11 +373,11 @@
         "description": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. All behind one /v1 endpoint, plus any custom OpenAI-compatible endpoint. Smart routing, automatic failover, encrypted keys. Personal experimentation only.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 23317,
-        "totalForks": 3202,
-        "starsInPeriod": 3037,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 23388,
+        "totalForks": 3216,
+        "starsInPeriod": 3640,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "anthropics/claude-plugins-official",
@@ -388,11 +388,11 @@
         "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 35734,
-        "totalForks": 3987,
-        "starsInPeriod": 1940,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 35754,
+        "totalForks": 3990,
+        "starsInPeriod": 2024,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "rohitg00/ai-engineering-from-scratch",
@@ -403,11 +403,11 @@
         "description": "Learn it. Build it. Ship it for others.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 51576,
-        "totalForks": 8926,
-        "starsInPeriod": 3720,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 51652,
+        "totalForks": 8935,
+        "starsInPeriod": 3735,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "asciimoo/hister",
@@ -418,11 +418,11 @@
         "description": "Your own search engine",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 3423,
+        "totalStars": 3474,
         "totalForks": 155,
-        "starsInPeriod": 1006,
-        "streakDays": 1,
-        "isNew": true
+        "starsInPeriod": 936,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "cursor/plugins",
@@ -433,11 +433,11 @@
         "description": "Cursor plugin specification and official plugins",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 6379,
-        "totalForks": 517,
-        "starsInPeriod": 1503,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 6404,
+        "totalForks": 522,
+        "starsInPeriod": 1479,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "ConardLi/garden-skills",
@@ -448,11 +448,11 @@
         "description": "ConardLi's open-source Skills collection, featuring web design, knowledge retrieval, image generation, and more.",
         "language": "CSS",
         "languageColor": "#663399",
-        "totalStars": 11909,
+        "totalStars": 11939,
         "totalForks": 1464,
-        "starsInPeriod": 1222,
-        "streakDays": 1,
-        "isNew": true
+        "starsInPeriod": 1370,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "google/googletest",
@@ -463,11 +463,11 @@
         "description": "GoogleTest - Google Testing and Mocking Framework",
         "language": "C++",
         "languageColor": "#f34b7d",
-        "totalStars": 39408,
+        "totalStars": 39418,
         "totalForks": 10885,
-        "starsInPeriod": 441,
-        "streakDays": 1,
-        "isNew": true
+        "starsInPeriod": 471,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "abi/screenshot-to-code",
@@ -478,11 +478,11 @@
         "description": "Drop in a screenshot and convert it to clean code (HTML/Tailwind/React/Vue)",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 76697,
-        "totalForks": 9332,
-        "starsInPeriod": 1909,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 76751,
+        "totalForks": 9344,
+        "starsInPeriod": 2264,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "every-app/open-seo",
@@ -493,11 +493,11 @@
         "description": "Open source alternative to Semrush and Ahrefs",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 15720,
-        "totalForks": 1895,
-        "starsInPeriod": 1881,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 15849,
+        "totalForks": 1910,
+        "starsInPeriod": 2308,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "tinyhumansai/openhuman",
@@ -508,11 +508,11 @@
         "description": "Your Personal AI super intelligence. A brain that builds a local-first memory of your life, a fantastic orchestrator of agent fleets and workflows, and a deep researcher.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 39194,
-        "totalForks": 3854,
-        "starsInPeriod": 2526,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 39241,
+        "totalForks": 3856,
+        "starsInPeriod": 2227,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "p-e-w/heretic",
@@ -523,11 +523,11 @@
         "description": "Fully automatic censorship removal for language models",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 29626,
-        "totalForks": 3247,
-        "starsInPeriod": 992,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 29749,
+        "totalForks": 3256,
+        "starsInPeriod": 1439,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "AprilNEA/OpenLogi",
@@ -538,11 +538,11 @@
         "description": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 18164,
-        "totalForks": 537,
-        "starsInPeriod": 3406,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 18217,
+        "totalForks": 539,
+        "starsInPeriod": 2565,
+        "streakDays": 2,
+        "isNew": false
       }
     ],
     "monthly": [
@@ -555,11 +555,11 @@
         "description": "Beautiful, Modern & Opinionated Linux",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 36169,
-        "totalForks": 3742,
-        "starsInPeriod": 11259,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 36330,
+        "totalForks": 3766,
+        "starsInPeriod": 12040,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "freestylefly/awesome-gpt-image-2",
@@ -570,11 +570,11 @@
         "description": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 26339,
-        "totalForks": 2572,
-        "starsInPeriod": 16908,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 26535,
+        "totalForks": 2589,
+        "starsInPeriod": 17692,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "TencentCloud/TencentDB-Agent-Memory",
@@ -585,11 +585,11 @@
         "description": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 25412,
-        "totalForks": 2369,
-        "starsInPeriod": 15913,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 25465,
+        "totalForks": 2376,
+        "starsInPeriod": 15760,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "anthropics/claude-plugins-community",
@@ -600,11 +600,11 @@
         "description": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 3038,
-        "totalForks": 242,
-        "starsInPeriod": 2543,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 3070,
+        "totalForks": 245,
+        "starsInPeriod": 2749,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "firecrawl/pdf-inspector",
@@ -615,11 +615,11 @@
         "description": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 17334,
-        "totalForks": 1198,
-        "starsInPeriod": 15341,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 17478,
+        "totalForks": 1205,
+        "starsInPeriod": 15596,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "tt-a1i/archify",
@@ -630,11 +630,11 @@
         "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 38522,
-        "totalForks": 2465,
-        "starsInPeriod": 25275,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 39586,
+        "totalForks": 2523,
+        "starsInPeriod": 29539,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "cactus-compute/needle",
@@ -645,11 +645,11 @@
         "description": "14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 9880,
-        "totalForks": 639,
-        "starsInPeriod": 6450,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 9909,
+        "totalForks": 641,
+        "starsInPeriod": 6577,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "volcengine/OpenViking",
@@ -660,11 +660,11 @@
         "description": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 34693,
-        "totalForks": 2652,
-        "starsInPeriod": 6903,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 34776,
+        "totalForks": 2658,
+        "starsInPeriod": 7099,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "AprilNEA/OpenLogi",
@@ -675,11 +675,11 @@
         "description": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 18164,
-        "totalForks": 537,
-        "starsInPeriod": 9946,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 18217,
+        "totalForks": 539,
+        "starsInPeriod": 10223,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "zhaoxuya520/reverse-skill",
@@ -690,11 +690,11 @@
         "description": "Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 | 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端",
         "language": "PowerShell",
         "languageColor": "#012456",
-        "totalStars": 33072,
-        "totalForks": 4488,
-        "starsInPeriod": 21984,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 33343,
+        "totalForks": 4521,
+        "starsInPeriod": 22876,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "apache/maka",
@@ -705,11 +705,11 @@
         "description": "Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 4317,
-        "totalForks": 405,
-        "starsInPeriod": 3257,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 4357,
+        "totalForks": 406,
+        "starsInPeriod": 3378,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "modular/modular",
@@ -720,11 +720,11 @@
         "description": "The Modular Platform (includes MAX & Mojo)",
         "language": "Mojo",
         "languageColor": "#ff4c1f",
-        "totalStars": 29409,
-        "totalForks": 3128,
-        "starsInPeriod": 2825,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 29415,
+        "totalForks": 3129,
+        "starsInPeriod": 2868,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "megadose/holehe",
@@ -735,11 +735,11 @@
         "description": "holehe allows you to check if the mail is used on different sites like twitter, instagram and will retrieve information on sites with the forgotten password function.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 14520,
-        "totalForks": 1852,
-        "starsInPeriod": 2652,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 14548,
+        "totalForks": 1857,
+        "starsInPeriod": 2687,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "pingdotgg/t3code",
@@ -750,11 +750,11 @@
         "description": "",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 21196,
-        "totalForks": 5112,
-        "starsInPeriod": 5445,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 21246,
+        "totalForks": 5124,
+        "starsInPeriod": 5309,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "public-apis/public-apis",
@@ -765,11 +765,11 @@
         "description": "A collective list of free APIs",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 473768,
-        "totalForks": 52307,
-        "starsInPeriod": 20630,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 473888,
+        "totalForks": 52321,
+        "starsInPeriod": 20955,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "unclebob/swarm-forge",
@@ -780,11 +780,11 @@
         "description": "A simple tool for coordinating several AI agents.",
         "language": "Clojure",
         "languageColor": "#db5855",
-        "totalStars": 3448,
-        "totalForks": 340,
-        "starsInPeriod": 1897,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 3476,
+        "totalForks": 341,
+        "starsInPeriod": 1999,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "akitaonrails/ai-memory",
@@ -795,11 +795,11 @@
         "description": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 5347,
-        "totalForks": 368,
-        "starsInPeriod": 3902,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 5370,
+        "totalForks": 369,
+        "starsInPeriod": 4001,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "virgiliojr94/book-to-skill",
@@ -810,11 +810,11 @@
         "description": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 27569,
-        "totalForks": 2849,
-        "starsInPeriod": 13879,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 27644,
+        "totalForks": 2855,
+        "starsInPeriod": 13529,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "ayghri/i-have-adhd",
@@ -825,11 +825,11 @@
         "description": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 26057,
-        "totalForks": 1638,
-        "starsInPeriod": 11902,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 26147,
+        "totalForks": 1641,
+        "starsInPeriod": 11574,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "earendil-works/pi",
@@ -840,11 +840,11 @@
         "description": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 99969,
-        "totalForks": 12404,
-        "starsInPeriod": 18925,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 100106,
+        "totalForks": 12433,
+        "starsInPeriod": 18958,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "diegosouzapw/OmniRoute",
@@ -855,11 +855,11 @@
         "description": "Never stop coding. Free MIT AI gateway: one endpoint, 352 providers (150+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 550+ contributors",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 59270,
-        "totalForks": 8236,
-        "starsInPeriod": 24211,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 59409,
+        "totalForks": 8248,
+        "starsInPeriod": 23809,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "CodebuffAI/freebuff",
@@ -870,48 +870,24 @@
         "description": "The free coding agent",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 11369,
-        "totalForks": 1224,
-        "starsInPeriod": 3236,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 11398,
+        "totalForks": 1226,
+        "starsInPeriod": 3300,
+        "streakDays": 2,
+        "isNew": false
       }
     ]
   },
   "hn": [
-    {
-      "id": "hn:49507822",
-      "title": "OpenShot 4.0 – Open-source video editor",
-      "url": "https://www.openshot.org/blog/2026/08/30/openshot-40-record-edit-color-like-never-before/",
-      "hnUrl": "https://news.ycombinator.com/item?id=49507822",
-      "author": "metrofun",
-      "points": 512,
-      "numComments": 120,
-      "createdAt": "2026-08-31T09:59:05Z",
-      "streakDays": 1,
-      "isNew": true
-    },
     {
       "id": "hn:49510514",
       "title": "Playa Phone",
       "url": "https://playaphone.com/",
       "hnUrl": "https://news.ycombinator.com/item?id=49510514",
       "author": "cutoff",
-      "points": 444,
-      "numComments": 170,
+      "points": 561,
+      "numComments": 202,
       "createdAt": "2026-08-31T14:52:26Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49506819",
-      "title": "Breaking Claude Code Opus 5 Auto Mode",
-      "url": "https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/",
-      "hnUrl": "https://news.ycombinator.com/item?id=49506819",
-      "author": "Recursing",
-      "points": 332,
-      "numComments": 110,
-      "createdAt": "2026-08-31T07:49:18Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -921,8 +897,8 @@
       "url": "https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/",
       "hnUrl": "https://news.ycombinator.com/item?id=49511856",
       "author": "speckx",
-      "points": 313,
-      "numComments": 88,
+      "points": 427,
+      "numComments": 102,
       "createdAt": "2026-08-31T16:47:11Z",
       "streakDays": 1,
       "isNew": true
@@ -933,8 +909,8 @@
       "url": "https://www.macrumors.com/2026/08/30/apple-unexpected-mac-mini-and-studio-demand/",
       "hnUrl": "https://news.ycombinator.com/item?id=49508982",
       "author": "thm",
-      "points": 250,
-      "numComments": 280,
+      "points": 359,
+      "numComments": 401,
       "createdAt": "2026-08-31T12:41:22Z",
       "streakDays": 1,
       "isNew": true
@@ -945,81 +921,9 @@
       "url": "https://www.rockpapershotgun.com/dwarf-fortress-is-getting-the-mother-of-all-magic-updates-extending-to-the-fundamental-cosmological-makeup-of-the-universe",
       "hnUrl": "https://news.ycombinator.com/item?id=49467636",
       "author": "Tomte",
-      "points": 244,
-      "numComments": 94,
+      "points": 350,
+      "numComments": 131,
       "createdAt": "2026-08-27T16:45:22Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49514878",
-      "title": "Google Has Removed MV2 Extensions from the Chrome Web Store, Including UBO",
-      "url": "https://webiterate.dev/google-removed-extensions-ublock-origin-108/",
-      "hnUrl": "https://news.ycombinator.com/item?id=49514878",
-      "author": "twapi",
-      "points": 225,
-      "numComments": 180,
-      "createdAt": "2026-08-31T21:10:58Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49508506",
-      "title": "I think the military commissary's freezers were hacked",
-      "url": "https://signalandsilence.substack.com/p/i-think-someone-hacked-the-commissary",
-      "hnUrl": "https://news.ycombinator.com/item?id=49508506",
-      "author": "jcurbo",
-      "points": 206,
-      "numComments": 120,
-      "createdAt": "2026-08-31T11:45:48Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49510000",
-      "title": "ChatGPT Work Tool and Skill Reference",
-      "url": "https://codex-tool-reference.simonw.chatgpt.site/",
-      "hnUrl": "https://news.ycombinator.com/item?id=49510000",
-      "author": "ijidak",
-      "points": 163,
-      "numComments": 49,
-      "createdAt": "2026-08-31T14:07:15Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49512975",
-      "title": "A walkable ASCII cyberpunk city in one HTML file [video]",
-      "url": "https://www.youtube.com/watch?v=3YtygAx_C6A",
-      "hnUrl": "https://news.ycombinator.com/item?id=49512975",
-      "author": "keithcarolus",
-      "points": 159,
-      "numComments": 28,
-      "createdAt": "2026-08-31T18:21:33Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49504905",
-      "title": "Internet centralization and the original sin of NAT",
-      "url": "https://dreamstation.systems/personal/ntppost.html",
-      "hnUrl": "https://news.ycombinator.com/item?id=49504905",
-      "author": "robinpie",
-      "points": 158,
-      "numComments": 115,
-      "createdAt": "2026-08-31T02:23:03Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49511534",
-      "title": "ravynOS: Pre-alpha open-source OS based on Darwin, FreeBSD, Apple open-source",
-      "url": "https://ravynos.com/",
-      "hnUrl": "https://news.ycombinator.com/item?id=49511534",
-      "author": "Bluestein",
-      "points": 143,
-      "numComments": 93,
-      "createdAt": "2026-08-31T16:19:36Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -1029,9 +933,69 @@
       "url": "https://www.youtube.com/watch?v=OOMx2BHHWtE",
       "hnUrl": "https://news.ycombinator.com/item?id=49503521",
       "author": "matthewsinclair",
-      "points": 127,
-      "numComments": 17,
+      "points": 321,
+      "numComments": 34,
       "createdAt": "2026-08-30T22:37:01Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49508506",
+      "title": "I think the military commissary's freezers were hacked",
+      "url": "https://signalandsilence.substack.com/p/i-think-someone-hacked-the-commissary",
+      "hnUrl": "https://news.ycombinator.com/item?id=49508506",
+      "author": "jcurbo",
+      "points": 303,
+      "numComments": 163,
+      "createdAt": "2026-08-31T11:45:48Z",
+      "streakDays": 2,
+      "isNew": false
+    },
+    {
+      "id": "hn:49512975",
+      "title": "A walkable ASCII cyberpunk city in one HTML file [video]",
+      "url": "https://www.youtube.com/watch?v=3YtygAx_C6A",
+      "hnUrl": "https://news.ycombinator.com/item?id=49512975",
+      "author": "keithcarolus",
+      "points": 274,
+      "numComments": 35,
+      "createdAt": "2026-08-31T18:21:33Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49510000",
+      "title": "ChatGPT Work Tool and Skill Reference",
+      "url": "https://codex-tool-reference.simonw.chatgpt.site/",
+      "hnUrl": "https://news.ycombinator.com/item?id=49510000",
+      "author": "ijidak",
+      "points": 204,
+      "numComments": 53,
+      "createdAt": "2026-08-31T14:07:15Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49511534",
+      "title": "RavynOS: Pre-alpha open-source OS based on Darwin, FreeBSD, Apple open-source",
+      "url": "https://ravynos.com/",
+      "hnUrl": "https://news.ycombinator.com/item?id=49511534",
+      "author": "Bluestein",
+      "points": 186,
+      "numComments": 106,
+      "createdAt": "2026-08-31T16:19:36Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49515830",
+      "title": "Run macOS Software on Linux",
+      "url": "https://www.darlinghq.org/",
+      "hnUrl": "https://news.ycombinator.com/item?id=49515830",
+      "author": "Bluestein",
+      "points": 184,
+      "numComments": 56,
+      "createdAt": "2026-08-31T22:53:45Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -1041,33 +1005,9 @@
       "url": "https://www.chosun.com/english/industry-en/2026/08/30/SBFXUIJQYZEARKP5T4FBAY25HQ/",
       "hnUrl": "https://news.ycombinator.com/item?id=49496292",
       "author": "geox",
-      "points": 117,
-      "numComments": 31,
+      "points": 183,
+      "numComments": 53,
       "createdAt": "2026-08-30T06:52:04Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49433481",
-      "title": "Tmp.0ut, Vol. 5",
-      "url": "https://tmpout.sh/5/",
-      "hnUrl": "https://news.ycombinator.com/item?id=49433481",
-      "author": "kmstout",
-      "points": 113,
-      "numComments": 5,
-      "createdAt": "2026-08-25T13:15:10Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49495171",
-      "title": "No country for mediocre mathematicians",
-      "url": "https://garvvee.substack.com/p/no-country-for-mediocre-mathematicians",
-      "hnUrl": "https://news.ycombinator.com/item?id=49495171",
-      "author": "reasonableklout",
-      "points": 112,
-      "numComments": 65,
-      "createdAt": "2026-08-30T02:35:14Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -1077,21 +1017,9 @@
       "url": "https://nullpt.rs/reverse-engineering-adhd-test",
       "hnUrl": "https://news.ycombinator.com/item?id=49467700",
       "author": "hazebooth",
-      "points": 110,
-      "numComments": 34,
+      "points": 175,
+      "numComments": 96,
       "createdAt": "2026-08-27T16:49:40Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:49487099",
-      "title": "Dimethyl Mercury Exposure Incident at MIT",
-      "url": "https://twitter.com/andrew_n_carr/status/2093524390390694232",
-      "hnUrl": "https://news.ycombinator.com/item?id=49487099",
-      "author": "notRobot",
-      "points": 101,
-      "numComments": 63,
-      "createdAt": "2026-08-29T05:17:59Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -1101,21 +1029,93 @@
       "url": "https://laser.consti.de",
       "hnUrl": "https://news.ycombinator.com/item?id=49489376",
       "author": "con",
-      "points": 97,
-      "numComments": 21,
+      "points": 157,
+      "numComments": 32,
       "createdAt": "2026-08-29T12:28:11Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:49476239",
-      "title": "'Mad honey' that can stop your heart is being sold online",
-      "url": "https://phys.org/news/2026-08-mad-honey-heart-sold-online.html",
-      "hnUrl": "https://news.ycombinator.com/item?id=49476239",
-      "author": "samizdis",
-      "points": 71,
-      "numComments": 51,
-      "createdAt": "2026-08-28T09:17:27Z",
+      "id": "hn:49516199",
+      "title": "Evidence of Fraud in an Influential Study About Procrastination",
+      "url": "https://datacolada.org/138",
+      "hnUrl": "https://news.ycombinator.com/item?id=49516199",
+      "author": "Anon84",
+      "points": 133,
+      "numComments": 90,
+      "createdAt": "2026-08-31T23:45:56Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49517448",
+      "title": "Fastpotify",
+      "url": "https://fastpotify.rocks/",
+      "hnUrl": "https://news.ycombinator.com/item?id=49517448",
+      "author": "nreece",
+      "points": 109,
+      "numComments": 40,
+      "createdAt": "2026-09-01T02:52:14Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49500504",
+      "title": "Cheap GPS jammers are filling the world with navigation dead zones",
+      "url": "https://www.wsj.com/tech/gps-jammers-dead-zones-e76f3261",
+      "hnUrl": "https://news.ycombinator.com/item?id=49500504",
+      "author": "vinnyglennon",
+      "points": 100,
+      "numComments": 101,
+      "createdAt": "2026-08-30T17:05:32Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49494181",
+      "title": "Lion-man",
+      "url": "https://en.wikipedia.org/wiki/Lion-man",
+      "hnUrl": "https://news.ycombinator.com/item?id=49494181",
+      "author": "gurjeet",
+      "points": 91,
+      "numComments": 43,
+      "createdAt": "2026-08-29T23:17:15Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49515662",
+      "title": "Develop Cross-Platform CLI and GUI Tools with Tcl/Tk",
+      "url": "https://cgicoffee.com/blog/2026/04/tcl-tk-develop-cross-platform-cli-gui-tools-tutorial-guide",
+      "hnUrl": "https://news.ycombinator.com/item?id=49515662",
+      "author": "aryonoco",
+      "points": 75,
+      "numComments": 39,
+      "createdAt": "2026-08-31T22:32:22Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49516699",
+      "title": "2004 RuneScape fit a multiplayer RPG into 56k dial-up",
+      "url": "https://jkm.dev/posts/how-2004-runescape-fit-a-multiplayer-rpg-into-56k-dialup/",
+      "hnUrl": "https://news.ycombinator.com/item?id=49516699",
+      "author": "fagnerbrack",
+      "points": 74,
+      "numComments": 40,
+      "createdAt": "2026-09-01T01:01:08Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:49517537",
+      "title": "Google Antigravity introduces Boost deep reasoning (/boost)",
+      "url": "https://antigravity.google/docs/boost/",
+      "hnUrl": "https://news.ycombinator.com/item?id=49517537",
+      "author": "simonpure",
+      "points": 52,
+      "numComments": 34,
+      "createdAt": "2026-09-01T03:05:55Z",
       "streakDays": 1,
       "isNew": true
     }
