@@ -31,7 +31,7 @@
     --ink:rgb(var(--ink-rgb));
     --ink-2:rgb(var(--ink-rgb) / 66%);
     --ink-3:rgb(var(--ink-rgb) / 56%);  /* lifted: real reading sits here */
-    --ink-4:rgb(var(--ink-rgb) / 44%);  /* glyphs and genuinely optional text */
+    --ink-4:rgb(var(--ink-rgb) / 49%);  /* glyphs and non-text marks only; 3.08:1, never body copy */
     --border:rgb(var(--ink-rgb) / 16%);
     --border-strong:rgb(var(--ink-rgb) / 30%);
     --hover:rgb(var(--ink-rgb) / 7%);
@@ -169,7 +169,7 @@
   .step__claim p{margin-top:10px;color:var(--ink-2);font-size:17px;max-width:56ch;text-wrap:pretty}
   .step__proof{margin-top:28px;margin-left:48px}
   @media(max-width:700px){.step__proof{margin-left:0}}
-  .step__lab{font-size:13px;color:var(--ink-4);text-transform:uppercase;letter-spacing:.07em;
+  .step__lab{font-size:13px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.07em;
     margin-bottom:16px}
   /* inside a step the project is evidence, not a headline act */
   .step__proof .project h3{font-size:18px}
