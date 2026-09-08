@@ -2,15 +2,46 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.181.0/build/three.m
 
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// The portrait is a flat plane, so it can never supply depth on its own:
-// parallax on one plane is a slide. The depth here comes from three bands of
-// embers at different distances, which shift against the portrait by different
-// amounts as the camera moves. Everything also drifts on its own, because a
-// touch device has no pointer and would otherwise see a static picture.
+// The portrait is a depth-displaced relief, not a flat plane. A monocular
+// depth map (Depth Anything V2, generated once and committed) pushes the
+// vertices of a subdivided quad along z, so the child stands forward of the
+// rampart and the sky falls away behind it. That is what makes the parallax
+// read as depth rather than as the picture sliding.
+//
+// It is a relief, not a model: there is no data behind the child, so past
+// roughly 25 degrees the disocclusion starts to smear. The camera range below
+// is set to stay inside that. Ember bands sit in front of and behind the
+// relief, and everything drifts on its own, because a touch device has no
+// pointer and would otherwise see a static picture.
 const EMBERS = 150;
 const NEAR = -0.55; // ember band nearest the camera, in front of the portrait
 const FAR = 1.35;   // furthest band, behind it
 const SPAN = 3.2;   // vertical distance an ember travels before it respawns
+const RELIEF = 0.62; // world units between the furthest and nearest depth
+
+const portraitVertex = /* glsl */ `
+  uniform sampler2D uDepth;
+  uniform float uRelief;
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    // Depth map: 1 is near, 0 is far. Centred so the relief grows around the
+    // plane rather than pushing the whole image at the camera.
+    float d = texture2D(uDepth, uv).r;
+    vec3 p = position;
+    p.z += (d - 0.5) * uRelief;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+  }
+`;
+
+const portraitFragment = /* glsl */ `
+  uniform sampler2D uMap;
+  varying vec2 vUv;
+  void main() {
+    gl_FragColor = texture2D(uMap, vUv);
+    #include <colorspace_fragment>
+  }
+`;
 
 const emberVertex = /* glsl */ `
   attribute float aSeed;
@@ -53,6 +84,7 @@ const emberFragment = /* glsl */ `
     vec3 cool = vec3(0.78, 0.22, 0.06);
     vec3 hot  = vec3(1.0, 0.72, 0.32);
     gl_FragColor = vec4(mix(cool, hot, vHeat), a * vFade * (0.18 + 0.42 * vHeat));
+    #include <colorspace_fragment>
   }
 `;
 
@@ -107,25 +139,44 @@ export class SiegeScene {
   }
 
   loadPortrait(onReady) {
-    new THREE.TextureLoader().load(
-      "./assets/hero/siege-baby.webp",
-      (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.anisotropy = Math.min(4, this.renderer.capabilities.getMaxAnisotropy());
-        const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-        // A unit plane, then scaled to cover the frame in resize(). The old
-        // fixed 2x3 showed only 78% of the art at this frustum and cropped the
-        // rest arbitrarily.
-        this.portrait = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
-        this.portraitAspect = texture.image.width / texture.image.height;
-        this.scene.add(this.portrait);
-        this.resize();
-        onReady?.();
-        this.render();
-      },
-      undefined,
-      () => { /* The semantic <img> remains visible if the texture cannot load. */ },
-    );
+    const loader = new THREE.TextureLoader();
+    // Both maps must be present before the relief means anything, so the
+    // fallback <img> stays up until the pair has landed.
+    Promise.all([
+      loader.loadAsync("./assets/hero/siege-baby.webp"),
+      loader.loadAsync("./assets/hero/siege-depth.webp"),
+    ]).then(([colour, depth]) => {
+      colour.colorSpace = THREE.SRGBColorSpace;
+      colour.anisotropy = Math.min(4, this.renderer.capabilities.getMaxAnisotropy());
+      // The depth map is data, not colour: no sRGB decode, and linear filtering
+      // so the displacement is smooth between texels.
+      depth.colorSpace = THREE.NoColorSpace;
+      depth.minFilter = THREE.LinearFilter;
+      depth.magFilter = THREE.LinearFilter;
+      depth.generateMipmaps = false;
+
+      this.portraitUniforms = {
+        uMap: { value: colour },
+        uDepth: { value: depth },
+        uRelief: { value: RELIEF },
+      };
+      // A unit quad, subdivided so there are vertices for the depth map to
+      // move, then cover-fitted in resize(). The old fixed 2x3 flat plane
+      // showed only 78% of the art at this frustum and cropped the rest.
+      this.portrait = new THREE.Mesh(
+        new THREE.PlaneGeometry(1, 1, 96, 144),
+        new THREE.ShaderMaterial({
+          uniforms: this.portraitUniforms,
+          vertexShader: portraitVertex,
+          fragmentShader: portraitFragment,
+        }),
+      );
+      this.portraitAspect = colour.image.width / colour.image.height;
+      this.scene.add(this.portrait);
+      this.resize();
+      onReady?.();
+      this.render();
+    }).catch(() => { /* The semantic <img> remains visible if either map fails. */ });
   }
 
   addEmbers() {
@@ -191,8 +242,13 @@ export class SiegeScene {
     if (this.portrait) {
       const vh = 2 * this.camera.position.z * Math.tan((this.camera.fov * Math.PI) / 360);
       const vw = vh * this.camera.aspect;
-      const overscan = 1.1;
+      // Sized empirically at full pointer deflection: the relief's receded
+      // half shrinks toward the camera's far distance, the keystone trims a
+      // little more, and 1.2 left the left edge showing the backing.
+      const overscan = 1.36;
       const scale = Math.max(vw / this.portraitAspect, vh) * overscan;
+      // Scale x and y only. Scaling z would multiply the relief with the
+      // frame size and make the depth breathe as the window resizes.
       this.portrait.scale.set(scale * this.portraitAspect, scale, 1);
     }
     this.emberUniforms.uScale.value = 0.5 * this.renderer.domElement.height;
@@ -228,14 +284,15 @@ export class SiegeScene {
     const x = this.pointer.x + driftX;
     const y = this.pointer.y + driftY;
 
-    this.camera.position.x = x * 0.42;
-    this.camera.position.y = -y * 0.3;
+    this.camera.position.x = x * 0.62;
+    this.camera.position.y = -y * 0.42;
     this.camera.lookAt(0, 0, 0);
     if (this.portrait) {
       // Counter-move the portrait a little so it lags the camera. The embers
       // do not, which is what separates them in depth.
-      this.portrait.position.x = x * 0.1;
-      this.portrait.position.y = -y * 0.07;
+      // No counter-move. The relief supplies the depth, so sliding the plane
+      // as well only fights that parallax and spends frame coverage.
+      this.portrait.position.set(0, 0, 0);
     }
     this.renderer.render(this.scene, this.camera);
   }
@@ -249,7 +306,8 @@ export class SiegeScene {
     this.embers?.geometry.dispose();
     this.embers?.material.dispose();
     this.portrait?.geometry.dispose();
-    this.portrait?.material.map?.dispose();
+    this.portraitUniforms?.uMap.value.dispose();
+    this.portraitUniforms?.uDepth.value.dispose();
     this.portrait?.material.dispose();
     this.renderer?.dispose();
   }
