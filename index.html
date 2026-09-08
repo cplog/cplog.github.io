@@ -95,6 +95,48 @@
   .hero__lede{margin-top:24px;font-size:18px;color:var(--ink-2);max-width:56ch;text-wrap:pretty}
   .hero__meta{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
 
+  /* Original siege-drama interruption. The page remains a portfolio, so this
+     is a single contained world in the first viewport rather than borrowed
+     franchise art or a site-wide costume. */
+  .siege-hero{padding:0;background:#111012;isolation:isolate;overflow:hidden;position:relative}
+  .siege-hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.72;
+    background:radial-gradient(ellipse at 78% 16%,rgb(202 61 27 / 34%),transparent 38%),
+      linear-gradient(120deg,rgb(10 12 17 / 95%),rgb(30 18 18 / 88%) 58%,rgb(51 21 17 / 82%));}
+  .siege-hero .hero{position:relative;z-index:1;padding-block:clamp(48px,7vw,88px)}
+  .siege-hero .hero__role{color:#f2794c;border-color:rgb(255 255 255 / 21%)}
+  .siege-hero h1{color:#fff7eb;text-wrap:balance}
+  .siege-hero h1 span,.siege-hero .hero__lede{color:rgb(255 241 224 / 76%)}
+  .siege-hero .btn{color:#fff7eb;background:rgb(255 255 255 / 8%);border-color:rgb(255 255 255 / 32%)}
+  .siege-hero .btn--primary{background:#a92d1d;border-color:#d54d31}
+  @media (hover:hover) and (pointer:fine){.siege-hero .btn:hover{background:rgb(255 255 255 / 15%);border-color:#f2794c}.siege-hero .btn--primary:hover{background:#cf3d25}}
+
+  /* The nav is sticky and lives outside the hero section, so it cannot inherit
+     the dark world by descent. The class is toggled while the hero is on
+     screen; without the scope the nav stays dark over the cream chapters. */
+  .nav.is-over-hero{background:rgb(16 14 16 / 92%);border-bottom-color:rgb(255 234 217 / 18%)}
+  .nav.is-over-hero .nav__name{color:#fff4e5}
+  .nav.is-over-hero .nav__crest{color:#f2794c}
+  .nav.is-over-hero .nav__links a{color:rgb(255 236 219 / 68%)}
+  .nav.is-over-hero .nav__links a[aria-current="true"]{color:#fff4e5;background:rgb(255 255 255 / 9%)}
+  @media (hover:hover) and (pointer:fine){.nav.is-over-hero .nav__links a:hover{color:#fff4e5;background:rgb(255 255 255 / 9%)}}
+
+  .siege-panel{width:100%;max-width:428px;margin-inline:auto 0}
+  @media(max-width:919px){.siege-panel{margin-inline:auto}}
+  .siege-panel__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;
+    color:rgb(255 241 224 / 64%);text-transform:uppercase;margin-bottom:8px;padding-left:2px}
+  .siege-scene{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:2 / 3;
+    border:1px solid rgb(255 229 207 / 40%);outline:1px solid rgb(255 255 255 / 14%);outline-offset:4px;
+    background:#171316;box-shadow:0 24px 64px rgb(0 0 0 / 38%)}
+  .siege-scene::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:linear-gradient(180deg,rgb(0 0 0 / 3%) 45%,rgb(0 0 0 / 35%)),repeating-linear-gradient(90deg,rgb(255 255 255 / 2%) 0 1px,transparent 1px 5px)}
+  .siege-scene canvas,.siege-scene img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+  .siege-scene canvas{z-index:2;cursor:crosshair}
+  .siege-scene img{z-index:1}
+  .siege-scene img[hidden]{display:none}
+  .siege-scene__tag{position:absolute;z-index:4;left:14px;bottom:14px;max-width:22ch;
+    color:rgb(255 244 230 / 85%);font-family:var(--font-mono);font-size:10px;line-height:1.5;
+    letter-spacing:.09em;text-transform:uppercase;text-shadow:0 1px 10px #000}
+
   /* Engraved plate buttons: a passport's stamped metal plates, not app chrome. */
   .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);
     font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
@@ -328,11 +370,12 @@ its provenance.
 </header>
 
 <main>
+  <section class="siege-hero" aria-labelledby="home-heading">
   <div class="wrap hero">
     <div class="hero__grid">
       <div data-in>
         <p class="hero__role">Forward-deployed engineer</p>
-        <h1>Most enterprise AI never <span>leaves the pilot.</span></h1>
+        <h1 id="home-heading">Most enterprise AI never <span>leaves the pilot.</span></h1>
         <p class="hero__lede">I get it out. Embedded with the customer, on their own data, one
           workflow live in weeks rather than a deck that impresses and dies. Currently leading
           engineering on an agent and knowledge platform in Hong Kong.</p>
@@ -341,17 +384,17 @@ its provenance.
           <a class="btn" href="https://www.linkedin.com/in/eric-cp-tai/" rel="me">LinkedIn</a>
         </div>
       </div>
-      <div class="photo" data-in>
-        <p class="photo__label">Specimen — hover to reveal</p>
-        <div class="field">
-          <canvas id="gardenGL"></canvas>
-          <canvas id="gardenFlat"></canvas>
-          <button type="button" class="field__hint" id="gardenHint"
-                  aria-pressed="false" aria-controls="garden">Hover for my card</button>
+      <div class="siege-panel" data-in>
+        <p class="siege-panel__label">Field portrait — sector zero</p>
+        <div class="siege-scene" role="img" aria-label="A cute 3D child character on a dramatic fictional citadel rampart at dusk">
+          <img id="siegeFallback" src="./assets/hero/siege-baby.png" alt="Cute 3D child character on an original fictional citadel rampart at dusk">
+          <canvas id="siegeGL" aria-hidden="true"></canvas>
+          <p class="siege-scene__tag">A small light<br>against a long night</p>
         </div>
       </div>
     </div>
   </div>
+  </section>
 
   <section id="how"><div class="wrap">
     <div class="chapter__head" data-in>
@@ -718,35 +761,30 @@ its provenance.
   }), { rootMargin: "0px 0px -15% 0px" });
   document.querySelectorAll(".dia").forEach((d) => drawIo.observe(d));
 
-  // 132KB of three.js, so it is fetched after first paint rather than before:
-  // the claim and the contact buttons never wait on the picture.
+  // The hero scene is deferred: the title and contact controls are useful
+  // without WebGL, and the matching image underneath is a genuine fallback.
   {
-    const box = document.querySelector(".field");
-    const hint = document.getElementById("gardenHint");
-    const { Garden } = await import("./assets/card/garden.js");
-    const g = new Garden(document.getElementById("gardenGL"),
-                         document.getElementById("gardenFlat"));
-    // WebGL can be unavailable or blocked. Rather than leave an empty frame,
-    // drop the panel and let the hero close up around the text.
-    if (g.failed) box.remove();
-    else {
-
-    let pinned = false;
-    const set = (on) => {
-      g.to(on ? 1 : 0);
-      box.classList.toggle("is-qr", on);
-      hint.setAttribute("aria-pressed", String(on));
-    };
-    const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
-    hint.textContent = fine ? "Hover for my card" : "Tap for my card";
-
-    if (fine) {
-      box.addEventListener("pointerenter", () => set(true));
-      box.addEventListener("pointerleave", () => { if (!pinned) set(false); });
+    const fallback = document.getElementById("siegeFallback");
+    try {
+      const { SiegeScene } = await import("./assets/hero/siege-scene.js");
+      const scene = new SiegeScene(document.getElementById("siegeGL"), {
+        onReady: () => { fallback.hidden = true; },
+      });
+      if (scene.failed) throw new Error("WebGL unavailable");
+      addEventListener("pagehide", () => scene.destroy(), { once: true });
+    } catch (error) {
+      console.warn("Hero scene unavailable; serving static fallback.", error);
     }
-    // Click pins it. Someone holding the screen out to another person needs the
-    // code to stay up, and on touch there is no hover to hold it there.
-    box.addEventListener("click", () => { pinned = !pinned; set(pinned); });
+  }
+
+  // Carry the hero's dark world onto the sticky nav, and only there.
+  {
+    const hero = document.querySelector(".siege-hero");
+    const nav = document.querySelector(".nav");
+    if (hero && nav) {
+      new IntersectionObserver(([entry]) => {
+        nav.classList.toggle("is-over-hero", entry.isIntersecting);
+      }, { rootMargin: "-64px 0px 0px 0px" }).observe(hero);
     }
   }
 
