@@ -57,7 +57,7 @@ export class SiegeScene {
 
   loadPortrait(onReady) {
     new THREE.TextureLoader().load(
-      "./assets/hero/siege-baby.png",
+      "./assets/hero/siege-baby.webp",
       (texture) => {
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.anisotropy = Math.min(4, this.renderer.capabilities.getMaxAnisotropy());
