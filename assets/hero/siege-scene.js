@@ -2,9 +2,60 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.181.0/build/three.m
 
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// A deliberately small Three.js scene: the generated portrait is a textured
-// plane and the depth comes from separate ember particles and pointer parallax.
-// It degrades to the <img> below the canvas if either WebGL or the CDN fails.
+// The portrait is a flat plane, so it can never supply depth on its own:
+// parallax on one plane is a slide. The depth here comes from three bands of
+// embers at different distances, which shift against the portrait by different
+// amounts as the camera moves. Everything also drifts on its own, because a
+// touch device has no pointer and would otherwise see a static picture.
+const EMBERS = 150;
+const NEAR = -0.55; // ember band nearest the camera, in front of the portrait
+const FAR = 1.35;   // furthest band, behind it
+const SPAN = 3.2;   // vertical distance an ember travels before it respawns
+
+const emberVertex = /* glsl */ `
+  attribute float aSeed;
+  attribute float aSpeed;
+  attribute float aSize;
+  attribute float aSway;
+  uniform float uTime;
+  uniform float uScale;
+  varying float vHeat;
+  varying float vFade;
+
+  void main() {
+    vec3 p = position;
+    // Rise and wrap. mod() respawns each ember at the bottom without any
+    // CPU-side bookkeeping, so the whole field is one draw call.
+    float y = mod(p.y + uTime * aSpeed + aSeed * SPAN_C, SPAN_C) - SPAN_C * 0.5;
+    p.x += sin(uTime * aSway + aSeed * 6.2831) * 0.18;
+    p.y = y;
+
+    // Flicker, and fade out over the top third of the rise so embers die
+    // rather than vanishing at a hard edge.
+    vHeat = 0.55 + 0.45 * sin(uTime * (2.4 + aSway * 3.0) + aSeed * 21.7);
+    float life = (y + SPAN_C * 0.5) / SPAN_C;
+    vFade = smoothstep(0.0, 0.14, life) * (1.0 - smoothstep(0.62, 1.0, life));
+
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    gl_PointSize = aSize * uScale / -mv.z;
+    gl_Position = projectionMatrix * mv;
+  }
+`.replace(/SPAN_C/g, SPAN.toFixed(4));
+
+const emberFragment = /* glsl */ `
+  varying float vHeat;
+  varying float vFade;
+  void main() {
+    // Soft round sprite from point coordinates: no texture to download.
+    float d = length(gl_PointCoord - 0.5);
+    float a = smoothstep(0.5, 0.02, d);
+    a *= a;
+    vec3 cool = vec3(0.78, 0.22, 0.06);
+    vec3 hot  = vec3(1.0, 0.72, 0.32);
+    gl_FragColor = vec4(mix(cool, hot, vHeat), a * vFade * (0.18 + 0.42 * vHeat));
+  }
+`;
+
 export class SiegeScene {
   constructor(canvas, { onReady } = {}) {
     this.canvas = canvas;
@@ -62,8 +113,13 @@ export class SiegeScene {
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.anisotropy = Math.min(4, this.renderer.capabilities.getMaxAnisotropy());
         const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-        this.portrait = new THREE.Mesh(new THREE.PlaneGeometry(2, 3), material);
+        // A unit plane, then scaled to cover the frame in resize(). The old
+        // fixed 2x3 showed only 78% of the art at this frustum and cropped the
+        // rest arbitrarily.
+        this.portrait = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+        this.portraitAspect = texture.image.width / texture.image.height;
         this.scene.add(this.portrait);
+        this.resize();
         onReady?.();
         this.render();
       },
@@ -73,29 +129,50 @@ export class SiegeScene {
   }
 
   addEmbers() {
-    const count = 96;
-    const positions = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      // Fixed arithmetic gives each deploy the same art direction, rather than
-      // a page that changes character on every refresh.
-      const seed = (i * 0.61803398875) % 1;
-      positions[i * 3] = (seed - 0.5) * 3.2;
-      positions[i * 3 + 1] = (((i * 0.371) % 1) - 0.5) * 4.2;
-      positions[i * 3 + 2] = -0.4 + ((i * 0.197) % 1) * 1.8;
-      sizes[i] = 0.015 + ((i * 0.137) % 1) * 0.045;
+    const positions = new Float32Array(EMBERS * 3);
+    const seeds = new Float32Array(EMBERS);
+    const speeds = new Float32Array(EMBERS);
+    const sizes = new Float32Array(EMBERS);
+    const sways = new Float32Array(EMBERS);
+    for (let i = 0; i < EMBERS; i++) {
+      // Fixed arithmetic rather than Math.random: every deploy has the same art
+      // direction instead of a page that changes character on each refresh.
+      const a = (i * 0.61803398875) % 1;
+      const b = (i * 0.37135) % 1;
+      const c = (i * 0.19731) % 1;
+      // Three depth bands. The near band parallaxes hardest against the
+      // portrait and is what actually reads as depth.
+      const band = i % 3;
+      const z = band === 0 ? NEAR + c * 0.35
+              : band === 1 ? 0.15 + c * 0.35
+              : FAR - c * 0.5;
+      positions[i * 3] = (a - 0.5) * 4.4;
+      positions[i * 3 + 1] = (b - 0.5) * SPAN;
+      positions[i * 3 + 2] = z;
+      seeds[i] = a;
+      // Nearer embers rise faster: another depth cue, and it stops the field
+      // moving as one sheet.
+      speeds[i] = (band === 0 ? 0.5 : band === 1 ? 0.33 : 0.2) * (0.7 + b * 0.6);
+      // World units, not pixels: gl_PointSize = aSize * (0.5 * bufferHeight) / -mv.z.
+      // These land at roughly 6 / 4 / 2.5 CSS px per band.
+      sizes[i] = (band === 0 ? 0.098 : band === 1 ? 0.055 : 0.029) * (0.6 + c * 0.8);
+      sways[i] = 0.25 + b * 0.55;
     }
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
-    this.embers = new THREE.Points(geometry, new THREE.PointsMaterial({
-      color: 0xff6b35,
-      size: 0.045,
+    geometry.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 1));
+    geometry.setAttribute("aSpeed", new THREE.BufferAttribute(speeds, 1));
+    geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+    geometry.setAttribute("aSway", new THREE.BufferAttribute(sways, 1));
+
+    this.emberUniforms = { uTime: { value: 0 }, uScale: { value: 300 } };
+    this.embers = new THREE.Points(geometry, new THREE.ShaderMaterial({
+      uniforms: this.emberUniforms,
+      vertexShader: emberVertex,
+      fragmentShader: emberFragment,
       transparent: true,
-      opacity: 0.82,
-      blending: THREE.AdditiveBlending,
       depthWrite: false,
-      sizeAttenuation: true,
+      blending: THREE.AdditiveBlending,
     }));
     this.scene.add(this.embers);
   }
@@ -108,6 +185,17 @@ export class SiegeScene {
     this.renderer.setSize(width, height, false);
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
+
+    // Cover-fit the portrait to the frame, plus overscan so the parallax has
+    // somewhere to travel without exposing an edge.
+    if (this.portrait) {
+      const vh = 2 * this.camera.position.z * Math.tan((this.camera.fov * Math.PI) / 360);
+      const vw = vh * this.camera.aspect;
+      const overscan = 1.1;
+      const scale = Math.max(vw / this.portraitAspect, vh) * overscan;
+      this.portrait.scale.set(scale * this.portraitAspect, scale, 1);
+    }
+    this.emberUniforms.uScale.value = 0.5 * this.renderer.domElement.height;
     this.render();
   }
 
@@ -127,17 +215,28 @@ export class SiegeScene {
 
   render() {
     if (this.failed) return;
-    const elapsed = this.clock.getElapsedTime();
-    this.pointer.lerp(this.target, this.reduced ? 1 : 0.045);
-    this.camera.position.x = this.pointer.x * 0.09;
-    this.camera.position.y = -this.pointer.y * 0.06;
+    const t = this.reduced ? 6 : this.clock.getElapsedTime();
+    this.emberUniforms.uTime.value = t;
+
+    // Ambient drift on two periods that do not divide into each other, so the
+    // scene never visibly loops. This is the whole of the motion on a touch
+    // device, so it carries the shot rather than decorating it.
+    const driftX = this.reduced ? 0 : Math.sin(t * 0.21) * 0.55 + Math.sin(t * 0.09) * 0.25;
+    const driftY = this.reduced ? 0 : Math.cos(t * 0.17) * 0.35;
+
+    this.pointer.lerp(this.target, this.reduced ? 1 : 0.075);
+    const x = this.pointer.x + driftX;
+    const y = this.pointer.y + driftY;
+
+    this.camera.position.x = x * 0.42;
+    this.camera.position.y = -y * 0.3;
     this.camera.lookAt(0, 0, 0);
     if (this.portrait) {
-      this.portrait.rotation.y = this.pointer.x * -0.035;
-      this.portrait.rotation.x = this.pointer.y * 0.018;
+      // Counter-move the portrait a little so it lags the camera. The embers
+      // do not, which is what separates them in depth.
+      this.portrait.position.x = x * 0.1;
+      this.portrait.position.y = -y * 0.07;
     }
-    this.embers.rotation.z = this.reduced ? 0 : elapsed * 0.018;
-    this.embers.position.y = this.reduced ? 0 : Math.sin(elapsed * 0.6) * 0.035;
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -147,6 +246,11 @@ export class SiegeScene {
     removeEventListener("resize", this.onResize);
     this.host.removeEventListener("pointermove", this.onPointerMove);
     this.host.removeEventListener("pointerleave", this.onPointerLeave);
+    this.embers?.geometry.dispose();
+    this.embers?.material.dispose();
+    this.portrait?.geometry.dispose();
+    this.portrait?.material.map?.dispose();
+    this.portrait?.material.dispose();
     this.renderer?.dispose();
   }
 }
