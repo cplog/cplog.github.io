@@ -10,7 +10,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* passport world, one-ink recipe: charcoal + signal red on security-paper cream. See /index.html for the direction contract. */
+  /* passport world, one-ink recipe: charcoal + signal red on security-paper
+     cream. Kept in sync with /index.html and /writing/index.html by hand —
+     this file regenerates both post pages and the listing page, so a drift
+     here silently repaints the whole blog on the next publish. */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --canvas:#efe3c9;
@@ -43,7 +46,7 @@
   a{color:inherit}
   ::selection{background:var(--stamp);color:var(--canvas)}
   :focus-visible{outline:2px solid var(--stamp);outline-offset:3px;border-radius:2px}
-  h1{font-family:var(--font-display)}
+  h1,h2,h3{font-family:var(--font-display)}
   .nav{position:sticky;top:0;z-index:50;background:rgb(239 227 201 / 90%);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   .nav__in{display:flex;align-items:center;gap:24px;height:64px;
@@ -86,7 +89,12 @@
 <div class="index">
 <h1>Writing</h1>
 <p class="index__lede">Notes and write-ups, published from source.</p>
-<ul class="post-list"><li><a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">
+<ul class="post-list"><li><a href="https://cplog.github.io/writing/knowledge-base-when-you-pay/">
+<div class="post-title">A knowledge base is a bet on when you pay for the thinking</div>
+<div class="post-meta">September 8, 2026</div>
+<div class="post-desc">Nine repos filed under one heading, sorted by when they make sense of your documents: at query time, at build time, or before you start. Each fails differently.</div>
+</a></li>
+<li><a href="https://cplog.github.io/writing/reviving-a-dead-chrome-extension/">
 <div class="post-title">Reviving a Chrome extension Manifest V2 killed</div>
 <div class="post-meta">August 30, 2026</div>
 <div class="post-desc">githunt replaced your new tab with trending GitHub repos. I liked using it, then it stopped working, and the reason turned out to be simple: Chrome disabled ...</div>
