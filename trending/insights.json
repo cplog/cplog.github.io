@@ -1,0 +1,12 @@
+{
+  "google-labs-code/stitch-skills": {
+    "useCase": "Compare layouts before building a screen in code.",
+    "tryIt": "Give Stitch a brief for a fictional settings screen. Ask for a compact layout and a spacious one, then compare how easily you can find the same control in each.",
+    "source": "https://github.com/google-labs-code/stitch-skills/blob/9f4e828e77634e230978be45fec5501554dbe4b2/README.md"
+  },
+  "kajisho5/ffmpeg-skill": {
+    "useCase": "Turn a landscape demo into a vertical clip without losing the important action.",
+    "tryIt": "Crop a sample 16:9 clip to 9:16. Play it beside the original and check whether the subject stays in frame before using the crop.",
+    "source": "https://github.com/kajisho5/ffmpeg-skill/blob/c8bc12fd57f6ddd39bb6bdf50800f9af012a2bb4/docs/demos.md"
+  }
+}
