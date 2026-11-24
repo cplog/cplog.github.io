@@ -64,8 +64,9 @@ async function loadHistory() {
   try {
     const raw = await readFile(HISTORY_PATH, 'utf8');
     return JSON.parse(raw);
-  } catch {
-    return { repos: {} }; // first run, or file doesn't exist yet
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    return { repos: {} }; // first run
   }
 }
 

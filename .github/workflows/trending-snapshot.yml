@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add trending/data.json
+          git add trending/data.json trending/history.json
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "trending: refresh snapshot"
           git push
