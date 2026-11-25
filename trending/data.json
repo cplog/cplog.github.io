@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T22:33:28.512Z",
+  "generatedAt": "2026-11-25T08:47:31.680Z",
   "since": {
     "daily": [
       {
@@ -11,11 +11,11 @@
         "description": "A Claude Code skill bundle for bug hunting and external red-team work - 84 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 21351,
-        "totalForks": 2224,
-        "starsInPeriod": 1833,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 22011,
+        "totalForks": 2274,
+        "starsInPeriod": 1826,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "obra/superpowers",
@@ -26,11 +26,11 @@
         "description": "An agentic skills framework & software development methodology that works.",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 325747,
-        "totalForks": 28899,
-        "starsInPeriod": 1006,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 326103,
+        "totalForks": 28939,
+        "starsInPeriod": 1003,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "HKUDS/CLI-Anything",
@@ -41,11 +41,11 @@
         "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 64674,
-        "totalForks": 5896,
-        "starsInPeriod": 1075,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 65178,
+        "totalForks": 5928,
+        "starsInPeriod": 1074,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "jingyaogong/minimind",
@@ -56,10 +56,10 @@
         "description": "🧠 两小时从 0 训出你的 64M 大模型。Train your own 64M LLM from scratch in 2 hours.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 70138,
-        "totalForks": 9128,
+        "totalStars": 70592,
+        "totalForks": 9179,
         "starsInPeriod": 727,
-        "streakDays": 1,
+        "streakDays": 2,
         "isNew": false
       },
       {
@@ -71,10 +71,10 @@
         "description": "Cursor plugin specification and official plugins",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 19168,
-        "totalForks": 2074,
-        "starsInPeriod": 359,
-        "streakDays": 1,
+        "totalStars": 19356,
+        "totalForks": 2089,
+        "starsInPeriod": 360,
+        "streakDays": 2,
         "isNew": false
       },
       {
@@ -86,11 +86,11 @@
         "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 208869,
-        "totalForks": 10913,
-        "starsInPeriod": 990,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 209300,
+        "totalForks": 10939,
+        "starsInPeriod": 991,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "nginx/nginx",
@@ -101,11 +101,11 @@
         "description": "The official NGINX Open Source repository.",
         "language": "C",
         "languageColor": "#555555",
-        "totalStars": 33207,
-        "totalForks": 8394,
+        "totalStars": 33283,
+        "totalForks": 8398,
         "starsInPeriod": 158,
-        "streakDays": 1,
-        "isNew": true
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "openvinotoolkit/openvino",
@@ -116,11 +116,11 @@
         "description": "OpenVINO™ is an open source toolkit for optimizing and deploying AI inference",
         "language": "C++",
         "languageColor": "#f34b7d",
-        "totalStars": 12443,
-        "totalForks": 3693,
-        "starsInPeriod": 187,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 12539,
+        "totalForks": 3698,
+        "starsInPeriod": 185,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "cathrynlavery/diagram-design",
@@ -131,11 +131,11 @@
         "description": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and Pi. 52 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
         "language": "HTML",
         "languageColor": "#e34c26",
-        "totalStars": 71953,
-        "totalForks": 4802,
-        "starsInPeriod": 794,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 72420,
+        "totalForks": 4821,
+        "starsInPeriod": 802,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "mvanhorn/last30days-skill",
@@ -146,10 +146,10 @@
         "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 74142,
-        "totalForks": 6538,
-        "starsInPeriod": 695,
-        "streakDays": 1,
+        "totalStars": 74591,
+        "totalForks": 6573,
+        "starsInPeriod": 703,
+        "streakDays": 2,
         "isNew": false
       },
       {
@@ -161,11 +161,11 @@
         "description": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 12622,
-        "totalForks": 1525,
-        "starsInPeriod": 401,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 12789,
+        "totalForks": 1530,
+        "starsInPeriod": 403,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "mjmirza/app-store-compliance",
@@ -176,11 +176,11 @@
         "description": "Avoid common App Store and Google Play rejections. Open playbook and pre-submission guard with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 112 tracked deadlines (EU AI Act, DSA, COPPA, age laws), and a skill for AI coding agents.",
         "language": "Shell",
         "languageColor": "#89e051",
-        "totalStars": 5808,
-        "totalForks": 375,
-        "starsInPeriod": 936,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 6105,
+        "totalForks": 397,
+        "starsInPeriod": 928,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "Tracer-Cloud/opensre",
@@ -191,11 +191,11 @@
         "description": "The open-source agent for CI/CD reliability.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 15160,
-        "totalForks": 2010,
-        "starsInPeriod": 408,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 15309,
+        "totalForks": 2021,
+        "starsInPeriod": 398,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "toeverything/AFFiNE",
@@ -206,11 +206,11 @@
         "description": "There can be more than Notion and Miro. AFFiNE(pronounced [ə‘fain]) is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and ready to use.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 77943,
-        "totalForks": 5697,
-        "starsInPeriod": 589,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 78160,
+        "totalForks": 5706,
+        "starsInPeriod": 584,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "XiaoYouChR/Ghost-Downloader-3",
@@ -221,11 +221,11 @@
         "description": "The only downloader you need. 下载器的集大成者。",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 17260,
-        "totalForks": 1047,
-        "starsInPeriod": 1102,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 17734,
+        "totalForks": 1063,
+        "starsInPeriod": 1092,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "zhouxiaoka/autoclip",
@@ -236,11 +236,11 @@
         "description": "AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video clipping & content repurposing.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 15284,
-        "totalForks": 2265,
-        "starsInPeriod": 981,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 15754,
+        "totalForks": 2298,
+        "starsInPeriod": 980,
+        "streakDays": 2,
+        "isNew": false
       }
     ],
     "weekly": [
@@ -253,11 +253,11 @@
         "description": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 14877,
-        "totalForks": 1436,
-        "starsInPeriod": 2395,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 14971,
+        "totalForks": 1439,
+        "starsInPeriod": 1956,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "google-labs-code/stitch-skills",
@@ -268,11 +268,11 @@
         "description": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 12622,
-        "totalForks": 1525,
-        "starsInPeriod": 2572,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 12789,
+        "totalForks": 1530,
+        "starsInPeriod": 2626,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "GoogleChrome/modern-web-guidance-src",
@@ -283,11 +283,11 @@
         "description": "Keep your coding agent up to date with the latest web best practices",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 10798,
-        "totalForks": 822,
-        "starsInPeriod": 2694,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 10912,
+        "totalForks": 826,
+        "starsInPeriod": 2494,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "alibaba/open-code-review",
@@ -298,11 +298,11 @@
         "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 56039,
-        "totalForks": 4629,
-        "starsInPeriod": 3015,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 56171,
+        "totalForks": 4635,
+        "starsInPeriod": 2638,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "mvanhorn/last30days-skill",
@@ -313,10 +313,10 @@
         "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 74142,
-        "totalForks": 6538,
-        "starsInPeriod": 5448,
-        "streakDays": 1,
+        "totalStars": 74591,
+        "totalForks": 6573,
+        "starsInPeriod": 5369,
+        "streakDays": 2,
         "isNew": false
       },
       {
@@ -328,11 +328,11 @@
         "description": "Chrome DevTools for coding agents",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 59202,
-        "totalForks": 4881,
-        "starsInPeriod": 1581,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 59271,
+        "totalForks": 4887,
+        "starsInPeriod": 1258,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "tradermonty/claude-trading-skills",
@@ -343,11 +343,11 @@
         "description": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 8281,
-        "totalForks": 1537,
-        "starsInPeriod": 1903,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 8368,
+        "totalForks": 1540,
+        "starsInPeriod": 1504,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "ag-ui-protocol/ag-ui",
@@ -358,11 +358,11 @@
         "description": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 21554,
-        "totalForks": 2173,
-        "starsInPeriod": 2966,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 21644,
+        "totalForks": 2177,
+        "starsInPeriod": 1753,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "meta/astryx",
@@ -373,11 +373,11 @@
         "description": "An open source design system that's fully customizable and agent ready",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 32852,
-        "totalForks": 2575,
-        "starsInPeriod": 3165,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 32961,
+        "totalForks": 2582,
+        "starsInPeriod": 2890,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "pookjw/HermesEnabler",
@@ -388,11 +388,11 @@
         "description": "Enable Hermès Watch Faces on any Apple Watch devices",
         "language": "Objective-C",
         "languageColor": "#438eff",
-        "totalStars": 2488,
+        "totalStars": 2502,
         "totalForks": 206,
-        "starsInPeriod": 390,
-        "streakDays": 1,
-        "isNew": true
+        "starsInPeriod": 328,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "we-promise/sure",
@@ -403,11 +403,11 @@
         "description": "The personal finance app for everyone (by everyone)",
         "language": "Ruby",
         "languageColor": "#701516",
-        "totalStars": 17763,
-        "totalForks": 1541,
-        "starsInPeriod": 1612,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 17831,
+        "totalForks": 1550,
+        "starsInPeriod": 1567,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "dream-num/univer",
@@ -418,11 +418,11 @@
         "description": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 31679,
-        "totalForks": 2858,
-        "starsInPeriod": 4324,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 31772,
+        "totalForks": 2865,
+        "starsInPeriod": 3278,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "kajisho5/ffmpeg-skill",
@@ -433,11 +433,11 @@
         "description": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 10644,
-        "totalForks": 918,
-        "starsInPeriod": 3891,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 10848,
+        "totalForks": 926,
+        "starsInPeriod": 2993,
+        "streakDays": 2,
+        "isNew": false
       }
     ],
     "monthly": [
@@ -450,11 +450,11 @@
         "description": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
         "language": "CSS",
         "languageColor": "#663399",
-        "totalStars": 60532,
-        "totalForks": 3309,
-        "starsInPeriod": 29144,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 60759,
+        "totalForks": 3323,
+        "starsInPeriod": 29170,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "cloudflare/security-audit-skill",
@@ -465,11 +465,11 @@
         "description": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 77935,
-        "totalForks": 5263,
-        "starsInPeriod": 36869,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 78112,
+        "totalForks": 5276,
+        "starsInPeriod": 35068,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "milind-soni/OpenMausBot",
@@ -480,11 +480,11 @@
         "description": "Open-source Grok Bot alternative with a virtual machine that bots can use",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 27499,
-        "totalForks": 3929,
-        "starsInPeriod": 21809,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 27661,
+        "totalForks": 3950,
+        "starsInPeriod": 22073,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "pingdotgg/t3code",
@@ -495,10 +495,10 @@
         "description": "The best way to control Claude Code, Codex and more from any computer or phone",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 77309,
-        "totalForks": 13000,
-        "starsInPeriod": 44453,
-        "streakDays": 1,
+        "totalStars": 78393,
+        "totalForks": 13618,
+        "starsInPeriod": 47147,
+        "streakDays": 2,
         "isNew": false
       },
       {
@@ -510,11 +510,11 @@
         "description": "Public repository for Agent Skills",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 199926,
-        "totalForks": 23393,
-        "starsInPeriod": 16727,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 200171,
+        "totalForks": 23411,
+        "starsInPeriod": 16946,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "thedotmack/claude-mem",
@@ -525,11 +525,11 @@
         "description": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 119544,
-        "totalForks": 10389,
-        "starsInPeriod": 17492,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 119631,
+        "totalForks": 10396,
+        "starsInPeriod": 17462,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "Jakeschincariol/instagram-agent-skill",
@@ -540,11 +540,11 @@
         "description": "Thirteen Claude skills that run an Instagram account: Reels off 26 scored hook formulas, a viral research skill, a caption linter, and a humanizer. Free, MIT.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 8964,
-        "totalForks": 1585,
-        "starsInPeriod": 6023,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 9094,
+        "totalForks": 1594,
+        "starsInPeriod": 6218,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "backnotprop/plannotator",
@@ -555,11 +555,11 @@
         "description": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 14877,
-        "totalForks": 1436,
-        "starsInPeriod": 5093,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 14971,
+        "totalForks": 1439,
+        "starsInPeriod": 5292,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "Ebony-Vinyl/dsh-our-free-model",
@@ -570,11 +570,11 @@
         "description": "在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 DeepSeek V4.1 Flash、Kimi K3 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier models are just there, DeepSeek V4.1 Flash and Kimi K3 among them. Completely free, with no usage cap.",
         "language": "JavaScript",
         "languageColor": "#f1e05a",
-        "totalStars": 85983,
-        "totalForks": 2425,
-        "starsInPeriod": 48139,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 86567,
+        "totalForks": 2453,
+        "starsInPeriod": 48193,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "HKUDS/DeepTutor",
@@ -585,11 +585,11 @@
         "description": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/ .",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 62290,
-        "totalForks": 7493,
-        "starsInPeriod": 19919,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 62518,
+        "totalForks": 7526,
+        "starsInPeriod": 20099,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "yetone/magpie",
@@ -600,11 +600,11 @@
         "description": "Every agent's model. One place. Codex on DeepSeek, Claude Code on Kimi, from the menu bar.",
         "language": "Go",
         "languageColor": "#00ADD8",
-        "totalStars": 41001,
-        "totalForks": 3752,
-        "starsInPeriod": 20747,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 41243,
+        "totalForks": 3781,
+        "starsInPeriod": 20773,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "pbakaus/impeccable",
@@ -615,11 +615,11 @@
         "description": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 116245,
-        "totalForks": 6937,
-        "starsInPeriod": 30675,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 116493,
+        "totalForks": 6961,
+        "starsInPeriod": 30688,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "sherlock-project/sherlock",
@@ -630,11 +630,11 @@
         "description": "Hunt down social media accounts by username across social networks",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 116983,
-        "totalForks": 13337,
-        "starsInPeriod": 21780,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 117258,
+        "totalForks": 13371,
+        "starsInPeriod": 22382,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "AgriciDaniel/claude-seo",
@@ -645,11 +645,11 @@
         "description": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 32168,
-        "totalForks": 3935,
-        "starsInPeriod": 12148,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 32261,
+        "totalForks": 3943,
+        "starsInPeriod": 12213,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "google-labs-code/stitch-skills",
@@ -660,11 +660,11 @@
         "description": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 12622,
-        "totalForks": 1525,
-        "starsInPeriod": 3630,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 12789,
+        "totalForks": 1530,
+        "starsInPeriod": 4010,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "heygen-com/hyperframes",
@@ -675,11 +675,11 @@
         "description": "Open-source AI video editor: edit your own footage, or create and remake any video with Claude Code, Codex or the free Studio app. Write HTML, render MP4. By HeyGen.",
         "language": "TypeScript",
         "languageColor": "#3178c6",
-        "totalStars": 89534,
-        "totalForks": 8347,
-        "starsInPeriod": 18679,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 89781,
+        "totalForks": 8371,
+        "starsInPeriod": 18583,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "elementalsouls/Claude-BugHunter",
@@ -690,11 +690,11 @@
         "description": "A Claude Code skill bundle for bug hunting and external red-team work - 84 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 21351,
-        "totalForks": 2224,
-        "starsInPeriod": 13817,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 22011,
+        "totalForks": 2275,
+        "starsInPeriod": 15607,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "kajisho5/ffmpeg-skill",
@@ -705,11 +705,11 @@
         "description": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys.",
         "language": "Python",
         "languageColor": "#3572A5",
-        "totalStars": 10644,
-        "totalForks": 918,
-        "starsInPeriod": 8031,
-        "streakDays": 1,
-        "isNew": true
+        "totalStars": 10848,
+        "totalForks": 926,
+        "starsInPeriod": 8190,
+        "streakDays": 2,
+        "isNew": false
       },
       {
         "id": "vercel-labs/agent-browser",
@@ -720,48 +720,24 @@
         "description": "Browser automation CLI for AI agents",
         "language": "Rust",
         "languageColor": "#dea584",
-        "totalStars": 53786,
+        "totalStars": 53870,
         "totalForks": 3770,
-        "starsInPeriod": 9273,
-        "streakDays": 1,
-        "isNew": true
+        "starsInPeriod": 9395,
+        "streakDays": 2,
+        "isNew": false
       }
     ]
   },
   "hn": [
     {
-      "id": "hn:50624497",
-      "title": "2035 came early",
-      "url": "https://fzakaria.com/2026/11/23/2035-came-early",
-      "hnUrl": "https://news.ycombinator.com/item?id=50624497",
-      "author": "setheron",
-      "points": 922,
-      "numComments": 350,
-      "createdAt": "2026-11-24T06:30:33Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50627340",
-      "title": "LLM agents work for their parent companies, not for you",
-      "url": "https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50627340",
-      "author": "surprisetalk",
-      "points": 845,
-      "numComments": 349,
-      "createdAt": "2026-11-24T12:40:15Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50625384",
-      "title": "Quad9 pulled their DNS service from France",
-      "url": "https://quad9.net/news/blog/quad9-service-deactivation-in-france/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50625384",
-      "author": "farrokhi",
-      "points": 315,
-      "numComments": 160,
-      "createdAt": "2026-11-24T08:33:14Z",
+      "id": "hn:50637220",
+      "title": "Matrix Multiplication is Θ(n^2.25) [pdf]",
+      "url": "https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf",
+      "hnUrl": "https://news.ycombinator.com/item?id=50637220",
+      "author": "E-Reverance",
+      "points": 564,
+      "numComments": 274,
+      "createdAt": "2026-11-25T01:19:26Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -771,9 +747,45 @@
       "url": "https://mechanical-pencil.com/products/spray-bottle",
       "hnUrl": "https://news.ycombinator.com/item?id=50598555",
       "author": "vinhnx",
-      "points": 295,
-      "numComments": 81,
+      "points": 467,
+      "numComments": 108,
       "createdAt": "2026-11-22T11:16:30Z",
+      "streakDays": 2,
+      "isNew": false
+    },
+    {
+      "id": "hn:50633922",
+      "title": "Ternary Bonsai 2.5 27B",
+      "url": "https://prismml.com/news/bonsai-2-5-27b",
+      "hnUrl": "https://news.ycombinator.com/item?id=50633922",
+      "author": "b0m",
+      "points": 437,
+      "numComments": 137,
+      "createdAt": "2026-11-24T20:08:03Z",
+      "streakDays": 2,
+      "isNew": false
+    },
+    {
+      "id": "hn:50627783",
+      "title": "GTA 6 Running on Windows",
+      "url": "https://twitter.com/raul_bs3/status/2125213756238291075",
+      "hnUrl": "https://news.ycombinator.com/item?id=50627783",
+      "author": "andrem",
+      "points": 377,
+      "numComments": 464,
+      "createdAt": "2026-11-24T13:19:31Z",
+      "streakDays": 2,
+      "isNew": false
+    },
+    {
+      "id": "hn:50638032",
+      "title": "Button Sounds – collection of professionally-recorded button clicks and presses",
+      "url": "https://buttons.joshwcomeau.com/",
+      "hnUrl": "https://news.ycombinator.com/item?id=50638032",
+      "author": "gaurang_tandon",
+      "points": 308,
+      "numComments": 33,
+      "createdAt": "2026-11-25T03:23:07Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -783,141 +795,69 @@
       "url": "https://www.greynoise.io/blog/check-point-security-management-servers-intrusion-campaign",
       "hnUrl": "https://news.ycombinator.com/item?id=50630594",
       "author": "louiereederson",
-      "points": 236,
-      "numComments": 96,
+      "points": 282,
+      "numComments": 140,
       "createdAt": "2026-11-24T16:32:17Z",
+      "streakDays": 2,
+      "isNew": false
+    },
+    {
+      "id": "hn:50630809",
+      "title": "Ask HN: Anthropic is accusing my company of distilling. How can I prove I'm not?",
+      "url": "https://news.ycombinator.com/item?id=50630809",
+      "hnUrl": "https://news.ycombinator.com/item?id=50630809",
+      "author": "weli",
+      "points": 262,
+      "numComments": 200,
+      "createdAt": "2026-11-24T16:45:44Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50630462",
-      "title": "Jetty Pro",
-      "url": "http://hypercritical.co/2026/11/23/jetty-pro",
-      "hnUrl": "https://news.ycombinator.com/item?id=50630462",
-      "author": "zdw",
-      "points": 235,
-      "numComments": 99,
-      "createdAt": "2026-11-24T16:23:02Z",
+      "id": "hn:50634658",
+      "title": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+      "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities/",
+      "hnUrl": "https://news.ycombinator.com/item?id=50634658",
+      "author": "acossta",
+      "points": 252,
+      "numComments": 76,
+      "createdAt": "2026-11-24T21:02:22Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50627783",
-      "title": "GTA 6 Running on Windows",
-      "url": "https://twitter.com/raul_bs3/status/2125213756238291075",
-      "hnUrl": "https://news.ycombinator.com/item?id=50627783",
-      "author": "andrem",
-      "points": 215,
-      "numComments": 245,
-      "createdAt": "2026-11-24T13:19:31Z",
+      "id": "hn:50637056",
+      "title": "PenGPT: A Generative Transformer for Handwriting and Sketches",
+      "url": "https://greydanus.github.io/2026/11/12/pengpt/",
+      "hnUrl": "https://news.ycombinator.com/item?id=50637056",
+      "author": "smusamashah",
+      "points": 223,
+      "numComments": 39,
+      "createdAt": "2026-11-25T00:54:49Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50626413",
-      "title": "Worshipping at the altar of Brendan Gregg",
-      "url": "https://fzakaria.com/2026/11/12/worshipping-at-the-altar-of-brendan-gregg",
-      "hnUrl": "https://news.ycombinator.com/item?id=50626413",
-      "author": "kqr",
-      "points": 208,
-      "numComments": 38,
-      "createdAt": "2026-11-24T10:50:14Z",
+      "id": "hn:50637686",
+      "title": "Models Can Communicate via Inference Servers Despite Being Sandboxed",
+      "url": "https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being",
+      "hnUrl": "https://news.ycombinator.com/item?id=50637686",
+      "author": "gmays",
+      "points": 200,
+      "numComments": 76,
+      "createdAt": "2026-11-25T02:34:21Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50633922",
-      "title": "Ternary Bonsai 2.5 27B",
-      "url": "https://prismml.com/news/bonsai-2-5-27b",
-      "hnUrl": "https://news.ycombinator.com/item?id=50633922",
-      "author": "b0m",
-      "points": 199,
-      "numComments": 60,
-      "createdAt": "2026-11-24T20:08:03Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50599458",
-      "title": "How a Mechanical Watch Keeps Time (Interactive 3D)",
-      "url": "https://martincmartin.github.io/slidev-stem/watches/article/1/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50599458",
-      "author": "martincmartin",
-      "points": 197,
-      "numComments": 50,
-      "createdAt": "2026-11-22T13:21:25Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50631157",
-      "title": "Microsoft declares 'Code Red' after historic outage, internal memos show",
-      "url": "https://www.reuters.com/business/microsoft-declares-code-red-after-historic-outage-internal-memos-show-2026-11-24/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50631157",
-      "author": "thm",
-      "points": 189,
-      "numComments": 163,
-      "createdAt": "2026-11-24T17:07:41Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50629231",
-      "title": "A training engine for your local model, using your idle compute",
-      "url": "https://github.com/sous-labs/songe",
-      "hnUrl": "https://news.ycombinator.com/item?id=50629231",
-      "author": "bluepeter",
-      "points": 147,
-      "numComments": 40,
-      "createdAt": "2026-11-24T15:03:40Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50632883",
-      "title": "Cloudflare hides shortcomings of the underlying infrastructure",
-      "url": "https://charlie.fish/posts/2026/11/what-cloudflare-doesnt-tell-you/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50632883",
-      "author": "fishcharlie",
-      "points": 129,
-      "numComments": 85,
-      "createdAt": "2026-11-24T19:03:55Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50629106",
-      "title": "Splitting USB-C: USB 3 and USB 2 on one port",
-      "url": "https://www.frankchiarulli.com/blog/splitting-usb-c/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50629106",
-      "author": "fcjr",
-      "points": 117,
-      "numComments": 75,
-      "createdAt": "2026-11-24T14:54:10Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50605361",
-      "title": "The new set of problems for engineers to solve",
-      "url": "https://www.katelynlesse.com/blog/new-problems-for-engineers-to-solve",
-      "hnUrl": "https://news.ycombinator.com/item?id=50605361",
-      "author": "ot",
-      "points": 109,
-      "numComments": 87,
-      "createdAt": "2026-11-22T23:42:53Z",
-      "streakDays": 1,
-      "isNew": true
-    },
-    {
-      "id": "hn:50633159",
-      "title": "Grafana 12.4.16, 13.0.14, 13.1.11, 13.2.7 and 13.3.2 (multiple CVEs)",
-      "url": "https://grafana.com/grafana/download",
-      "hnUrl": "https://news.ycombinator.com/item?id=50633159",
-      "author": "petecooper",
-      "points": 101,
-      "numComments": 18,
-      "createdAt": "2026-11-24T19:23:44Z",
+      "id": "hn:50637874",
+      "title": "I've been drinking wine in my kitchen",
+      "url": "https://scottaaronson.blog/?p=10362",
+      "hnUrl": "https://news.ycombinator.com/item?id=50637874",
+      "author": "nill0",
+      "points": 173,
+      "numComments": 147,
+      "createdAt": "2026-11-25T03:02:10Z",
       "streakDays": 1,
       "isNew": true
     },
@@ -927,45 +867,105 @@
       "url": "https://www.core77.com/posts/145766/An-Italian-Folding-Bicycle-Design-that-Fits-Into-a-Suitcase",
       "hnUrl": "https://news.ycombinator.com/item?id=50610820",
       "author": "surprisetalk",
-      "points": 81,
-      "numComments": 62,
+      "points": 172,
+      "numComments": 117,
       "createdAt": "2026-11-23T12:40:08Z",
+      "streakDays": 2,
+      "isNew": false
+    },
+    {
+      "id": "hn:50638320",
+      "title": "Gemini refused to give me the lyrics to Twinkle Twinkle Little Star",
+      "url": "https://www.comentr.com/technology/01M88DWQ0R4NCMYR17AFEWRG1F",
+      "hnUrl": "https://news.ycombinator.com/item?id=50638320",
+      "author": "hoodied",
+      "points": 162,
+      "numComments": 106,
+      "createdAt": "2026-11-25T04:03:33Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50604355",
-      "title": "Cento fine foods has been sued for “tomato fraud”",
-      "url": "https://slate.com/life/2026/11/cento-san-marzano-tomato-sauce-recipes-lawsuit.html",
-      "hnUrl": "https://news.ycombinator.com/item?id=50604355",
-      "author": "ncr100",
-      "points": 79,
-      "numComments": 121,
-      "createdAt": "2026-11-22T21:59:09Z",
+      "id": "hn:50637890",
+      "title": "Bypassing iOS Safari's 60 FPS Limit to Build Web Applications That Feel Native",
+      "url": "https://rida.dev/blog/bypassing-ios-safari-60-fps-limit",
+      "hnUrl": "https://news.ycombinator.com/item?id=50637890",
+      "author": "vinhnx",
+      "points": 146,
+      "numComments": 53,
+      "createdAt": "2026-11-25T03:04:37Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50629962",
-      "title": "The KL Divergence Is Never Negative, Except in PyTorch",
-      "url": "https://arxiv.org/abs/2611.30835",
-      "hnUrl": "https://news.ycombinator.com/item?id=50629962",
-      "author": "Anon84",
-      "points": 75,
-      "numComments": 30,
-      "createdAt": "2026-11-24T15:50:22Z",
+      "id": "hn:50625265",
+      "title": "Gödel Enigma",
+      "url": "https://www.helsinki.fi/en/researchgroups/godel-enigma/research/project-description",
+      "hnUrl": "https://news.ycombinator.com/item?id=50625265",
+      "author": "benbreen",
+      "points": 122,
+      "numComments": 41,
+      "createdAt": "2026-11-24T08:16:02Z",
       "streakDays": 1,
       "isNew": true
     },
     {
-      "id": "hn:50630294",
-      "title": "Show HN: Mason – A lightweight Postgres read-replica, built on columnar storage",
-      "url": "https://masondata.ai/",
-      "hnUrl": "https://news.ycombinator.com/item?id=50630294",
-      "author": "tagspace",
-      "points": 75,
-      "numComments": 14,
-      "createdAt": "2026-11-24T16:11:52Z",
+      "id": "hn:50638220",
+      "title": "Marginalia Search, Money, C++, Rust, AI, Stuff",
+      "url": "https://www.marginalia.nu/log/a_141_marginalia_update/",
+      "hnUrl": "https://news.ycombinator.com/item?id=50638220",
+      "author": "Curiositry",
+      "points": 93,
+      "numComments": 37,
+      "createdAt": "2026-11-25T03:47:42Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:50638503",
+      "title": "Show HN: Old Nvidia and ATI tech demos, running again in the browser",
+      "url": "https://gpu-demo-gallery.pages.dev/",
+      "hnUrl": "https://news.ycombinator.com/item?id=50638503",
+      "author": "arkits",
+      "points": 89,
+      "numComments": 20,
+      "createdAt": "2026-11-25T04:31:48Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:50634426",
+      "title": "Launch HN: Versine (YC F26) – MCP to send and receive money",
+      "url": "https://news.ycombinator.com/item?id=50634426",
+      "hnUrl": "https://news.ycombinator.com/item?id=50634426",
+      "author": "harshithl1777",
+      "points": 84,
+      "numComments": 68,
+      "createdAt": "2026-11-24T20:44:15Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:50638478",
+      "title": "Taking over US Treasury subdomains for $3 each",
+      "url": "https://www.intruder.io/research/taking-over-us-treasury-subdomains-for-3-each",
+      "hnUrl": "https://news.ycombinator.com/item?id=50638478",
+      "author": "negura",
+      "points": 65,
+      "numComments": 10,
+      "createdAt": "2026-11-25T04:27:55Z",
+      "streakDays": 1,
+      "isNew": true
+    },
+    {
+      "id": "hn:50637891",
+      "title": "Macrohistory in Six Facts",
+      "url": "https://basilhalperin.com/essays/macrohistory.html",
+      "hnUrl": "https://news.ycombinator.com/item?id=50637891",
+      "author": "tptacek",
+      "points": 61,
+      "numComments": 26,
+      "createdAt": "2026-11-25T03:04:46Z",
       "streakDays": 1,
       "isNew": true
     }
